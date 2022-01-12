@@ -73,7 +73,7 @@ Licence
 -------
 
 The application is licenced under the Affero GNU General Public License 3 or
-later (AGPL 3+).
+at your choice any later version (AGPL 3+).
 
 The initial exercise and ingredient data is licensed additionally under a
 Creative Commons Attribution Share-Alike 3.0 (CC-BY-SA 3.0)
