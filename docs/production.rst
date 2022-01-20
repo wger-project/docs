@@ -70,9 +70,10 @@ Database
 PostgreSQL
 ~~~~~~~~~~
 
-Install the Postgres server and create a database and a user::
+Install the Postgres server (choose the appropriate and currently supported version
+for your distro) and create a database and a user::
 
-    sudo apt-get install postgresql postgresql-server-dev-12 # or appropriate version
+    sudo apt-get install postgresql postgresql-server-dev-12 python3-psycopg2
     sudo su - postgres
     createdb wger
     psql wger -c "CREATE USER wger WITH PASSWORD 'wger'";
@@ -115,9 +116,7 @@ Get the application::
   git clone https://github.com/wger-project/wger.git /home/wger/src
   cd /home/wger/src
   pip install -r requirements.txt
-  python setup.py develop
-  # Only if using postgres
-  pip install psycopg2
+  pip install -e .
 
   # If using sqlite without the --database-path
   wger create-settings --database-path /home/wger/db/database.sqlite

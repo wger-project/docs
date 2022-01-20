@@ -26,7 +26,7 @@ Install Requirements
 Install python requirements::
 
   $ pip install -r requirements_dev.txt
-  $ python setup.py develop
+  $ pip install -e .
 
 Install application
 ~~~~~~~~~~~~~~~~~~~
