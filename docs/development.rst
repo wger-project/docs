@@ -8,16 +8,14 @@ Virtual environment
 
 Create a new virtualenv::
 
-For LINUX Follow below:
+  For LINUX Follow below:
+    $ python3 -m venv venv-wger
+    $ source venv-wger/bin/activate
 
-  $ python3 -m venv venv-wger
-  $ source venv-wger/bin/activate
 
-
-For WINDOWS Follow below:
-
-  $ exec python -m venv venv-wger
-  $ source venv-wger/Scripts/activate
+  For WINDOWS Follow below:
+    $ exec python -m venv venv-wger
+    $ source venv-wger/Scripts/activate
 
 
 Note:- For Windows Migrate to this path wger/wger/__main__.py and set pty=False in Line No.40 which for Linux should be True 
