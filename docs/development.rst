@@ -9,11 +9,13 @@ Virtual environment
 Create a new virtualenv::
 
 For LINUX Follow below:
+
   $ python3 -m venv venv-wger
   $ source venv-wger/bin/activate
 
 
 For WINDOWS Follow below:
+
   $ exec python -m venv venv-wger
   $ source venv-wger/Scripts/activate
 
