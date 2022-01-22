@@ -17,6 +17,9 @@ dictionary in your settings file. Currently, the following options are supported
 **USE_RECAPTCHA**: Default ``False``.
   Controls whether a captcha challenge will be presented when new users register.
 
+**ALLOW_UPLOAD_VIDEOS**: Default ``False``.
+  Controls whether it is allowed to upload videos to exercises in the instance.
+
 **REMOVE_WHITESPACE**: Default ``False``.
   Removes whitespaces around HTML tags to reduce the size of the resulting HTML.
   If you are not serving the site using TLS you probably want to use the GZip
