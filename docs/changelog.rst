@@ -7,6 +7,7 @@ Changelog
 
 Upgrade steps from 2.0:
 
+* Install ffmpeg ``apt install ffmpeg``
 * Update python libraries ``pip3 install -r requirements.txt``
 * Run migrations ``python3 manage.py migrate``
 * Update CSS and JS libraries ``yarn install``
@@ -16,6 +17,8 @@ Upgrade steps from 2.0:
 🚀 Features:
 
 * New gallery where users can upload pictures to track their progress `#572`_
+* Exercises can now have videos. Also many thanks to Goulart for providing 150 videos
+  and releasing them under the CC-BY-SA license.
 * Add templates / centrally managed workouts (thanks `@qwert45hi`_) `#639`_
 * Add comment filed to set for user notes `#702`_
 * Custom measurements such as biceps size or body fat `#133`_
