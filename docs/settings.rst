@@ -19,6 +19,7 @@ dictionary in your settings file. Currently, the following options are supported
 
 **ALLOW_UPLOAD_VIDEOS**: Default ``False``.
   Controls whether it is allowed to upload videos to exercises in the instance.
+  See section :ref:`videos` for more information.
 
 **REMOVE_WHITESPACE**: Default ``False``.
   Removes whitespaces around HTML tags to reduce the size of the resulting HTML.

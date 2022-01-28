@@ -7,7 +7,7 @@ Changelog
 
 Upgrade steps from 2.0:
 
-* Install ffmpeg ``apt install ffmpeg``
+* Install ffmpeg if you want to upload videos (consult documentation).
 * Update python libraries ``pip3 install -r requirements.txt``
 * Run migrations ``python3 manage.py migrate``
 * Update CSS and JS libraries ``yarn install``
