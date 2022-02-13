@@ -33,6 +33,10 @@ Upgrade steps from 2.0:
 
 * Changes to the REST API:
 
+  + /exercisebaseinfo/
+    - New endpoint to get exercise information grouped by the base exercise
+  + /language/
+    - Also expose the language ID
   + /exerciseimage/
     - ``exercise`` was renamed to  ``exercise_base`` (was pointing there anyway)
     - New field ``style``
