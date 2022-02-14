@@ -24,7 +24,7 @@ Upgrade steps from 2.0:
 * Add comment filed to set for user notes `#702`_
 * Custom measurements such as biceps size or body fat `#133`_
 * Add picture type to exercise images (thanks `@LucasSD`_) `#589`_
-* Add toptional relation from nutritional diary to meal (thanks `@Alig1493`_) `#819`_
+* Add optional relation from nutritional diary to meal (thanks `@Alig1493`_) `#819`_
 
 🐛 Bug Fixes:
 
