@@ -13,11 +13,12 @@ Upgrade steps from 2.0:
 * Update CSS and JS libraries ``yarn install``
 * Compile the CSS ``yarn build:css:sass``
 * Update static files (only production): ``python3 manage.py collectstatic``
+* Load new permissions ``python3 manage.py loaddata groups.json``
 
 🚀 Features:
 
 * New gallery where users can upload pictures to track their progress `#572`_
-* Exercises can now have videos. Also many thanks to Goulart for providing 150 videos
+* Exercises can now have videos. Also many thanks to Goulart for providing 150 videos `#970`_
   and releasing them under the CC-BY-SA license.
 * Add templates / centrally managed workouts (thanks `@qwert45hi`_) `#639`_
 * Add comment filed to set for user notes `#702`_
@@ -61,6 +62,7 @@ Upgrade steps from 2.0:
 .. _#702: https://github.com/wger-project/wger/issues/702
 .. _#716: https://github.com/wger-project/wger/issues/716
 .. _#819: https://github.com/wger-project/wger/issues/819
+.. _#970: https://github.com/wger-project/wger/issues/970
 
 .. _@Alig1493: https://github.com/Alig1493
 .. _@LucasSD: https://github.com/LucasSD
