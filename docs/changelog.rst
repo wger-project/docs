@@ -7,20 +7,24 @@ Changelog
 
 Upgrade steps from 2.0:
 
+* Install ffmpeg if you want to upload videos (consult documentation).
 * Update python libraries ``pip3 install -r requirements.txt``
 * Run migrations ``python3 manage.py migrate``
 * Update CSS and JS libraries ``yarn install``
 * Compile the CSS ``yarn build:css:sass``
 * Update static files (only production): ``python3 manage.py collectstatic``
+* Load new permissions ``python3 manage.py loaddata groups.json``
 
 🚀 Features:
 
 * New gallery where users can upload pictures to track their progress `#572`_
+* Exercises can now have videos. Also many thanks to Goulart for providing 150 videos `#970`_
+  and releasing them under the CC-BY-SA license.
 * Add templates / centrally managed workouts (thanks `@qwert45hi`_) `#639`_
 * Add comment filed to set for user notes `#702`_
 * Custom measurements such as biceps size or body fat `#133`_
 * Add picture type to exercise images (thanks `@LucasSD`_) `#589`_
-* Add toptional relation from nutritional diary to meal (thanks `@Alig1493`_) `#819`_
+* Add optional relation from nutritional diary to meal (thanks `@Alig1493`_) `#819`_
 
 🐛 Bug Fixes:
 
@@ -30,6 +34,10 @@ Upgrade steps from 2.0:
 
 * Changes to the REST API:
 
+  + /exercisebaseinfo/
+    - New endpoint to get exercise information grouped by the base exercise
+  + /language/
+    - Also expose the language ID
   + /exerciseimage/
     - ``exercise`` was renamed to  ``exercise_base`` (was pointing there anyway)
     - New field ``style``
@@ -54,6 +62,7 @@ Upgrade steps from 2.0:
 .. _#702: https://github.com/wger-project/wger/issues/702
 .. _#716: https://github.com/wger-project/wger/issues/716
 .. _#819: https://github.com/wger-project/wger/issues/819
+.. _#970: https://github.com/wger-project/wger/issues/970
 
 .. _@Alig1493: https://github.com/Alig1493
 .. _@LucasSD: https://github.com/LucasSD

@@ -254,6 +254,11 @@ management functions that are sometimes needed. Call them with
   its help text as it could save the wrong image to the wrong exercise should
   different IDs match.
 
+**download-exercise-videos**
+  wger also has a number of exercise videos. Like the images, we self host them
+  and they can be downloaded to your local installation, but consider that the
+  size requirements are quite large compared to the images.
+
 **redo-capitalize-names**
   re-calculates the capitalized exercise names. This command can be called if the
   current "smart" capitalization algorithm is changed. This is a safe operation
