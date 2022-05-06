@@ -21,12 +21,6 @@ dictionary in your settings file. Currently, the following options are supported
   Controls whether it is allowed to upload videos to exercises in the instance.
   See section :ref:`videos` for more information.
 
-**REMOVE_WHITESPACE**: Default ``False``.
-  Removes whitespaces around HTML tags to reduce the size of the resulting HTML.
-  If you are not serving the site using TLS you probably want to use the GZip
-  middleware instead. Read the Django documentation on the security implications
-  (BREACH attack).
-
 **EMAIL_FROM**: Default `wger Workout Manager <wger@example.com>`
   The sender address used for sent emails by the system such as weight reminders
 
