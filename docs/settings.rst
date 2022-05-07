@@ -24,6 +24,9 @@ dictionary in your settings file. Currently, the following options are supported
 **EMAIL_FROM**: Default `wger Workout Manager <wger@example.com>`
   The sender address used for sent emails by the system such as weight reminders
 
+**EXERCISE_CACHE_TTL**: Default ``3600``
+  Sets how long the overview responses for exercise, exerciseinfo and exercisebaseinfo
+  are cached for. The value is in seconds, so 3600 is one hour.
 
 .. note::
   If you want to override a default setting, don't overwrite all the dictionary
