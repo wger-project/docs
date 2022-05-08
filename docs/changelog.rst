@@ -32,6 +32,8 @@ Upgrade steps from 2.0:
 
 🧰 Maintenance:
 
+* Exercise API response is now cached (thanks `@ImTheTom`_) `#1033`_
+
 * Changes to the REST API:
 
   + /exercisebaseinfo/
@@ -63,10 +65,12 @@ Upgrade steps from 2.0:
 .. _#716: https://github.com/wger-project/wger/issues/716
 .. _#819: https://github.com/wger-project/wger/issues/819
 .. _#970: https://github.com/wger-project/wger/issues/970
+.. _#1033: https://github.com/wger-project/wger/issues/1033
 
 .. _@Alig1493: https://github.com/Alig1493
 .. _@LucasSD: https://github.com/LucasSD
 .. _@qwert45hi: https://github.com/qwert45hi
+.. _@ImTheTom: https://github.com/ImTheTom
 .. _@jackmulligan-ire: https://github.com/jackmulligan-ire
 
 
