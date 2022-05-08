@@ -30,6 +30,7 @@ Configure apache to serve the application::
 
 
     <VirtualHost *:80>
+        WSGIApplicationGroup %{GLOBAL}
         WSGIDaemonProcess wger python-path=/home/wger/src python-home=/home/wger/venv
         WSGIProcessGroup wger
         WSGIScriptAlias / /home/wger/src/wger/wsgi.py
