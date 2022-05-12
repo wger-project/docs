@@ -25,6 +25,7 @@ Upgrade steps from 2.0:
 * Custom measurements such as biceps size or body fat `#133`_
 * Add picture type to exercise images (thanks `@LucasSD`_) `#589`_
 * Add optional relation from nutritional diary to meal (thanks `@Alig1493`_) `#819`_
+* Muscles now have a "common" name, besides their names in Latin (thanks `@ImTheTom`_) `#1041`_
 
 🐛 Bug Fixes:
 
@@ -66,6 +67,7 @@ Upgrade steps from 2.0:
 .. _#819: https://github.com/wger-project/wger/issues/819
 .. _#970: https://github.com/wger-project/wger/issues/970
 .. _#1033: https://github.com/wger-project/wger/issues/1033
+.. _#1041: https://github.com/wger-project/wger/pull/1041
 
 .. _@Alig1493: https://github.com/Alig1493
 .. _@LucasSD: https://github.com/LucasSD
