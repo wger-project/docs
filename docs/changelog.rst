@@ -26,6 +26,7 @@ Upgrade steps from 2.0:
 * Add picture type to exercise images (thanks `@LucasSD`_) `#589`_
 * Add optional relation from nutritional diary to meal (thanks `@Alig1493`_) `#819`_
 * Muscles now have a "common" name, besides their names in Latin (thanks `@ImTheTom`_) `#1041`_
+* Allow to add nutritional plan diary entries for other dates (thanks `@ImTheTom`_) `#520`_
 
 🐛 Bug Fixes:
 
@@ -56,6 +57,7 @@ Upgrade steps from 2.0:
 * `#666`_, `#667`_, `#656`_ (thanks `@jackmulligan-ire`_), `#716`_
 
 .. _#133: https://github.com/wger-project/wger/issues/133
+.. _#520: https://github.com/wger-project/wger/issues/520
 .. _#572: https://github.com/wger-project/wger/issues/572
 .. _#589: https://github.com/wger-project/wger/issues/589
 .. _#639: https://github.com/wger-project/wger/issues/639
