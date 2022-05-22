@@ -30,7 +30,7 @@ Upgrade steps from 2.0:
 
 🐛 Bug Fixes:
 
-* ...
+* Adding a new workout day no longer needs to be saved twice (thanks `@ImTheTom`_) `#974`_
 
 🧰 Maintenance:
 
@@ -68,6 +68,7 @@ Upgrade steps from 2.0:
 .. _#716: https://github.com/wger-project/wger/issues/716
 .. _#819: https://github.com/wger-project/wger/issues/819
 .. _#970: https://github.com/wger-project/wger/issues/970
+.. _#974: https://github.com/wger-project/wger/issues/974
 .. _#1033: https://github.com/wger-project/wger/issues/1033
 .. _#1041: https://github.com/wger-project/wger/pull/1041
 
