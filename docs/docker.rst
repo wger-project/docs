@@ -11,6 +11,14 @@ Note that you need to build from the project's source folder, e.g::
     docker build -f extras/docker/demo/Dockerfile --tag wger/demo .
 
 
+Production
+----------
+
+There is a configured docker compose file with all necessary services
+
+https://github.com/wger-project/docker
+
+
 Demo
 ----
 
@@ -27,6 +35,8 @@ Run a container and start the application::
 
 Then just open http://localhost:8000 and log in as: **admin**, password **adminadmin**
 
+Please note that the database will not be persisted when you update the image
+
 
 Development
 -----------
@@ -41,7 +51,6 @@ Get the image::
 Run a container and start the application::
 
     docker run -ti --name wger.dev --publish 8000:8000 wger/server
-    (in docker) source ~/venv/bin/activate
     (in docker) python manage.py runserver 0.0.0.0:8000
 
 Then just open http://localhost:8000 and log in as: **admin**, password **adminadmin**
@@ -59,8 +68,3 @@ your host machine and use docker only to serve it. Then do this::
 It will mount the local path *on top* of the folder in the container. For this to
 work you obviously need to manually checkout the code to ``/path/to/local/wger/``
 and create a settings file as well.
-
-Production
-----------
-
-The production docker compose setup can be found here: https://github.com/wger-project/docker
