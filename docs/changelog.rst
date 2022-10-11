@@ -1,22 +1,40 @@
 Changelog
 =========
 
-2.1 - IN DEVELOPMENT
---------------------
-**2021-XX-XX**
+2.1
+---
+**2022-10-11**
 
 Upgrade steps from 2.0:
 
 * Install ffmpeg if you want to upload videos (consult documentation).
 * Update python libraries ``pip3 install -r requirements.txt``
-* Run migrations ``python3 manage.py migrate``
+* To sync the new exercises:
+
+  * Run migrations ``python3 manage.py migrate``
+  * delete all exercises not in use ``python manage.py delete-unused-exercises``
+    (this will delete all exercises that are currently in the database but are
+    not part of any workout, log, etc. You will be promted before the script does anything)
+  * get the new exercises ``python manage.py sync-exercises`` (Also note that if
+    you don’t perform these steps and directly run a regular sync the worst
+    that can happen is that you might have some duplicate exercises in your
+    installation)
+  * get the new images ``python manage.py download-exercise-images``
+  * get the new videos ``python manage.py download-exercise-videos`` (please
+    note that this needs more space)
+
 * Update CSS and JS libraries ``yarn install``
 * Compile the CSS ``yarn build:css:sass``
 * Update static files (only production): ``python3 manage.py collectstatic``
-* Load new permissions ``python3 manage.py loaddata groups.json``
+* Load new permissions ``python3 manage.py loaddata groups.json categories.json``
+
 
 🚀 Features:
 
+* The exercise database has undergone a huge cleanup, combining duplicates and
+  translations, deleting stubs, etc. Refreshed the UI for the exercise overview,
+  detail view and contribution page. It is now easier (or at all possible) to
+  submit, correct and translate the exercises. `#1120`_
 * New gallery where users can upload pictures to track their progress `#572`_
 * Exercises can now have videos. Also many thanks to Goulart for providing 150 videos `#970`_
   and releasing them under the CC-BY-SA license.
@@ -70,6 +88,7 @@ Upgrade steps from 2.0:
 .. _#970: https://github.com/wger-project/wger/issues/970
 .. _#974: https://github.com/wger-project/wger/issues/974
 .. _#1033: https://github.com/wger-project/wger/issues/1033
+.. _#1120: https://github.com/wger-project/wger/pull/1120
 .. _#1041: https://github.com/wger-project/wger/pull/1041
 
 .. _@Alig1493: https://github.com/Alig1493
