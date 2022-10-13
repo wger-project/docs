@@ -4,6 +4,18 @@ Changelog
 2.2 - IN DEVELOPMENT
 --------------------
 
+Upgrade steps from 2.1:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Update python libraries ``pip3 install -r requirements.txt``
+* Migrate database ``python manage.py migrate``
+* Update CSS and JS libraries ``yarn install``
+* Compile the CSS ``yarn build:css:sass``
+* Update static files (only production): ``python3 manage.py collectstatic``
+* Load new permissions ``python3 manage.py loaddata groups.json categories.json``
+
+
+
 🚀 Features:
 ~~~~~~~~~~~~
 
