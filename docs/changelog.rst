@@ -8,6 +8,7 @@ Changelog
 ~~~~~~~~~~~~
 
 * Added JWT authentication to the REST API (thanks `@RohanKaran`_!) `#1047`_
+* Added brute protection against brute force login attacks (thanks `@RohanKaran`_!) `#1096`_
 
 
 🐛 Bug Fixes:
@@ -22,6 +23,7 @@ Changelog
 * ...
 
 .. _#1047: https://github.com/wger-project/wger/issues/1047
+.. _#1096: https://github.com/wger-project/wger/issues/1096
 .. _@RohanKaran: https://github.com/RohanKaran
 
 
