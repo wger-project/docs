@@ -2,21 +2,24 @@ Changelog
 =========
 
 2.2 - IN DEVELOPMENT
----
+--------------------
 
 🚀 Features:
+~~~~~~~~~~~~
 
 * Added JWT authentication to the REST API (thanks `@RohanKaran`_!) `#1047`_
 
 
 🐛 Bug Fixes:
+~~~~~~~~~~~~~
 
-*
+* ...
 
 
 🧰 Maintenance:
+~~~~~~~~~~~~~~~
 
-*
+* ...
 
 .. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _@RohanKaran: https://github.com/RohanKaran
