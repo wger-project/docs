@@ -32,11 +32,14 @@ Upgrade steps from 2.1:
 🧰 Maintenance:
 ~~~~~~~~~~~~~~~
 
-* ...
+* `#1137`_  (thanks `@AdamPetik`_!)
+
 
 .. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _#1096: https://github.com/wger-project/wger/issues/1096
+.. _#1137: https://github.com/wger-project/wger/issues/1137
 .. _@RohanKaran: https://github.com/RohanKaran
+.. _@AdamPetik: https://github.com/AdamPetik
 
 
 2.1
