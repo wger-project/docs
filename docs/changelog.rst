@@ -21,6 +21,7 @@ Upgrade steps from 2.1:
 
 * Added JWT authentication to the REST API (thanks `@RohanKaran`_!) `#1047`_
 * Added brute protection against brute force login attacks (thanks `@RohanKaran`_!) `#1096`_
+* Allow to set the minimum account age for users to contribute exercises (thanks `@mohammadrafigh`_!) `#1187`_
 
 
 🐛 Bug Fixes:
@@ -38,8 +39,10 @@ Upgrade steps from 2.1:
 .. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _#1096: https://github.com/wger-project/wger/issues/1096
 .. _#1137: https://github.com/wger-project/wger/issues/1137
+.. _#1187: https://github.com/wger-project/wger/issues/1187
 .. _@RohanKaran: https://github.com/RohanKaran
 .. _@AdamPetik: https://github.com/AdamPetik
+.. _@mohammadrafigh: https://github.com/mohammadrafigh
 
 
 2.1
