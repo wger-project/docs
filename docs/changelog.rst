@@ -27,7 +27,7 @@ Upgrade steps from 2.1:
 🐛 Bug Fixes:
 ~~~~~~~~~~~~~
 
-* ...
+* Fix issue with django axes and mobile app `#1163`_
 
 
 🧰 Maintenance:
@@ -39,6 +39,7 @@ Upgrade steps from 2.1:
 .. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _#1096: https://github.com/wger-project/wger/issues/1096
 .. _#1137: https://github.com/wger-project/wger/issues/1137
+.. _#1163: https://github.com/wger-project/wger/issues/1163
 .. _#1187: https://github.com/wger-project/wger/issues/1187
 .. _@RohanKaran: https://github.com/RohanKaran
 .. _@AdamPetik: https://github.com/AdamPetik
