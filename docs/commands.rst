@@ -249,39 +249,34 @@ wger also implements a series of Django commands that perform different
 management functions that are sometimes needed. Call them with
 ``python manage.py <command_name>``:
 
+**sync-exercises**
+  synchronizes the exercise database from the default wger instance to the local
+  installation. This will also update categories, equipment, languages, muscles
+  and will delete entries that were removed on the remote server (this basically
+  only applies to exercises that were submitted several times). Exercises that
+  you added manually to the database are not touched.
+
 **download-exercise-images**
-  synchronizes the exercise images from wger.de to the local installation. Read
-  its help text as it could save the wrong image to the wrong exercise should
-  different IDs match.
+  synchronizes the exercise images from the default wger instance to the local
+  installation
 
 **download-exercise-videos**
-  wger also has a number of exercise videos. Like the images, we self host them
-  and they can be downloaded to your local installation, but consider that the
-  size requirements are quite large compared to the images.
-
-**redo-capitalize-names**
-  re-calculates the capitalized exercise names. This command can be called if the
-  current "smart" capitalization algorithm is changed. This is a safe operation
-  since the original names (as entered by the user) are still available.
-
-**submitted-exercises**
-  simply prints a list of user-submitted exercises
+  synchronizes the exercise videos from the default wger instance to the local
+  installation
 
 **extract-i18n**
-  extract strings from the database that have to be inserted manually in the PO
-  file when translating. These include e.g. exercise categories.
+  Used for development only. Extracts strings from the database that need to be
+  translated
 
 **clear-cache**
   clears different application caches. Might be needed after some updates or
   just useful while testing. Please note that you must select what caches to
   clear.
 
-**update-user-cache**
-  update the user cache-table. This command is only needed when the python code
-  used to calculate any of the cached entries is changed and the ones in the
-  database need to be updated to reflect the new logic.
-
-
+**exercises-health-check.py**
+  Performs a series of basic health checks. Basically sees if there are exercises
+  that don't have a default English translation or worse, don't have any
+  translation at all
 
 Cron
 ~~~~

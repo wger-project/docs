@@ -21,6 +21,7 @@ This documentation is intended for developers and administrators of the software
 Installation and administration
 -------------------------------
 .. toctree::
+   :maxdepth: 2
 
    installation
 
@@ -28,6 +29,7 @@ Installation and administration
 Development
 -------------------------------
 .. toctree::
+   :maxdepth: 2
 
    tips_and_tricks
    codingstyle
@@ -37,6 +39,7 @@ Development
 Administration guide
 --------------------
 .. toctree::
+   :maxdepth: 2
 
    commands
    settings

@@ -42,6 +42,7 @@ the :ref:`videos` section for more information.
 
    development
    production
+   celery
    docker
    updating
 

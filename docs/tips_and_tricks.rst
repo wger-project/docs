@@ -102,7 +102,7 @@ install the following packages::
 
 
 Contributing
-------------
+============
 
 * **Send pull requests**: for new code you want to share, please send pull
   requests in GitHub. Sending patches by email or attaching them to an issue
