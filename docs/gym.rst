@@ -33,7 +33,7 @@ one they were created in) and can access only those members. This setting cannot
 be changed later. The user's gym appears in the top-right menu.
 
 Member Management
------------------
+=================
 To add members to a gym:
 
 1. Click the ``Add Member`` button at the top of the member overview.
@@ -70,7 +70,7 @@ option but keep in mind that this action cannot be undone.
 
 
 Contracts
----------
+=========
 
 It is also possible to manage the members' contracts with the application. A
 contract is composed of a base form and optional *type* and *options*. The type
@@ -85,7 +85,7 @@ contract to a specific user.
 
 
 E-Mails
------------
+=======
 You can send a batch e-mail to all members of a gym. Currently, there is no support 
 for filtering members based on specific criterion.
 
@@ -99,7 +99,7 @@ How to send e-mails:
 
 
 Configuration
--------------
+=============
 
 Inactive members
 ~~~~~~~~~~~~~~~~
