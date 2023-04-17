@@ -98,7 +98,7 @@ If using sqlite, create a folder for it (must be writable by the apache user)::
 Application
 -----------
 
-Make a virtualenv for python and activate it::
+As the wger user, make a virtualenv for python and activate it::
 
   python3 -m venv /home/wger/venv
   source /home/wger/venv/bin/activate
