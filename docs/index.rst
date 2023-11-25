@@ -62,7 +62,7 @@ issue tracker).
 
 * **Discord:** https://discord.gg/rPWFv6W
 * **Issue tracker:** https://github.com/wger-project/wger/issues
-* **Twitter:** https://twitter.com/wger_project
+* **Mastodon:** https://fosstodon.org/@wger
 
 
 Sources
