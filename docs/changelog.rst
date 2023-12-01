@@ -1,8 +1,15 @@
 Changelog
 =========
 
-2.2 - IN DEVELOPMENT
+2.3 - IN DEVELOPMENT
 --------------------
+
+Upgrade steps from 2.2:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+2.2
+---
+**2023-11-06**
 
 Upgrade steps from 2.1:
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -19,33 +26,90 @@ Upgrade steps from 2.1:
 🚀 Features:
 ~~~~~~~~~~~~
 
+* Improvements to the nutritional plan handling. Users don't have to setup a detailed
+  plan with meals anymore, instead they can just log their meals `#817`_
+* Allow users to set goals for their nutritional plans. This basically works
+  like the sum of the individual meals, but is simpler and easier to setup `#1003`_
+* Added general measurements tracking to the web application `#875`_
 * Added JWT authentication to the REST API (thanks `@RohanKaran`_!) `#1047`_
+* When scanning a product, fetch the data from the live OFF server if it is not
+  found locally `#1012`_
 * Added brute protection against brute force login attacks (thanks `@RohanKaran`_!) `#1096`_
+* Reworked the landing page (thanks `@12people`_!) `#1112`_
 * Allow to set the minimum account age for users to contribute exercises (thanks `@mohammadrafigh`_!) `#1187`_
+* Improvements to the Open Food Facts product importer. The setup has been simplified
+  with a docker compose, making the process much more streamlined. `#1505`_
+* Document the API with openAPI, redoc and all the goodies that come from it
+  (better online docs, being able to generate clients, etc.) `#1127`_
+* Allow searching exercises and ingredient in English in addition to the user's
+  currently selected language `#1238`_
+* More flexible user (sub)locale switching. This specially affected English users
+  that would be shown dates in US format `#1245`_
+* Add a deletion log for exercises. This allows exercises to be marked as deleted by
+  the system. Alternatively a replacement can be set so that when other instances
+  sync the exercises logs and routines are correctly updated `#1237`_
+* Show all the authors of an exercise and any of its child items (translations,
+  images, videos, etc.) `#1137`_
 
 
 🐛 Bug Fixes:
 ~~~~~~~~~~~~~
 
 * Fix issue with django axes and mobile app `#1163`_
+* Correctly format decimal places in numbers according to the user's locale `#1402`_
+* Fix issue when a user tried to register with an existing email via the app (thanks `@JayanthBontha`_!) `#1459`_
+* Fix bug in the demo entries generator (thanks `@JayanthBontha`_!) `#1278`_
 * Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1154`_
+* Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1287`_
+* Fix issue that prevented users from resetting their password (thanks `@RohanKaran`_!) `#1154`_
+* Split the dummy generator into individual files `#919`_
+* Fix bug in the link used in the password reset link `#1320`_
+* Fix bug in the weight log chart `#1308`_
 
 
 🧰 Maintenance:
 ~~~~~~~~~~~~~~~
 
 * `#1137`_  (thanks `@AdamPetik`_!)
+* Show last modified datetime of exercises in the API `#1387`_
+* Better handling of exercises without translations `#1319`_
+* Update bootstrap to current version `#1109`_
+* Update django to current version `#1110`_
 
-
+.. _#1505 : https://github.com/wger-project/wger/issues/1505
+.. _#1459 : https://github.com/wger-project/wger/issues/1459
+.. _#1402 : https://github.com/wger-project/wger/issues/1402
+.. _#1387 : https://github.com/wger-project/wger/issues/1387
+.. _#1320 : https://github.com/wger-project/wger/issues/1320
+.. _#1319 : https://github.com/wger-project/wger/issues/1319
+.. _#1308 : https://github.com/wger-project/wger/issues/1308
+.. _#1287 : https://github.com/wger-project/wger/issues/1287
+.. _#1278 : https://github.com/wger-project/wger/issues/1278
+.. _#1245 : https://github.com/wger-project/wger/issues/1245
+.. _#1238 : https://github.com/wger-project/wger/issues/1238
+.. _#1237 : https://github.com/wger-project/wger/issues/1237
+.. _#1154: https://github.com/wger-project/wger/issues/1154
+.. _#1137: https://github.com/wger-project/wger/issues/1137
+.. _#1127: https://github.com/wger-project/wger/issues/1127
+.. _#1112: https://github.com/wger-project/wger/issues/1112
+.. _#1110: https://github.com/wger-project/wger/issues/1110
+.. _#1109: https://github.com/wger-project/wger/issues/1109
 .. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _#1096: https://github.com/wger-project/wger/issues/1096
 .. _#1137: https://github.com/wger-project/wger/issues/1137
 .. _#1163: https://github.com/wger-project/wger/issues/1163
 .. _#1154: https://github.com/wger-project/wger/issues/1154
 .. _#1187: https://github.com/wger-project/wger/issues/1187
+.. _#1012: https://github.com/wger-project/wger/issues/1012
+.. _#1003: https://github.com/wger-project/wger/issues/1003
+.. _#919: https://github.com/wger-project/wger/issues/919
+.. _#875: https://github.com/wger-project/wger/issues/875
+.. _#817: https://github.com/wger-project/wger/issues/817
+.. _@12people: https://github.com/12people
 .. _@RohanKaran: https://github.com/RohanKaran
 .. _@AdamPetik: https://github.com/AdamPetik
 .. _@mohammadrafigh: https://github.com/mohammadrafigh
+.. _@JayanthBontha : https://github.com/JayanthBontha
 
 
 2.1
