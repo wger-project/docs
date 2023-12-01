@@ -33,6 +33,9 @@ Upgrade steps from 2.1:
 * Compile the CSS ``yarn build:css:sass``
 * Update static files (only production): ``python3 manage.py collectstatic``
 * Load new permissions ``python3 manage.py loaddata groups.json categories.json``
+* Read the section on celery in this documentation on how to set it up. While at the
+  moment this is not needed and only provides quality of life features, in the future
+  this might change
 
 
 
