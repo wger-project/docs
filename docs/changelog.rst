@@ -6,6 +6,19 @@ Changelog
 
 Upgrade steps from 2.2:
 ~~~~~~~~~~~~~~~~~~~~~~~
+*
+
+🐛 Bug Fixes
+~~~~~~~~~~~~
+*
+
+🚀 Features
+~~~~~~~~~~~
+*
+
+🧰 Maintenance
+~~~~~~~~~~~~~~
+*
 
 2.2
 ---
@@ -23,8 +36,8 @@ Upgrade steps from 2.1:
 
 
 
-🚀 Features:
-~~~~~~~~~~~~
+🚀 Features
+~~~~~~~~~~~
 
 * Improvements to the nutritional plan handling. Users don't have to setup a detailed
   plan with meals anymore, instead they can just log their meals `#817`_
@@ -32,6 +45,11 @@ Upgrade steps from 2.1:
   like the sum of the individual meals, but is simpler and easier to setup `#1003`_
 * Added general measurements tracking to the web application `#875`_
 * Added JWT authentication to the REST API (thanks `@RohanKaran`_!) `#1047`_
+* Added images to ingredients. This can now be shown in the nutritional plan,
+  the autocompleter, etc. `#653`_
+* Add a celery queue for longer running or periodic tasks. At the moment this is only used
+  to keep the exercises in sync and download the ingredient images, but other features
+  are planned `#1174`_
 * When scanning a product, fetch the data from the live OFF server if it is not
   found locally `#1012`_
 * Added brute protection against brute force login attacks (thanks `@RohanKaran`_!) `#1096`_
@@ -52,8 +70,8 @@ Upgrade steps from 2.1:
   images, videos, etc.) `#1137`_
 
 
-🐛 Bug Fixes:
-~~~~~~~~~~~~~
+🐛 Bug Fixes
+~~~~~~~~~~~~
 
 * Fix issue with django axes and mobile app `#1163`_
 * Correctly format decimal places in numbers according to the user's locale `#1402`_
@@ -62,17 +80,17 @@ Upgrade steps from 2.1:
 * Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1154`_
 * Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1287`_
 * Fix issue that prevented users from resetting their password (thanks `@RohanKaran`_!) `#1154`_
-* Split the dummy generator into individual files `#919`_
 * Fix bug in the link used in the password reset link `#1320`_
 * Fix bug in the weight log chart `#1308`_
 
 
-🧰 Maintenance:
-~~~~~~~~~~~~~~~
+🧰 Maintenance
+~~~~~~~~~~~~~~
 
 * `#1137`_  (thanks `@AdamPetik`_!)
 * Show last modified datetime of exercises in the API `#1387`_
 * Better handling of exercises without translations `#1319`_
+* Split the dummy generator into individual files `#919`_
 * Update bootstrap to current version `#1109`_
 * Update django to current version `#1110`_
 
@@ -96,15 +114,17 @@ Upgrade steps from 2.1:
 .. _#1109: https://github.com/wger-project/wger/issues/1109
 .. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _#1096: https://github.com/wger-project/wger/issues/1096
-.. _#1137: https://github.com/wger-project/wger/issues/1137
-.. _#1163: https://github.com/wger-project/wger/issues/1163
-.. _#1154: https://github.com/wger-project/wger/issues/1154
 .. _#1187: https://github.com/wger-project/wger/issues/1187
+.. _#1163: https://github.com/wger-project/wger/issues/1163
+.. _#1174: https://github.com/wger-project/wger/issues/1174
+.. _#1154: https://github.com/wger-project/wger/issues/1154
+.. _#1137: https://github.com/wger-project/wger/issues/1137
 .. _#1012: https://github.com/wger-project/wger/issues/1012
 .. _#1003: https://github.com/wger-project/wger/issues/1003
 .. _#919: https://github.com/wger-project/wger/issues/919
 .. _#875: https://github.com/wger-project/wger/issues/875
 .. _#817: https://github.com/wger-project/wger/issues/817
+.. _#653: https://github.com/wger-project/wger/issues/653
 .. _@12people: https://github.com/12people
 .. _@RohanKaran: https://github.com/RohanKaran
 .. _@AdamPetik: https://github.com/AdamPetik
