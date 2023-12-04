@@ -58,8 +58,6 @@ Upgrade steps from 2.1:
 * Added brute protection against brute force login attacks (thanks `@RohanKaran`_!) `#1096`_
 * Reworked the landing page (thanks `@12people`_!) `#1112`_
 * Allow to set the minimum account age for users to contribute exercises (thanks `@mohammadrafigh`_!) `#1187`_
-* Improvements to the Open Food Facts product importer. The setup has been simplified
-  with a docker compose, making the process much more streamlined. `#1505`_
 * Document the API with openAPI, redoc and all the goodies that come from it
   (better online docs, being able to generate clients, etc.) `#1127`_
 * Allow searching exercises and ingredient in English in addition to the user's
@@ -90,6 +88,8 @@ Upgrade steps from 2.1:
 🧰 Maintenance
 ~~~~~~~~~~~~~~
 
+* Improvements to the Open Food Facts product importer. The setup has been simplified
+  with a docker compose, making the process much more streamlined. `#1505`_
 * `#1137`_  (thanks `@AdamPetik`_!)
 * Show last modified datetime of exercises in the API `#1387`_
 * Better handling of exercises without translations `#1319`_
