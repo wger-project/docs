@@ -4,12 +4,8 @@ Changelog
 2.3 - IN DEVELOPMENT
 --------------------
 
-Upgrade steps from 2.2:
-~~~~~~~~~~~~~~~~~~~~~~~
-*
-
-🐛 Bug Fixes
-~~~~~~~~~~~~
+🔧 Upgrade steps from 2.2
+~~~~~~~~~~~~~~~~~~~~~~~~~
 *
 
 🚀 Features
@@ -20,12 +16,19 @@ Upgrade steps from 2.2:
 ~~~~~~~~~~~~~~
 *
 
+🐛 Bug Fixes
+~~~~~~~~~~~~
+*
+
+
 2.2
 ---
 **2023-11-06**
 
-Upgrade steps from 2.1:
-~~~~~~~~~~~~~~~~~~~~~~~
+https://github.com/wger-project/wger/releases/tag/2.2
+
+🔧 Upgrade steps from 2.1
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Update python libraries ``pip3 install -r requirements.txt``
 * Migrate database ``python manage.py migrate``
@@ -46,6 +49,7 @@ Upgrade steps from 2.1:
   plan with meals anymore, instead they can just log their meals `#817`_
 * Allow users to set goals for their nutritional plans. This basically works
   like the sum of the individual meals, but is simpler and easier to setup `#1003`_
+* Implemented nutrition page with react
 * Added general measurements tracking to the web application `#875`_
 * Added JWT authentication to the REST API (thanks `@RohanKaran`_!) `#1047`_
 * Added images to ingredients. This can now be shown in the nutritional plan,
@@ -54,7 +58,7 @@ Upgrade steps from 2.1:
   to keep the exercises in sync and download the ingredient images, but other features
   are planned `#1174`_
 * When scanning a product, fetch the data from the live OFF server if it is not
-  found locally `#1012`_
+  found locally `#1012`_, `#1348`_
 * Added brute protection against brute force login attacks (thanks `@RohanKaran`_!) `#1096`_
 * Reworked the landing page (thanks `@12people`_!) `#1112`_
 * Allow to set the minimum account age for users to contribute exercises (thanks `@mohammadrafigh`_!) `#1187`_
@@ -69,21 +73,12 @@ Upgrade steps from 2.1:
   sync the exercises logs and routines are correctly updated `#1237`_
 * Show all the authors of an exercise and any of its child items (translations,
   images, videos, etc.) `#1137`_
-
-
-🐛 Bug Fixes
-~~~~~~~~~~~~
-
-* Fix issue with django axes and mobile app `#1163`_
-* Correctly format decimal places in numbers according to the user's locale `#1402`_
-* Fix issue when a user tried to register with an existing email via the app (thanks `@JayanthBontha`_!) `#1459`_
-* Fix bug in the demo entries generator (thanks `@JayanthBontha`_!) `#1278`_
-* Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1154`_
-* Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1287`_
-* Fix issue that prevented users from resetting their password (thanks `@RohanKaran`_!) `#1154`_
-* Fix bug in the link used in the password reset link `#1320`_
-* Fix bug in the weight log chart `#1308`_
-
+* Allow users to give meals a description (thanks `@mohammadrafigh`_!) `#822`_
+* Added style field (Foto, 3D, etc.) to exercise image (thanks `@LucasSD`_!) `#822`_
+* Added exercise edit history (thanks `@ImTheTom`_!) `#1082`_
+* Added JWT authentication to rest API (thanks `@RohanKaran`_!) `#1134`_
+* Add support for sub-locales in the application such as en-gb  `#1275`_
+* Moved some parts of routine management to react `#1328`_
 
 🧰 Maintenance
 ~~~~~~~~~~~~~~
@@ -96,43 +91,84 @@ Upgrade steps from 2.1:
 * Split the dummy generator into individual files `#919`_
 * Update bootstrap to current version `#1109`_
 * Update django to current version `#1110`_
+* Bettler handling of exercises UUIDs (thanks `@Gr8ayu`_) `#675`_
+* Add foreign key to meals on log (thanks `@Alig1493`_) `#842`_
+* Make URL for media, static and login redirect configurable (thanks `@novalis111`_) `#1020`_
+* Configure django axes (thanks `@RohanKaran`_) `#1143`_
+* Add tzdate package to docker base image (thanks `@bbkz`_) `#1408`_
 
+
+🐛 Bug Fixes
+~~~~~~~~~~~~
+
+* Fix issue with django axes and mobile app `#1163`_
+* Correctly format decimal places in numbers according to the user's locale `#1402`_
+* Fix issue when a user tried to register with an existing email via the app (thanks `@JayanthBontha`_!) `#1459`_
+* Fix bug in the demo entries generator (thanks `@JayanthBontha`_!) `#1278`_
+* Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1154`_
+* Fix issue with password reset links and expired tokens (thanks `@RohanKaran`_!) `#1287`_
+* Fix issue that prevented users from resetting their password (thanks `@RohanKaran`_!) `#1154`_
+* Fix import error (thanks `@sophiamartelli`_!) `#986`_
+* Use either TLS or SSL for emails (thanks `@bbkz`_!) `#1514`_
+* Fix bug in the link used in the password reset link `#1320`_
+* Fix bug in the weight log chart `#1308`_
+
+
+.. _#1514 : https://github.com/wger-project/wger/issues/1514
 .. _#1505 : https://github.com/wger-project/wger/issues/1505
 .. _#1459 : https://github.com/wger-project/wger/issues/1459
+.. _#1408 : https://github.com/wger-project/wger/issues/1408
 .. _#1402 : https://github.com/wger-project/wger/issues/1402
 .. _#1387 : https://github.com/wger-project/wger/issues/1387
+.. _#1348 : https://github.com/wger-project/wger/issues/1348
+.. _#1328 : https://github.com/wger-project/wger/issues/1328
 .. _#1320 : https://github.com/wger-project/wger/issues/1320
 .. _#1319 : https://github.com/wger-project/wger/issues/1319
 .. _#1308 : https://github.com/wger-project/wger/issues/1308
 .. _#1287 : https://github.com/wger-project/wger/issues/1287
 .. _#1278 : https://github.com/wger-project/wger/issues/1278
+.. _#1275 : https://github.com/wger-project/wger/issues/1275
 .. _#1245 : https://github.com/wger-project/wger/issues/1245
 .. _#1238 : https://github.com/wger-project/wger/issues/1238
 .. _#1237 : https://github.com/wger-project/wger/issues/1237
+.. _#1187: https://github.com/wger-project/wger/issues/1187
+.. _#1174: https://github.com/wger-project/wger/issues/1174
+.. _#1163: https://github.com/wger-project/wger/issues/1163
 .. _#1154: https://github.com/wger-project/wger/issues/1154
+.. _#1143: https://github.com/wger-project/wger/issues/1143
 .. _#1137: https://github.com/wger-project/wger/issues/1137
+.. _#1134: https://github.com/wger-project/wger/issues/1134
 .. _#1127: https://github.com/wger-project/wger/issues/1127
 .. _#1112: https://github.com/wger-project/wger/issues/1112
 .. _#1110: https://github.com/wger-project/wger/issues/1110
 .. _#1109: https://github.com/wger-project/wger/issues/1109
-.. _#1047: https://github.com/wger-project/wger/issues/1047
 .. _#1096: https://github.com/wger-project/wger/issues/1096
-.. _#1187: https://github.com/wger-project/wger/issues/1187
-.. _#1163: https://github.com/wger-project/wger/issues/1163
-.. _#1174: https://github.com/wger-project/wger/issues/1174
-.. _#1154: https://github.com/wger-project/wger/issues/1154
-.. _#1137: https://github.com/wger-project/wger/issues/1137
+.. _#1082 : https://github.com/wger-project/wger/issues/1082
+.. _#1047: https://github.com/wger-project/wger/issues/1047
+.. _#1020 : https://github.com/wger-project/wger/issues/1020
 .. _#1012: https://github.com/wger-project/wger/issues/1012
 .. _#1003: https://github.com/wger-project/wger/issues/1003
+.. _#986: https://github.com/wger-project/wger/issues/986
 .. _#919: https://github.com/wger-project/wger/issues/919
 .. _#875: https://github.com/wger-project/wger/issues/875
+.. _#842: https://github.com/wger-project/wger/issues/842
+.. _#822: https://github.com/wger-project/wger/issues/822
 .. _#817: https://github.com/wger-project/wger/issues/817
+.. _#774: https://github.com/wger-project/wger/issues/774
+.. _#675: https://github.com/wger-project/wger/issues/675
 .. _#653: https://github.com/wger-project/wger/issues/653
 .. _@12people: https://github.com/12people
 .. _@RohanKaran: https://github.com/RohanKaran
 .. _@AdamPetik: https://github.com/AdamPetik
 .. _@mohammadrafigh: https://github.com/mohammadrafigh
 .. _@JayanthBontha : https://github.com/JayanthBontha
+.. _@Gr8ayu: https://github.com/Gr8ayu
+.. _@LucasSD: https://github.com/LucasSD
+.. _@Alig1493: https://github.com/Alig1493
+.. _@sophiamartelli: https://github.com/sophiamartelli
+.. _@novalis111: https://github.com/novalis111
+.. _@RohanKaran: https://github.com/RohanKaran
+.. _@bbkz: https://github.com/bbkz
 
 
 2.1
