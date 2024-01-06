@@ -6,7 +6,11 @@ Changelog
 
 🔧 Upgrade steps from 2.2
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-*
+* Update python libraries ``pip3 install -r requirements.txt``
+* Migrate database ``python manage.py migrate``
+* Update CSS and JS libraries ``yarn install``
+* Compile the CSS ``yarn build:css:sass``
+* Update static files (only production): ``python3 manage.py collectstatic``
 
 🚀 Features
 ~~~~~~~~~~~
@@ -14,7 +18,7 @@ Changelog
 
 🧰 Maintenance
 ~~~~~~~~~~~~~~
-*
+* Added UUID fields to exercise aliases and comments for better synchronization
 
 🐛 Bug Fixes
 ~~~~~~~~~~~~
