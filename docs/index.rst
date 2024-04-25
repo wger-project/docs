@@ -39,11 +39,19 @@ Development
 Administration guide
 --------------------
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    commands
    settings
    gym
+
+
+API guide
+---------
+.. toctree::
+   :maxdepth: 1
+
+   routines
 
 
 Changelog
