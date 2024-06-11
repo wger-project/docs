@@ -1,17 +1,25 @@
 .. _routines:
 
-Data model for routines
-=======================
+Using the routine API
+=====================
 
 This section explains how the data model behind the routines and its different
 calculations work and is only relevant to you if you plan on using the API
 directly.
 
+A routine has
+
+* a name
+* an optional description
+* a start date
+* an end date
+* the day which starts the routine
+
 Days
 ----
 
-A routine consists of of several linked days that can be configured in different
-ways
+A day is the building block of a routine. It consists of of several linked days
+that can be configured in different ways.
 
 ::
 
@@ -148,12 +156,40 @@ Here day 3 has the flag set:
      - 2
      - 2
 
-Set configuration
------------------
+Sets
+----
 
-Exercises can be added to a slot (if you add more than one they are considered a superset, so
-most of them will only have one). These slots have a SetConfiguration entry, and different
-individual config entries where the magic happens.
+You can add exercises to a slot (set). These slots have a ``SetConfiguration``
+entry, and different individual config entries for individual properties where
+the magic happens.
+
+Supersets
+`````````
+
+If you add more than one exercise to a set, it automatically becomes a superset.
+The specific oder of exercises is the interleaved list of exercises. Not all exercises
+need to have the same number of sets, e.g.:
+
+* Exercise 1, 4 sets
+* Exercise 2, 2 sets
+* Exercise 3, 3 sets
+
+Would result in:
+
+* Exercise 1
+* Exercise 2
+* Exercise 3
+* Exercise 1
+* Exercise 2
+* Exercise 3
+* Exercise 1
+* Exercise 3
+* Exercise 1
+(with the respective values for weight, reps, etc.)
+
+
+Configuration
+`````````````
 
 There are config tables / endpoints for the following properties:
 
@@ -163,23 +199,47 @@ There are config tables / endpoints for the following properties:
 * reps in reserve (RiR)
 * rest time
 
-and are all optional, in which case they will return null over the API.
+All of these are optional, in which case they will return null over the API.
 In this case the number of sets will be set to 1.
 
-They all work basically the same, here with a weight config example::
+The behaviour is basically the same for all of them, here with a weight config example:
 
-    Iteration:    1        2        3        4        5        6        7        8
+.. list-table::
+   :header-rows: 0
 
-    Config:       50kg     -        -        +10%     -        +2       +1       45kg
-    Result:       50kg     50kg     50kg     55kg     55kg     57kg     58kg     45kg
+   * - **Iteration**
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5
+     - 6
+     - 7
+     - 8
+   * - **Config**
+     - 50kg
+     - -/-
+     - -/-
+     - +10%
+     - -/-
+     - +2kg
+     - +1kg
+     - 45kg
+   * - **Result**
+     - 50kg
+     - 50kg
+     - 50kg
+     - 55kg
+     - 55kg
+     - 57kg
+     - 58kg
+     - 45kg
 
 You can add changes that will happen at specific iterations and either modify the
-weight (+2, -10%) or replace it with a new value (45). The value at a specific iteration
+weight (+2kg, -10%) or replace it with a new value (45). The value at a specific iteration
 is the stacked calculated value (unless you just replace the value with a new one) of
 the previous ones. There are also a handful of possibilities on how to calculate the value
 such as increasing / decreasing or using an absolute value or a percentage.
-
-
 
 When exactly an iteration happens depends on how the days are configured and
 whether logs are required from the user or not.
@@ -194,3 +254,13 @@ ignored.
 If this is not enough, there is an escape hatch in the form of setting a custom python
 class that can perform any calculations you might need. Please consider that while this
 works, it is not currently in use so we would be happy if you got in touch with us.
+
+Possible values:
+~~~~~~~~~~~~~~~
+
+* ``value``: Decimal number with the wanted value
+* ``operation``: Operation to perform: ``+`` or ``-``
+* ``step``: How to calculate the new value: ``abs`` or ``percent``
+* ``replace``: Boolean, whether to replace the old value. Ignores operation and value
+* ``need_log_to_apply``: Boolean, whether a valid log is required to proceed
+
