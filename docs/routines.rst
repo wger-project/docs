@@ -156,6 +156,17 @@ Here day 3 has the flag set:
      - 2
      - 2
 
+Labels
+``````
+You can group the workout days (such as "Deload week" or similar) by adding labels to
+the routine. A label accepts the following properties:
+
+* ``start_offset``, the number of days after the start of the routine when this label becomes active
+* ``end_offset``, the number of days after the start of the routine when this label ceases being active
+* ``label``, the label that will be displayed in the UI
+
+
+
 Sets
 ----
 
