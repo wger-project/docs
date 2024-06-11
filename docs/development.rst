@@ -28,6 +28,19 @@ Install python requirements::
   $ pip install -r requirements_dev.txt
   $ pip install -e .
 
+Install Dependencies
+~~~~~~~~~~~~~~~~~~~~
+
+Before proceeding, you need to install `yarn` and `sass`. 
+
+You can install `yarn` using the following command::
+
+  $ npm install -g yarn
+
+And install `sass` using the following command::
+
+  $ npm install -g sass
+
 Install application
 ~~~~~~~~~~~~~~~~~~~
 
