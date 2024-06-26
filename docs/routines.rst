@@ -9,11 +9,11 @@ directly.
 
 A routine has
 
-* a name
-* an optional description
-* a start date
-* an end date
-* the day which starts the routine
+* ``name``, 50 chars max
+* ``description``, optional, 1000 chars max
+* a ``start date``
+* an ``end date``
+* the ``day`` which starts the routine
 
 Days
 ----
@@ -156,6 +156,22 @@ Here day 3 has the flag set:
      - 2
      - 2
 
+Additionally days have the following properties:
+
+* ``type`` the type of workout day. These will change the way the workout for a
+  specific day is handled, but currently this setting is ignored. Current values are:
+   * ``custom`` (default)
+   * ``enom``
+   * ``amrap``
+   * ``hiit``
+   * ``tabata``
+   * ``edt``
+   * ``rft``
+   * ``afap``
+* ``name``, 50 chars max
+* ``description``, optional, 1000 chars max
+* ``is_rest`` flag indicating that this is a rest day
+
 Labels
 ``````
 You can group the workout days (such as "Deload week" or similar) by adding labels to
@@ -170,9 +186,23 @@ the routine. A label accepts the following properties:
 Sets
 ----
 
-You can add exercises to a slot (set). These slots have a ``SetConfiguration``
+You can add exercises to a slot (set). These slots have a ``SlotConfig``
 entry, and different individual config entries for individual properties where
 the magic happens.
+
+* ``repetition_rounding`` - the rounding factor for the repetition value (happens client side)
+* ``weight_rounding`` - the rounding factor for the weight value (happens client side)
+* ``type`` the type of set. These will change the way the set is handled or displayed,
+  but currently this setting is ignored. Current values are:
+   * ``normal`` (default)
+   * ``dropset``
+   * ``myo``
+   * ``partial``
+   * ``forced``
+   * ``tut``
+   * ``iso``
+   * ``jump``
+
 
 Supersets
 `````````
