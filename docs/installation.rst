@@ -34,6 +34,12 @@ These are the necessary packages for both development and production::
     sudo apt-get install nodejs npm git python3-dev python3-venv libcairo2-dev pkg-config
     sudo npm install -g yarn sass
 
+If your node version is out of date, it can be updated with::
+
+    sudo npm install -g n
+    sudo npm cache clean -f
+    sudo n stable
+
 If you plan to use video files, you need to install additional packages, consult
 the :ref:`videos` section for more information.
 
