@@ -300,8 +300,7 @@ Possible values:
 ~~~~~~~~~~~~~~~
 
 * ``value``: Decimal number with the wanted value
-* ``operation``: Operation to perform: ``+`` or ``-``
+* ``operation``: Operation to perform: ``+``, ``-`` for adding or subtracting the value, or to replace it ``r``
 * ``step``: How to calculate the new value: ``abs`` or ``percent``
-* ``replace``: Boolean, whether to replace the old value. Ignores operation and value
 * ``need_log_to_apply``: Boolean, whether a valid log is required to proceed
 
