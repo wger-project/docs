@@ -13,7 +13,6 @@ A routine has
 * ``description``, optional, 1000 chars max
 * a ``start date``
 * an ``end date``
-* the ``day`` which starts the routine
 
 Days
 ----
@@ -26,12 +25,12 @@ that can be configured in different ways.
    +----------------+      +-----------------+      +-----------------+
    |Day 1 - Push    |      |Day 2 - Pull     |      |Day 3 - Legs     |
    |----------------+      |-----------------+      |-----------------+
-   |next_day 2      | ---> |next_day 3       | ---> |next_day 1       |
+   |order=1         | ---> |order=2          | ---> |order=3          |
    |rest=false      |      |rest=false       |      |rest=false       |
    |needs_logs=true |      |needs_logs=false |      |needs_logs=false |
    +----------------+      +-----------------+      +-----------------+
 
-The routine will calculate from the linked list a sequence of days that are planned.
+The routine will calculate from the list a sequence of days that are planned.
 This allows you to create very flexible setups. If the routine starts on the 1.1, it
 will create the following sequence:
 
@@ -70,7 +69,7 @@ will create the following sequence:
      - 4
 
 
-With the ``need_logs_to_advance`` flag you can control wether there needs to be a
+With the ``need_logs_to_advance`` flag you can control whether there needs to be a
 logged session for the day for the day to proceed. Otherwise, the day will be repeated
 till a log is saved, like in the example below with day 3 where the user logged a
 session on the 1.8.
