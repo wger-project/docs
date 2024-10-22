@@ -41,30 +41,47 @@ Please note that the database will not be persisted when you update the image
 Development
 -----------
 
-This image installs the application using virtualenv, uses an SQLite database
-and serves it with Django's development server.
+It's also possible to start the development server in docker, without needing to
+install any dependencies locally. For this, clone the docker repository https://github.com/wger-project/docker
 
-Get the image::
 
-    docker pull wger/server
+1. Clone https://github.com/wger-project/wger to a folder of your choice.
+2. `cd` into the environment of your choice (dev or dev-postgres)
+3. Copy `.env.example` to `.env` and set the path to correspond to the location where
+   you have checked out the wger server git repo.
 
-Run a container and start the application::
+Then::
 
-    docker run -ti --name wger.dev --publish 8000:8000 wger/server
-    (in docker) python manage.py runserver 0.0.0.0:8000
+    docker compose up
+    docker compose exec web /bin/bash
+    cp extras/docker/development/settings.py .
 
-Then just open http://localhost:8000 and log in as: **admin**, password **adminadmin**
+    # this creates initial db tables, runs yarn install, yarn build:css:sass, etc
+    wger bootstrap
 
-As an alternative, you might want to map a local folder to the container.
-This is interesting if e.g. you want to keep the wger source code on
-your host machine and use docker only to serve it. Then do this::
+    # safe to ignore: Your models in app(s): 'exercises', 'nutrition' have changes that are not yet reflected in a migration, and so won't be applied.
+    python3 manage.py migrate
 
-    docker run -ti \
-        --name wger.test1 \
-        --publish 8005:8000 \
-        --volume /path/to/local/wger/:/home/wger/src \
-         wger/server
+    # pull exercises from wger.de (or other source you have defined)
+    python3 manage.py sync-exercises
 
-It will mount the local path *on top* of the folder in the container. For this to
-work you obviously need to manually checkout the code to ``/path/to/local/wger/``
-and create a settings file as well.
+    # pull nutrition information
+    wger load-online-fixtures
+
+    # if you use sqlite, at this time you can make a backup if you want
+    # such that if you mess something up, you don't have to start from scratch
+    cp /home/wger/db/database.sqlite /home/wger/db/database.sqlite.orig
+
+    # finally, this is important, start the actual server!
+    python3 manage.py runserver 0.0.0.0:8000
+
+You can now login on http://localhost:8000 - there is one user account: admin, with password adminadmin
+The server should restart automatically when you change code, etc.
+
+
+Note: the docker images assume a wger user id of 1000. Since we mount the code
+and write from the image into your code repository, you may run into permission errors
+if your user id is not 1000. We don't have a good solution for such situation yet.
+Check your user id with `echo $UID`.
+
+TODO: document configuring IDE to automatically start the server, debug the python process, view logs, etc.
