@@ -13,6 +13,8 @@ A routine has
 * ``description``, optional, 1000 chars max
 * a ``start date``
 * an ``end date``
+* a ``fit_in_week`` flag to indicate that the routine should fit in a week, after the
+las regular workout day, the remainder of the week is filled with rest days
 
 Days
 ----
@@ -114,12 +116,7 @@ The bottom row shows the *iteration* of the day, which is the number of times th
 has occurred and is used to calculate the current weight, reps, etc. If a day needs a log
 to advance and it repeats, the iteration counter will not increase.
 
-You can also set the ``last_day_in_week`` flag to indicate that this is the last workout
-day in the current week. The API will return null for days and iterations for the remainder
-of the week.
-
-
-Here day 3 has the flag set:
+Here is an example if the ``fit_in_week`` flag is set for the routine:
 
 .. list-table::
    :header-rows: 1
