@@ -168,8 +168,8 @@ Additionally days have the following properties:
 * ``description``, optional, 1000 chars max
 * ``is_rest`` flag indicating that this is a rest day
 
-Labels
-``````
+**Labels**
+
 You can group the workout days (such as "Deload week" or similar) by adding labels to
 the routine. A label accepts the following properties:
 
@@ -304,7 +304,6 @@ class that can perform any calculations you might need. Please consider that whi
 works, it is not currently in use so we would be happy if you got in touch with us.
 
 Possible values:
-~~~~~~~~~~~~~~~
 
 * ``value``: Decimal number with the wanted value
 * ``operation``: Operation to perform: ``+``, ``-`` for adding or subtracting the value, or to replace it ``r``
