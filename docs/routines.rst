@@ -230,11 +230,11 @@ Configuration
 
 There are config tables / endpoints for the following properties:
 
-* nr of sets
-* weight
-* repetitions
-* reps in reserve (RiR)
-* rest time
+* [max] nr of sets
+* [max] weight
+* [max] repetitions
+* [max] reps in reserve (RiR)
+* [max] rest time
 
 All of these are optional, in which case they will return null over the API.
 In this case the number of sets will be set to 1.
@@ -273,20 +273,31 @@ The behaviour is basically the same for all of them, here with a weight config e
      - 45kg
 
 You can add changes that will happen at specific iterations and either modify the
-weight (+2kg, -10%) or replace it with a new value (45). The value at a specific iteration
-is the stacked calculated value (unless you just replace the value with a new one) of
-the previous ones. There are also a handful of possibilities on how to calculate the value
-such as increasing / decreasing or using an absolute value or a percentage.
+weight (+2kg, -10%) or replace it with a new value (45kg). The value at a specific
+iteration is the stacked calculated value (unless you just replace the value with
+a new one) of the previous ones. There are also a handful of possibilities on how
+to calculate the value such as increasing / decreasing or using an absolute value
+or a percentage.
 
-When exactly an iteration happens depends on how the days are configured and
-whether logs are required from the user or not.
+When exactly an iteration happens depends on how the days are configured, but
+realistically it's probably a week long.
 
-One of the ways the configs currently differ is the handling of the ``need_log_to_apply``
-flag. If this is set for both the weight and reps value, the system will check that
-the user logged at least the planned weight and reps. As an example, if your weight
-should change from 8x60 to 8x65 but you didn't log at least that in the last workout,
-you will stay at 8x60 till you do. For all other fields this flag is currently
-ignored.
+You can also control if a value increases by setting the ``requirements`` field. This
+field is a JSON object that can currently contains an object with the following keys::
+
+    {
+         "rules": [
+            "weight",
+            "repetitions",
+            "rir",
+            "rest"
+         ]
+    }
+You can add values to "rules" that need to be checked for the rule to apply. Only
+if all of them are met (i.e., the user logged them in the last iteration), the rule
+will be applied. For example, if the weight should change from 8x60 to 8x65, depends
+on the weight and repetitions but the user didn't log at least that in the last
+workout, it will stay at 8x60 until they do.
 
 If this is not enough, there is an escape hatch in the form of setting a custom python
 class that can perform any calculations you might need. Please consider that while this
@@ -298,5 +309,9 @@ Possible values:
 * ``value``: Decimal number with the wanted value
 * ``operation``: Operation to perform: ``+``, ``-`` for adding or subtracting the value, or to replace it ``r``
 * ``step``: How to calculate the new value: ``abs`` or ``percent``
-* ``need_log_to_apply``: Boolean, whether a valid log is required to proceed
+* ``requirements``: JSON field, see above
+* ``repetition_rounding`` and ``weight_rounding``: Rounding factor for the respective values.
+  Note that this only applies to that configuration, if you want to add a default value
+  you can change the user pofile, which also has these settings and, if set, will be written
+  to the config table *when creating new entries*.
 
