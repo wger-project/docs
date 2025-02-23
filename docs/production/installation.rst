@@ -1,7 +1,7 @@
 .. _installation:
 
-Installation
-============
+Manual installation
+===================
 
 You can get a local instance of wger installed in a couple of minutes.
 
@@ -17,7 +17,7 @@ stable state.
 The application is compatible and regularly tested with
 
 * PostgreSQL, sqlite
-* python 3.8, 3.9, 3.10 and pypy3
+* python 3.10, 3.11, 3.12 and 3.13
 
 After installation, you might also want to take a look at the :ref:`other-changes` section for other
 changes you might want to do to your local instance such as Terms of Service or
@@ -37,12 +37,5 @@ These are the necessary packages for both development and production::
 If you plan to use video files, you need to install additional packages, consult
 the :ref:`videos` section for more information.
 
-.. toctree::
-   :maxdepth: 1
 
-   development
-   production
-   celery
-   docker
-   updating
 

@@ -1,7 +1,7 @@
 .. _api:
 
-Authentication
-===============
+Using the API
+==============
 
 Public endpoints, such as the list of exercises or the ingredients can be
 accessed without authentication. For user owned objects such as
@@ -89,7 +89,7 @@ currently have a token, a new one will be generated for you
 
 
 Format negotiation
-==================
+------------------
 
 At the moment only JSON and the browsable HTML view are supported. That
 means that you can use the same endpoints from your browser or a client.
@@ -108,7 +108,7 @@ necessary to explicitly set the format, but you have the following options:
 
 
 Miscellaneous operations
-=========================
+------------------------
 
 Ordering
 --------

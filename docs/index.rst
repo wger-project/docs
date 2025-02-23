@@ -12,54 +12,19 @@ as a simple gym management utility. It offers a REST API as well, for easy
 integration with other projects and tools.
 
 For more details and a live system, refer to the project's site:
-https://github.com/wger-project/wger
+https://github.com/wger-project
 
 
 This documentation is intended for developers and administrators of the software.
 
 
-Installation and administration
--------------------------------
-.. toctree::
-   :maxdepth: 2
-
-   installation
-
-
-Development
--------------------------------
-.. toctree::
-   :maxdepth: 2
-
-   tips_and_tricks
-   codingstyle
-   i18n
-
-
-Administration guide
---------------------
 .. toctree::
    :maxdepth: 1
 
-   commands
-   settings
-   gym
-
-
-API guide
----------
-.. toctree::
-   :maxdepth: 1
-
-   api
-   routines
-
-
-Changelog
----------
-.. toctree::
-   :maxdepth: 2
-
+   contributing
+   development/index
+   production/index
+   api/index
    changelog
 
 Contact
@@ -78,7 +43,7 @@ Sources
 -------
 
 All the code and the content is freely available and is hosted on GitHub:
-https://github.com/wger-project/wger
+https://github.com/wger-project
 
 
 Licence

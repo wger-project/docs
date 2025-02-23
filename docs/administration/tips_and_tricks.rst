@@ -107,4 +107,3 @@ Contributing
   implement something new, don't forget to run the testsuite and write appropriate
   tests for the new code.
 
-* **Code according to the coding style**: :ref:`codingstyle`

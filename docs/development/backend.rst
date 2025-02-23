@@ -1,7 +1,15 @@
 .. _development:
 
-Development
+Backend
 ===========
+
+Development with docker
+------------------------
+
+:ref:`development_docker` provides a quick way to get a development environment
+
+Local installation
+-------------------
 
 Virtual environment
 ~~~~~~~~~~~~~~~~~~~
@@ -39,7 +47,7 @@ database and populate it with data on the first run::
   $ wger bootstrap
   $ wger load-online-fixtures
 
-You can of course also use other databases such as PostgreSQL or MariaDB. Create
+You can of course also use other databases such as PostgresSQL or MariaDB. Create
 a database and user and edit the DATABASES settings before calling bootstrap.
 Take a look at the :ref:`prod_postgres` on apache on how that could look like.
 
@@ -56,3 +64,10 @@ That's it. You can log in with the default administrator user:
 * **password**: adminadmin
 
 You can reset the admin's password with ``wger create-or-reset-admin``.
+
+
+Other
+-----
+
+You might need to start :ref:`celery` as well if you want to to run certain
+commands in the background.
