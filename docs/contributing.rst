@@ -5,16 +5,6 @@ There are many different ways to help the project, you don't need to be a
 developer to help out. Here are some ways you can contribute:
 
 
-Donate
----------
-
-If you like the application and want to support its development, you can donate
-to the project. This helps pay for the server costs and other expenses related
-to the project.
-
-https://www.buymeacoffee.com/wger
-
-
 Exercises
 ---------
 
@@ -37,3 +27,12 @@ Code
 Obviously, you can also contribute code. Please consult the :ref:`development`
 section for more information on how to set this up.
 
+
+Donate
+---------
+
+If you like the application and want to support its development, you can donate
+to the project. This helps pay for the server costs and other expenses related
+to the project.
+
+https://www.buymeacoffee.com/wger

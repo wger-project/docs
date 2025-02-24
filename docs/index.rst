@@ -24,6 +24,7 @@ This documentation is intended for developers and administrators of the software
    contributing
    development/index
    production/index
+   administration/index
    api/index
    changelog
 

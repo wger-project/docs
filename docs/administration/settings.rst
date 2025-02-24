@@ -15,9 +15,7 @@ dictionary in your settings file. Currently, the following options are supported
   to create the user accounts.
 
 **DOWNLOAD_INGREDIENTS_FROM**: Default ``WGER``
-  Where to download ingredient images from. Possible
-  values are 'WGER' and 'OFF'. It is recommended to leave the default of WGER as
-  to now hit the Open Food Facts with too many requests
+  Where to download ingredient images from. Set to 'None' to deactivate.
 
 **EMAIL_FROM**: Default ``wger Workout Manager <wger@example.com>``
   The sender address used for sent emails by the system such as weight reminders
@@ -57,6 +55,3 @@ dictionary in your settings file. Currently, the following options are supported
   If you want to override a default setting, don't overwrite all the dictionary
   but only the keys you need, e.g. ``WGER_SETTINGS['foo'] = 'bar'``. This avoids
   problems when new keys are added in the global settings.
-
-Set the URL for your site in the table ``django_site``. This is only used e.g. in
-the password reset emails.

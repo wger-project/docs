@@ -62,48 +62,8 @@ For help, just do::
    you will probably get duplicate names if you generate more than a dozen.
 
 
-Selectively running tests
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you do a ``python manage.py test`` you will run the complete testsuite, and
-this can take a while. You can control which tests will be executed like this.
-
-Test only the tests in the 'core' app::
-
-  python manage.py test wger.core
-
-Test only the tests in the 'test_user.py` file in the core app::
-
-  python manage.py test wger.core.tests.test_user
-
-Test only the tests in 'StatusUserTestCase' in the file 'test_user.py` file in
-the core app::
-
-  python manage.py test wger.core.tests.test_user.StatusUserTestCase
+Set the URL for your site in the table ``django_site``. This is only used e.g. in
+the password reset emails.
 
 
-Using runserver_plus
-~~~~~~~~~~~~~~~~~~~~
-
-During development, you can use ``runserver_plus`` instead of the default Django
-server as you can use an interactive debugger directly from the browser if an
-exception occurs. It also accepts the same command-line options. For this just
-install the following packages::
-
-    pip install django_extensions werkzeug
-    python manage.py runserver_plus [options]
-
-
-Contributing
-============
-
-* **Send pull requests**: for new code you want to share, please send pull
-  requests in GitHub. Sending patches by email or attaching them to an issue
-  means a lot more work. It's recommended that you work on a feature branch
-  when working on something, especially when it's something bigger. While many
-  people insist on rebasing before sending a pull request, it's not necessary.
-
-* **Run the tests**: wger is proud to have a test coverage of over 90%. When you
-  implement something new, don't forget to run the testsuite and write appropriate
-  tests for the new code.
 

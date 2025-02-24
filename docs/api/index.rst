@@ -7,8 +7,17 @@ Public endpoints, such as the list of exercises or the ingredients can be
 accessed without authentication. For user owned objects such as
 routines, you need to authenticate.
 
-JWT Authentication
-------------------
+
+For some info on how to create routines over the API, see
+
+.. toctree::
+   :maxdepth: 1
+
+   routines
+
+
+JWT Tokens
+----------
 
 This is the suggested way. You generate a temporary token which you send in
 the header with each request that needs authorization
@@ -79,8 +88,6 @@ method should be considered deprecated::
 
 To generate a key, visit the API page on the web app.
 
-Username and password
-`````````````````````
 You can also get a permanent token from the ``login`` endpoint.
 Send a username and password in a POST request. If the user doesn't
 currently have a token, a new one will be generated for you

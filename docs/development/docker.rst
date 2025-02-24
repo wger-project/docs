@@ -2,17 +2,18 @@
 Development with docker
 ========================
 
-Clone https://github.com/wger-project/wger to a folder of your choice and
-``cd`` into the environment of your choice (dev or dev-postgres)
+Clone https://github.com/wger-project/docker as well
+https://github.com/wger-project/wger to a folder of your choice and
+``cd`` in the docker repo into the environment of your choice (dev or dev-postgres)
 
 Copy ``.env.example`` to ``.env`` and set the path to correspond to the location where you
 have checked out the wger server git repo.
 
 .. code-block:: bash
 
+    cp extras/docker/production/settings.py .
     docker compose up
     docker compose exec web /bin/bash
-    cp extras/docker/production/settings.py .
 
     # this creates initial db tables, runs yarn install, yarn build:css:sass, etc
     wger bootstrap
@@ -43,13 +44,16 @@ against the database file. For ``postgres-sqlite`` you can use
 ``pgcli -h localhost -p 5432 -u wger`` on your host, with password `wger`
 
 
-Building the images
+Building the image
 -------------------
 
-You can easily build your own docker images, just run these commands from
-the server's source folder:
+If you want to build your own image, you can do so by running the following
+commands from the server's source folder:
 
 .. code-block:: bash
 
     docker build -f extras/docker/development/Dockerfile -t wger/server .
-    docker build -f extras/docker/demo/Dockerfile --tag wger/demo .
+
+
+There is also a "base" image located in ``extras/docker/base`` which the
+server one uses as a base.

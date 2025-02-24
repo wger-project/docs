@@ -1,4 +1,4 @@
-.. _routines:
+.. _api_routines:
 
 Using the routine API
 =====================

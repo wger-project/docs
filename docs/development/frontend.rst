@@ -53,4 +53,4 @@ Rendering in django
 We don't render the whole page with react, just a part of it. We use ``ReactView``
 in django to render an emtpy div with a known ID and then let react take over.
 
-Take a look at ``src/index.tsx``to see how we do this.
+Take a look at ``src/index.tsx`` to see how we do this.
