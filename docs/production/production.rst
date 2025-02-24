@@ -90,8 +90,8 @@ SQLite
 
 If using sqlite, create a folder for it (must be writable by the apache user)::
 
-  mkdir db
-  touch db/database.sqlite
+  mkdir /home/wger/db
+  touch /home/wger/db/database.sqlite
   chown :www-data -R /home/wger/db
   chmod g+w /home/wger/db /home/wger/db/database.sqlite
 
@@ -108,16 +108,14 @@ Create folders to collect all static resources and save uploaded files. The
 by the apache process while ``media`` will contain the uploaded files and must
 be writeable as well::
 
-  mkdir static
-
-  mkdir media
-  chmod o+w media
+  mkdir /home/wger/{static,media}
+  chmod o+w /home/wger/media
 
 Get the application::
 
   git clone https://github.com/wger-project/wger.git /home/wger/src
   cd /home/wger/src
-  pip install -r requirements.txt
+  pip install -r requirements_prod.txt
   pip install -e .
 
   # If using sqlite without the --database-path
