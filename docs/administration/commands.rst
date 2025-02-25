@@ -8,238 +8,54 @@ running application (to e.g. delete guest users, send emails, etc.).
 Administration Commands
 -----------------------
 
-The application provides several administration and bootstrapping commands that
-can be passed to the ``wger`` command::
+Use the ``wger`` command to perform different administration and bootstrapping
+tasks such as initialising the database. You can get a list of all available
+commands by calling ``wger`` without any arguments as well as help on a specific
+command with ``wger --help <command>``.
+
+Here are some of the most important ones:
+
+``bootstrap``
+  This command bootstraps the application: it creates a settings file, initialises
+  a SQLite database, loads all necessary fixtures for the application to work and
+  creates a default administrator user. While it can also work with e.g. a PostgreSQL
+  database, you will need to create it yourself::
+
+``create-settings``
+  Creates a new settings file-based. If you call it without further arguments it
+  will create the settings in the default locations::
+
+``create-or-reset-admin``
+  Makes sure that the default administrator user exists. If you change the password,
+  it is reset.
+
+``load-fixtures``
+  loads all fixture files with the default data. This data includes all data necessary
+  for the application to work such as:
+  * exercises, muscles, equipment
+  * ingredients, units
+  * languages
+  * permission groups
+  * etc.
+
+  Note that ingredients are not included and need to be installed separately with
+  download-online-fixtures.
+
+``load-online-fixtures``
+  Downloads a subset of ingredients, the weight units fixtures and installs them.
+  If you want to download all ingredients, you need to use the manage.py command
+  with the ``sync-ingredients`` (see below).
+
+  Downloads a subset of ingredients and the weight units fixtures, then installs
+  them. To download all ingredients, use the manage.py command with the
+  ``sync-ingredients`` option (see below).
+
+``import-off-products``
+  Imports and updates products from the Open Food Facts database. You can select
+  whether to use a local file with the full database dump, the daily delta
+  updates or use a mongo database, see the help for more information.
 
-    wger <command>
 
-
-You can get a list of all available commands by calling ``wger`` without any
-arguments::
-
-    Available tasks:
-
-    bootstrap               Performs all steps necessary to bootstrap the application
-    config-location         Returns the default location for the settings file and the data folder
-    create-or-reset-admin   Creates an admin user or resets the password for an existing one
-    create-settings         Creates a local settings file
-    load-fixtures           Loads all fixtures
-    load-online-fixtures    Downloads fixtures from server and installs them (at the moment only ingredients)
-    migrate-db              Run all database migrations
-    start                   Start the application using django's built-in webserver
-
-You can also get help on a specific command with ``wger --help <command>``.
-
-.. note::
-    Most commands support a ``--settings-path`` command line option that sets the
-    settings file to use for the operation. If you use it, it is recommended to
-    use absolute paths, for example::
-
-        wger bootstrap --settings-path /path/to/development/wger/settings-test.py
-
-
-
-Bootstrap
-~~~~~~~~~
-
-Command: **bootstrap**
-
-This command bootstraps the application: it creates a settings file, initialises
-a SQLite database, loads all necessary fixtures for the application to work and
-creates a default administrator user. While it can also work with e.g. a PostgreSQL
-database, you will need to create it yourself::
-
-    wger bootstrap
-
-The most usual use-case is creating the settings file and the SQLite database to
-their default locations, but you can set your own paths if you want e.g. start
-developing on a branch that is going to change the database schema.
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] bootstrap [--options] [other tasks here ...]
-
-    Docstring:
-      Performs all steps necessary to bootstrap the application
-
-    Options:
-      -a STRING, --address=STRING         Address to use. Default: localhost
-      -b, --browser                       Whether to open the application in a browser window. Default: false
-      -d STRING, --database-path=STRING   Path to SQLite database (absolute path recommended). Leave empty for default
-      -p, --port                          Port to use. Default: 8000
-      -s STRING, --settings-path=STRING   Path to settings file (absolute path recommended). Leave empty for default
-
-
-Start wger
-~~~~~~~~~~
-
-Command: **start**
-
-Starts an already installed application::
-
-    wger start
-
-Please note that this is simply a comfort function and does not use any *magic*,
-it simply calls Django's development server and (optionally) opens a browser
-window. If you are developing, using the usual ``python manage.py runserver``
-is probably better.
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] start [--options] [other tasks here ...]
-
-    Docstring:
-      Start the application using django's built in webserver
-
-    Options:
-      -a STRING, --address=STRING         Address to bind to. Default: localhost
-      -b, --browser                       Whether to open the application in a browser window. Default: false
-      -e STRING, --extra-args=STRING      Additional arguments to pass to the builtin server. Pass as string: "--arg1 --arg2=value". Default: none
-      -p, --port                          Port to use. Default: 8000
-      -s STRING, --settings-path=STRING   Path to settings file. Leave empty for default
-      -t, --[no-]start-server             Whether to start the development server. Default: true
-
-
-Default locations
-~~~~~~~~~~~~~~~~~
-
-Command: **config-location**
-
-Information command that simply outputs the default locations for the settings
-file as well as the data folder used for the SQLite database and the uploaded
-files.
-
-
-Create settings
-~~~~~~~~~~~~~~~
-
-Command: **create-settings**
-
-Creates a new settings file-based. If you call it without further arguments it
-will create the settings in the default locations::
-
-    wger create-settings
-
-If you pass custom paths, it's recommended to use absolute paths::
-
-    wger create-settings --settings-path /path/to/development/wger/settings-test.py --database-path /path/to/development/wger/database-test.sqlite
-
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] create-settings [--options] [other tasks here ...]
-
-    Docstring:
-      Creates a local settings file
-
-    Options:
-      -a STRING, --database-type=STRING   Database type to use. Supported: SQLite3, postgresql. Default: SQLite3
-      -d STRING, --database-path=STRING   Path to SQLite database (absolute path recommended). Leave empty for default
-      -k, --key-length                    Lenght of the generated secret key. Default: 50
-      -s STRING, --settings-path=STRING   Path to settings file (absolute path recommended). Leave empty for default
-      -u STRING, --url=STRING
-
-
-
-Create or reset admin
-~~~~~~~~~~~~~~~~~~~~~
-
-Command: **create-or-reset-admin**
-
-Makes sure that the default administrator user exists. If you change the password,
-it is reset.
-
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] create-or-reset-admin [--options] [other tasks here ...]
-
-    Docstring:
-      Creates an admin user or resets the password for an existing one
-
-    Options:
-      -s STRING, --settings-path=STRING   Path to settings file (absolute path recommended). Leave empty for default
-
-
-
-Migrate database
-~~~~~~~~~~~~~~~~
-
-Command: **migrate-db**
-
-Migrates the database schema. This command is called internally when installing
-the application. The only need to call this explicitly is after installing a new
-version of the application.
-
-Calling this command is a safe operation, if your database is current, nothing
-will happen.
-
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] migrate-db [--options] [other tasks here ...]
-
-    Docstring:
-      Run all database migrations
-
-    Options:
-      -s STRING, --settings-path=STRING   Path to settings file (absolute path recommended). Leave empty for default
-
-
-
-Load fixtures
-~~~~~~~~~~~~~
-
-Command: **load-fixtures**
-
-Loads all fixture files with the default data. This data includes all data necessary
-for the application to work such as:
-
-* exercises, muscles, equipment
-* ingredients, units
-* languages
-* permission groups
-* etc.
-
-Note that ingredients are not included and need to be installed separately with
-download-online-fixtures.
-
-This command is called internally when installing the application but you can use
-it to reset the data to the original state. Note: new entries or user entries such
-as workouts are *not* reset with this, only the application data.
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] load-fixtures [--options] [other tasks here ...]
-
-    Docstring:
-      Loads all fixtures
-
-    Options:
-      -s STRING, --settings-path=STRING   Path to settings file (absolute path recommended). Leave empty for default
-
-
-Load online fixtures
-~~~~~~~~~~~~~~~~~~~~
-
-Command: **load-online-fixtures**
-
-Downloads ingredient and weight units fixtures and installs them. They are not
-included in the repository due to size.
-
-This command is called internally when installing the application but you can use
-it to reset the data to the original state. Note: new entries or user entries such
-as workouts are *not* reset with this, only the application data.
-
-Usage::
-
-    Usage: inv[oke] [--core-opts] load-online-fixtures [--options] [other tasks here ...]
-
-    Docstring:
-      Downloads fixtures from server and installs them (at the moment only ingredients)
-
-    Options:
-      -s STRING, --settings-path=STRING   Path to settings file (absolute path). Leave empty for default
 
 
 Management commands
@@ -247,53 +63,44 @@ Management commands
 
 wger also implements a series of Django commands that perform different
 management functions that are sometimes needed. Call them with
-``python manage.py <command_name>``:
+``python manage.py <command_name>``.
 
-**sync-exercises**
+To retrieve a full list of available commands, call ``python manage.py`` without
+any arguments and look under the app names (weight, nutrition, manager, core, exercises).
+To get help on a specific command, call ``python manage.py <command_name> --help``.
+
+Here are some of the most important ones:
+
+``sync-ingredients[-async]``
+  synchronizes the ingredient database from the default wger instance to the local
+  installation. Ingredients that you added manually to the database are not touched.
+  The ``async`` version uses celery to perform the task in the background. Also note
+  that this will use around 1GB of disk space and takes several hours to complete.
+
+``sync-exercises``
   synchronizes the exercise database from the default wger instance to the local
   installation. This will also update categories, equipment, languages, muscles
   and will delete entries that were removed on the remote server (this basically
   only applies to exercises that were submitted several times). Exercises that
   you added manually to the database are not touched.
 
-**download-exercise-images**
+``download-exercise-images``
   synchronizes the exercise images from the default wger instance to the local
-  installation
+  installation, does not overwrite existing images.
 
-**download-exercise-videos**
+``download-exercise-videos``
   synchronizes the exercise videos from the default wger instance to the local
-  installation
+  installation, does not overwrite existing videos.
 
-**extract-i18n**
-  Used for development only. Extracts strings from the database that need to be
-  translated
-
-**clear-cache**
-  clears different application caches. Might be needed after some updates or
-  just useful while testing. Please note that you must select what caches to
-  clear.
-
-**exercises-health-check.py**
+``exercises-health-check.py``
   Performs a series of basic health checks. Basically sees if there are exercises
   that don't have a default English translation or worse, don't have any
   translation at all
 
-Cron
-~~~~
+``extract-i18n``
+  Used for development only. Extracts strings from the database that need to be
+  translated. See the :ref:`i18n` section for more information.
 
-The following commands are built to be called regularly, via a cronjob or
-similar
-
-**delete-temp-users**
-  deletes all guest users older than 1 week. At the moment this value can't be
-  configured
-
-**email-reminders**
-  sends out email reminders for a user that need to create a new workout.
-
-**email-weight-reminders**
-  sends out email reminders for a user that need to enter a new (body) weight entry.
-
-**inactive-members**
-  Sends email for gym members that have not been to the gym for a specified
-  amount of weeks.
+``dummy-generator-*``
+  Use to generate dummy data for the different entry types. For more information
+  see the :ref:`dummy_generator` section.

@@ -58,8 +58,6 @@ You can reset the admin's password with ``wger create-or-reset-admin``.
 
 Other
 -----
-* To update changes consult the :ref:`updating` section.
-
 * For a description of the available settings consult :ref:`settings`.
 
 * You might need to start :ref:`celery` as well if you want to to run certain

@@ -92,7 +92,12 @@ You can also get a permanent token from the ``login`` endpoint.
 Send a username and password in a POST request. If the user doesn't
 currently have a token, a new one will be generated for you
 
-
+Pagination
+----------
+By default all results are paginated by 20 elements per page. If you want to
+change this value, add a ``?limit=<xxx>`` to your query.
+You will find in the answer JSON the ``next`` and ``previous``
+keywords with links to the next or previous result pages.
 
 
 Format negotiation
@@ -114,9 +119,6 @@ necessary to explicitly set the format, but you have the following options:
     * ``/api/v2/<endpoint>.api/`` - browsable HTML view
 
 
-Miscellaneous operations
-------------------------
-
 Ordering
 --------
 Simply use ``?ordering=<fieldname>`` to order by that field.
@@ -124,13 +126,6 @@ You can also specify more than one field name, just give it a list separated
 by commas ``?ordering=<field1>,<field2>``. To reverse
 the order use like in django a ``-`` in front of the field.
 
-
-Pagination
-----------
-By default all results are paginated by 20 elements per page. If you want to
-change this value, add a ``?limit=<xxx>`` to your query.
-You will find in the answer JSON the ``next`` and ``previous``
-keywords with links to the next or previous result pages.
 
 
 Filtering resources

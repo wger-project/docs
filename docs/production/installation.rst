@@ -221,4 +221,11 @@ Other changes
   * **tos.html**, for your own Terms Of Service here
   * **about.html**, for your contact address or other such legal requirements
 
-* To update changes consult the :ref:`updating` section.
+* To keep the application updated, regularly pull new changes and
+
+  * install new or updated dependencies: ``pip install -r requirements.txt``
+  * apply new migrations: ``python manage.py migrate --all``
+  * update the static files: ``yarn install``, ``yarn build:css:sass``
+    and ``python manage.py collectstatic``
+  * update data ``python3 manage.py sync-exercises``, ``python3 manage.py download-exercise-images``
+    (something like weekly) and ``python3 manage.py sync-ingredients`` (monthly)
