@@ -11,5 +11,4 @@ production or development.
 
    commands
    settings
-   tips_and_tricks
    gym

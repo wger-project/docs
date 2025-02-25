@@ -29,12 +29,6 @@ Adding new languages
 Besides adding the new translations to the locale folder, they have to be
 activated in the Django settings file and in the application itself.
 
-.. note::
-  At the moment composed language codes such as pt-BR (Brazilian Portuguese)
-  are **not** supported, the issue for this problem is `#130`_
-
-.. _#130: https://github.com/wger-project/wger/issues/130
-
 * **django:** add an entry to ``LANGUAGES`` in ``wger/settings_global.py``
 
 * **wger:** add the new language in the language admin page and set the

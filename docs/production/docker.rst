@@ -2,6 +2,8 @@
 Docker compose
 ==============
 
+https://github.com/wger-project/docker
+
 The prod docker compose file starts up a production environment with gunicorn
 as the webserver, postgres as a database and redis for caching with nginx
 used as a reverse proxy.
@@ -13,6 +15,12 @@ backup this data.
 
 It is recommended to regularly pull the latest version of the compose file,
 since sometimes new configurations or environmental variables are added.
+
+Kubernetes
+----------
+
+If you want to deploy the application with Kubernetes instead, consult the helm
+charts repository: https://github.com/wger-project/helm-charts
 
 First steps
 -----------

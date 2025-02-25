@@ -56,14 +56,16 @@ That's it. You can log in with the default administrator user:
 You can reset the admin's password with ``wger create-or-reset-admin``.
 
 
-Other
------
+Other:
+
 * For a description of the available settings consult :ref:`settings`.
 
 * You might need to start :ref:`celery` as well if you want to to run certain
   commands in the background.
 
 * For managing i18n files consult :ref:`i18n`.
+
+* Check the :ref:`dummy_generator` for generating dummy data.
 
 * Take a look at django extensions, a collection of custom extensions and
   commands:
