@@ -19,11 +19,11 @@ Here are some of the most important ones:
   This command bootstraps the application: it creates a settings file, initialises
   a SQLite database, loads all necessary fixtures for the application to work and
   creates a default administrator user. While it can also work with e.g. a PostgreSQL
-  database, you will need to create it yourself::
+  database, you will need to create it yourself:
 
 ``create-settings``
   Creates a new settings file-based. If you call it without further arguments it
-  will create the settings in the default locations::
+  will create the settings in the default locations:
 
 ``create-or-reset-admin``
   Makes sure that the default administrator user exists. If you change the password,

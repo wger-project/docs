@@ -1,4 +1,5 @@
 .. _docker_prod:
+
 Docker compose
 ==============
 
@@ -246,6 +247,7 @@ Backup
 a dump and restore it when needed
 
 .. code-block:: bash
+
     # Stop all other containers so the db is not changed while you export it
     docker compose stop web nginx cache celery_worker celery_beat
     docker compose exec db pg_dumpall --clean --username wger > backup.sql

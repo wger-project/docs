@@ -1,6 +1,7 @@
 .. _administration:
+
 Administration
-=============
+==============
 
 This section describes changes, configurations or available commands that are
 relevant for administrators of the application, whether this is used in

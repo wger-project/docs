@@ -208,6 +208,7 @@ where ``wger.example.com`` is the domain of the wger instance. This assumes that
   SITE_ID = 2
 
 .. _other-changes:
+
 Other changes
 -------------
 

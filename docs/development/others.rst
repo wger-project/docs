@@ -1,11 +1,12 @@
 .. _others:
 
 Others
-===========================
+======
 
 .. _dummy_generator:
+
 Dummy data generator
-------------------------
+--------------------
 
 To properly test the different parts of the application for usability or
 performance, it is often very useful to have some data to work with. For this
