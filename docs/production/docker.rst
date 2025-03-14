@@ -159,32 +159,6 @@ only within the application's docker network):
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so `location /wger {` will probably only mostly work
 
-.. code-block:: nginx
-
-    nginx
-    upstream wger {
-        server 123.456.789.0:8080;
-    }
-
-    server {
-        listen 80;
-        listen [::]:443 ssl;
-        listen 443 ssl;
-
-        location / {
-            proxy_pass http://wger;
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_redirect off;
-        }
-
-        server_name my.domain.example.com;
-
-        ssl_certificate /path/to/https/certificate.crt;
-        ssl_certificate_key /path/to/https/certificate.key;
-    }
 
 If you get CSRF errors
 ----------------------

@@ -56,7 +56,8 @@ That's it. You can log in with the default administrator user:
 You can reset the admin's password with ``wger create-or-reset-admin``.
 
 
-Other:
+And now
+-------
 
 * For a description of the available settings consult :ref:`settings`.
 

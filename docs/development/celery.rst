@@ -79,7 +79,9 @@ past the following content and reboot the system::
 
 
 Add a new file `/etc/systemd/system/celery.service` with the following contents
-(if you don't have a redis service or is called differently, adjust as needed)::
+(if you don't have a redis service or is called differently, adjust as needed):
+
+.. code-block:: ini
 
     [Unit]
     Description=Celery Service
@@ -137,7 +139,9 @@ To start it just run in your virtual env::
     celery -A wger beat -l INFO
 
 To daemonize this you just need to add a new service, e.g.
-``/etc/systemd/system/celery-beat.service``::
+``/etc/systemd/system/celery-beat.service``:
+
+.. code-block:: ini
 
     [Unit]
     Description=Celery Beat Service

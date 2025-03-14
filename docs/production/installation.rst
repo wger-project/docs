@@ -83,8 +83,7 @@ Database
 
 .. _prod_postgres:
 
-PostgreSQL
-~~~~~~~~~~
+**PostgreSQL**
 
 Install the Postgres server (choose the appropriate and currently supported version
 for your distro) and create a database and a user::
@@ -99,8 +98,7 @@ You might want or need to edit your ``pg_hba.conf`` file to allow local socket
 connections or similar.
 
 
-SQLite
-~~~~~~
+**SQLite**
 
 If using sqlite, create a folder for it (must be writable by the apache user)::
 

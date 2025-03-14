@@ -15,21 +15,21 @@ Building the app
 
 https://docs.flutter.dev/get-started/install
 
-
 2) Start a wger server. You can either run your own instance
-(see :ref:`development_docker`) or use the test server:
+(see e.g. :ref:`development_docker`) or use the test server:
 
 * URL: ``https://wger-master.rge.uber.space``
 * username: ``user``
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``
 
-(the db is reset every day, so feel free to edit or delete anything)
+The db is reset every day, so feel free to edit or delete anything.
 
 
 3) Start the application with ``flutter run`` or use your IDE
-(please note that depending on how you run your emulator you will need to change the IP address of
-the server)
+
+Please note that depending on how you run your emulator you will need to change
+the IP address of the server.
 
 You can run the tests with the ``flutter test``
 
@@ -50,14 +50,15 @@ If we use a new version, update the version in
 
 2) Dry-run release before uploading
 
-We use `fastlane <https://fastlane.tools/>`_ to automate the release process. To test the release process,
-install it first and then
+We use `fastlane <https://fastlane.tools/>`_ to automate the release process. To
+test the release process, install it first and then
 
 * Increase build nr in pubspec.yaml (revert after the dry-run was successful)
 * ``flutter build appbundle --release``
 * ``bundle install``
 * ``bundle update fastlane``
-* ``bundle exec fastlane android test_configuration`` (needs the different publishing keys available)
+* ``bundle exec fastlane android test_configuration`` (needs the different
+  publishing keys available)
 
 It might be necessary to repeat these steps if upload_to_play_store returns any errors
 such as a missing title or similar.
@@ -88,9 +89,8 @@ the pull requests.
 
 * in the flathub
   repo: https://github.com/flathub/de.wger.flutter/compare/master...wger-project:de.wger.flutter:master
-* in the fork sync master https://github.com/wger-project/de.wger.flutter
 * in the flutter repo: https://github.com/wger-project/flutter/branches
-
+* in the fork, sync master https://github.com/wger-project/de.wger.flutter
 
 
 Updating screenshots

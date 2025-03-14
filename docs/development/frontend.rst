@@ -23,7 +23,7 @@ You can obviously use your own instance, but feel free to use the test server
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``
 
-Install node and yarn, then run::
+Install node and yarn (1.x), then run::
 
   yarn install
 
@@ -31,7 +31,7 @@ Then, in the project directory, you can run::
 
   yarn start
 
-Runs the app in the development mode. Open http://localhost:3000 in the browser.
+and open http://localhost:3000 in the browser.
 
 To run the tests::
 
@@ -46,7 +46,8 @@ To build the app for production, run::
   yarn build
 
 This creates a production bundle and copies it over the the django static folder.
-This assumes that the django server folder is next to the react one.
+This assumes that the django server folder is next to the react one and is called
+"server".
 
 
 Rendering in django
