@@ -133,7 +133,7 @@ Get the application::
   # If using sqlite without the --database-path
   wger create-settings --database-path /home/wger/db/database.sqlite
 
-Edit the settings file
+Edit the generated settings file (``/home/wger/src/settings.py``)
 
 * Add the correct values for the database (use ``django.db.backends.postgresql``
   for the engine) if you are using postgres
