@@ -3,11 +3,8 @@
 Internationalization (i18n)
 ===========================
 
-Django
-------
-
 Updating the translation files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 wger uses Django's translation infrastructure, but there are a couple of things
 that need to be considered. First, you need to extract some translatable strings
@@ -27,16 +24,10 @@ and finally, you can compile them with::
 
 
 Adding new languages
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 Besides adding the new translations to the locale folder, they have to be
 activated in the Django settings file and in the application itself.
-
-.. note::
-  At the moment composed language codes such as pt-BR (Brazilian Portuguese)
-  are **not** supported, the issue for this problem is `#130`_
-
-.. _#130: https://github.com/wger-project/wger/issues/130
 
 * **django:** add an entry to ``LANGUAGES`` in ``wger/settings_global.py``
 
@@ -76,7 +67,7 @@ activated in the Django settings file and in the application itself.
 
 
 Getting new languages
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 If you have a local installation and new languages arrive from upstream, you
 need to load the necessary data to the language tables in the database (note
@@ -90,8 +81,25 @@ Please note that this will overwrite any changes you might have done from the
 language administration module.
 
 
-React
------
+Server translations
+-------------------
 
-The frontend that is built with react uses its own translation files. See
-the README.md file in the locale folder in the react repo for more information.
+There are a handful of translations that are not part of the Django translation
+files, but are saved in the db instead. These are things like categories and
+muscles. These can be extracted to be used in the Django, react and flutter
+applications with the following command::
+
+  python manage.py extract-i18n
+
+This command will generate the following files:
+
+* ``wger/i18n.tpl``: this allows the django makemessages command to extract
+  the strings so they can be translated.
+* ``wger/i18n.tsx``: this should be copied to the react repository.
+* ``wger/app_en.arb`` and ``wger/i18n.dart``: the content of this file should be copied to
+  the end of the ``intl_en.arb`` file in the flutter repository.
+
+Yes, this process is by far not optimal and should definitely be changed one
+of these days, however these translations are *very rarely* updated so this
+is kinda ok. The downside is that local instances can't easily add new
+categories or muscles.

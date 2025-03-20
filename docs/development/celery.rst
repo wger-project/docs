@@ -1,16 +1,16 @@
 .. _celery:
 
-Celery queue
-------------
+Celery
+------
 
-wger can use a celery queue for some background tasks. At the moment this is used
+wger uses a celery queue for some background tasks. At the moment this is used
 for things like fetching the ingredient images or periodically synchronizing the
 exercise database.
 
 The celery queue is optional and is not required.
 
-You will need to configure a cache backend, redis is a good and easy solution and
-you might already have it running for the regular application cache::
+Celery needs a configured cache backend, redis is a good and easy solution and
+you might already have it running for the regular application::
 
     CELERY_BROKER_URL = "redis://localhost:6379/2"
     CELERY_RESULT_BACKEND = "redis://localhost:6379/2"
@@ -23,7 +23,7 @@ For alternatives, consult celery's documentation: https://docs.celeryq.dev/en/st
 
 .. note::
   The docker compose file has all services already configured, you don't need
-  to do anything
+  to do anything. These installation instructions are only for a manual setup.
 
 
 
@@ -79,7 +79,9 @@ past the following content and reboot the system::
 
 
 Add a new file `/etc/systemd/system/celery.service` with the following contents
-(if you don't have a redis service or is called differently, adjust as needed)::
+(if you don't have a redis service or is called differently, adjust as needed):
+
+.. code-block:: ini
 
     [Unit]
     Description=Celery Service
@@ -137,7 +139,9 @@ To start it just run in your virtual env::
     celery -A wger beat -l INFO
 
 To daemonize this you just need to add a new service, e.g.
-``/etc/systemd/system/celery-beat.service``::
+``/etc/systemd/system/celery-beat.service``:
+
+.. code-block:: ini
 
     [Unit]
     Description=Celery Beat Service

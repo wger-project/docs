@@ -1,5 +1,17 @@
-Production
-==========
+.. _installation:
+
+Manual installation
+===================
+
+Install ``npm``, ``yarn`` (1.x) and ``sass``
+
+If you plan to use video files, it's recommended you install ffmpeg as well
+(not that this is not sctrictly necessary, it's just used for better upload
+validation as well as the extraction of some information from the video files
+such as resulution, codec, etc)::
+
+    apt-get install ffmpeg
+    pip install ffmpeg-python
 
 Wger user
 ---------
@@ -20,7 +32,9 @@ Install apache and the WSGI module::
   sudo vim /etc/apache2/sites-available/wger.conf
 
 
-Configure apache to serve the application::
+Configure apache to serve the application:
+
+.. code-block:: apache
 
     <Directory /home/wger/src>
         <Files wsgi.py>
@@ -69,8 +83,7 @@ Database
 
 .. _prod_postgres:
 
-PostgreSQL
-~~~~~~~~~~
+**PostgreSQL**
 
 Install the Postgres server (choose the appropriate and currently supported version
 for your distro) and create a database and a user::
@@ -85,8 +98,7 @@ You might want or need to edit your ``pg_hba.conf`` file to allow local socket
 connections or similar.
 
 
-SQLite
-~~~~~~
+**SQLite**
 
 If using sqlite, create a folder for it (must be writable by the apache user)::
 
@@ -121,7 +133,7 @@ Get the application::
   # If using sqlite without the --database-path
   wger create-settings --database-path /home/wger/db/database.sqlite
 
-Edit the settings file
+Edit the generated settings file (``/home/wger/src/settings.py``)
 
 * Add the correct values for the database (use ``django.db.backends.postgresql``
   for the engine) if you are using postgres
@@ -198,8 +210,19 @@ where ``wger.example.com`` is the domain of the wger instance. This assumes that
 Other changes
 -------------
 
-If you want to use the application as a public instance, you will probably want to
-change the following templates:
+* For a description of the available settings consult :ref:`settings`.
 
-* **tos.html**, for your own Terms Of Service here
-* **about.html**, for your contact address or other such legal requirements
+* If you want to use the application as a public instance, you will probably want to
+  change the following templates:
+
+  * **tos.html**, for your own Terms Of Service here
+  * **about.html**, for your contact address or other such legal requirements
+
+* To keep the application updated, regularly pull new changes and
+
+  * install new or updated dependencies: ``pip install -r requirements.txt``
+  * apply new migrations: ``python manage.py migrate --all``
+  * update the static files: ``yarn install``, ``yarn build:css:sass``
+    and ``python manage.py collectstatic``
+  * update data ``python3 manage.py sync-exercises``, ``python3 manage.py download-exercise-images``
+    (something like weekly) and ``python3 manage.py sync-ingredients`` (monthly)
