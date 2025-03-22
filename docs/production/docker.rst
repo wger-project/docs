@@ -32,8 +32,9 @@ To start all services::
 Optionally download current exercises, exercise images and the ingredients
 from wger.de. Please note that ``load-online-fixtures`` will overwrite any local
 changes you might have while ``sync-ingredients`` should be used afterward once
-you have imported the initial fixtures::
+you have imported the initial fixtures:
 
+.. code-block:: bash
     docker compose exec web python3 manage.py sync-exercises
     docker compose exec web python3 manage.py download-exercise-images
     docker compose exec web python3 manage.py download-exercise-videos
@@ -54,8 +55,9 @@ password **adminadmin**
 
 **Update the application**
 
-Just remove the containers and pull the newest version::
+Just remove the containers and pull the newest version:
 
+.. code-block:: bash
     docker compose pull
     docker compose up -d
 
@@ -85,7 +87,8 @@ e.g.:
 
      docker compose exec web python3 manage.py migrate
      docker compose exec --user root web /bin/bash
-     docker compose exec --user postgres db psql wger -U wger
+     docker compose exec db psql wger -U wger
+     docker compose exec cache redis-cli FLUSHALL
 
 Configuration
 -------------
@@ -152,12 +155,15 @@ Deployment
 The easiest way to deploy this application to prod is to use a reverse proxy like
 nginx or traefik. You can change the port this application exposes and reverse proxy
 your domain to it. For this just edit the "nginx" service in docker-compose.yml and
-set the port to some value, e.g. `"8080:80"` then configure your proxy to forward
+set the port to some value, e.g. ``"8080:80"`` then configure your proxy to forward
 requests to it, e.g. for nginx (no other ports need to be changed, they are used
-only within the application's docker network):
+only within the application's docker network).
+
+There is also an example with Caddy, a webserver that can automatically generate
+SSL certificates for you and is very easy to use.
 
 Also notice that the application currently needs to run on its own (sub)domain
-and not in a subdirectory, so `location /wger {` will probably only mostly work
+and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 
 
 If you get CSRF errors
@@ -279,3 +285,17 @@ See also https://github.com/docker-library/postgres/issues/37
     docker compose exec -T db psql --username wger --dbname wger -c "ALTER USER wger WITH PASSWORD 'wger'"
     docker compose up
     rm backup.sql
+
+Building the image
+-------------------
+
+If you want to build your own image, you can do so by running the following
+commands from the server's source folder:
+
+.. code-block:: bash
+
+    docker build -f extras/docker/development/Dockerfile -t wger/server .
+
+
+There is also a "base" image located in ``extras/docker/base`` which the
+server one uses as a base.
