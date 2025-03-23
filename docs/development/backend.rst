@@ -3,10 +3,14 @@
 Backend
 ===========
 
+The backend is a Django application, the repository can be found at:
+
+https://github.com/wger-project/wger
+
 Development with docker
 ------------------------
 
-:ref:`development_docker` provides a quick way to get a development environment
+:ref:`development_docker` provides a quick way to setup a development environment
 
 Local installation
 -------------------

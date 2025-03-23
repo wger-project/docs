@@ -4,9 +4,9 @@ Frontend
 ========
 
 Note that "frontend" is not completely correct, more like "part of the frontend".
-The application uses django to render the main page, react is only used for
-some parts of the application that need to be more interactive.
-These parts have their own repository which can be found at
+The application uses django to render the main page, react is only used for some
+parts of the application that need to be more interactive. These parts have their
+own repository which can be found at
 
 https://github.com/wger-project/react
 
