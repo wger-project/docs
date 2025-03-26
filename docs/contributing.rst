@@ -48,18 +48,23 @@ Make sure to always use a feature branch, even if the change is minor.
 
 Once you have the code ready:
 
+* make sure to write good commit messages. A good commit message should
+  explain what the change is about and why it was made.
 * make sure the tests are running (``python3 manage.py test`` in the case of
   python). At the latest you will notice they are failing when you open the pull
   request, but it is better to check them before.
 * if you write new code, write new tests. These don't need to test absolutely
   everything, but they should cover the most important parts of the code. If you
-  are not sure what to test, just ask us.
+  are not sure what or how to test, just ask us.
 * make sure the code is formatted correctly (``ruff format && isort .`` for python)
   and has a line length of 100 characters or less.
 * think about UI/UX. If you are adding a new feature, make sure it is easy to use and
   understand. Nobody here is a designer, but we try our best!
 * finally open a new PR. You can expect a response from a maintainer within a week, if
   you haven’t heard anything by then, ping the thread.
+* don't mix different features in the same pull request. If you have multiple
+  changes, just create a separate pull request for each one.
+
 
 Also, these are mostly guidelines, not rules. As everywhere in life, use your
 best judgment, and feel free to propose changes to this document in a pull request.
