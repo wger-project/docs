@@ -85,3 +85,59 @@ And now
     pip install django_extensions werkzeug
     python manage.py runserver_plus [options]
 
+
+Release process
+---------------
+Before releasing a new (major or minor) version of the backend, a couple of manual
+steps are still necessary.
+
+Yes, some of these steps could and should be automated, but for now they are not.
+This might also be one of the reasons why there are not that many releases...
+
+1) Bump version
+
+Bump the version in:
+
+* ``wger/__init__.py``
+* ``package.json`` (not really needed, but since it's there, let's keep it up to date)
+* All the ``.github/workflows/docker-*.yml`` files
+* ``docs/conf.py`` (in the docs repo)
+
+
+2) Update contributors list
+
+Run the script that updates the contributors list::
+
+  python3 extras/authors/generate_authors_api.py
+
+
+3) Update exercise fixture
+
+It's recommended to update the exercise fixture before a release. To do this extract
+them from a current database, split the files and and copy them as appropriate::
+
+    python ./manage.py dumpdata --indent 4 --natural-foreign exercises > extras/scripts/data.json
+    cd extras/scripts/
+    python3 filter-fixtures.py
+    cp categories.json ../../wger/exercises/fixtures/
+
+4) Update translations
+
+Update the po files as described in :ref:`i18n`.
+
+5) Tag the release
+
+Create a new tag for the release::
+
+  git tag -a 1.2.3 -m "Release 1.2.3"
+  git push origin 1.2.3
+
+6) Create a new release on GitHub
+
+Finally, create a new release on GitHub from the tag. Generate the description
+from the pull requests and edit if necessary. Copy this changelog to the docs
+repo and add it to the existing changelog.rst.
+
+7) Talk about it!
+
+Write an announcement, and post it on discord, mastodon, etc.

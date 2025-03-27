@@ -38,16 +38,17 @@ To run the tests::
   yarn test
 
 
-Building for production
------------------------
+Release process
+---------------
 
-To build the app for production, run::
+There is no release process as such for the frontend. When features are done and
+should be available on the django application, just run the build script::
 
   yarn build
 
 This creates a production bundle and copies it over the the django static folder.
 This assumes that the django server folder is next to the react one and is called
-"server".
+"server". From there you can commit the changes and push them.
 
 
 Rendering in django

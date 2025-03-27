@@ -51,9 +51,10 @@ If we use a new version, update the version in
 2) Dry-run release before uploading
 
 We use `fastlane <https://fastlane.tools/>`_ to automate the release process. To
-test the release process, install it first and then
+test the that the update works, you can make a dry-run
 
-* Increase build nr in pubspec.yaml (revert after the dry-run was successful)
+* Increase build nr in pubspec.yaml (revert after the dry-run was successful):
+  ``flutter pub run cider bump build``
 * ``flutter build appbundle --release``
 * ``bundle install``
 * ``bundle update fastlane``
