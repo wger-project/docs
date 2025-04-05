@@ -11,7 +11,7 @@ https://github.com/wger-project/flutter
 
 Building the app
 ----------------
-1) Install flutter (the app currently uses flutter 3.27)
+1) Install flutter (the app currently uses the flutter version in .github/actions/flutter-common/action.yml)
 
 https://docs.flutter.dev/get-started/install
 
@@ -42,24 +42,20 @@ there are some manual steps involved to prepare the release:
 
 1) Update flutter version
 
-If we use a new version, update the version in
-
-* this file
-* Github Actions in ``build-release.yml`` in ``.github/workflows``
-* If needed, update the F-droid build recipe in https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/de.wger.flutter.yml
+If we use a new version, update the version in ``.github/actions/flutter-common/action.yml``
 
 2) Dry-run release before uploading
 
 We use `fastlane <https://fastlane.tools/>`_ to automate the release process. To
-test the that the update works, you can make a dry-run
+test the that the update works, you can make a dry-run (needs the different
+  publishing keys available)
 
 * Increase build nr in pubspec.yaml (revert after the dry-run was successful):
   ``flutter pub run cider bump build``
 * ``flutter build appbundle --release``
 * ``bundle install``
 * ``bundle update fastlane``
-* ``bundle exec fastlane android test_configuration`` (needs the different
-  publishing keys available)
+* ``bundle exec fastlane android test_configuration``
 
 It might be necessary to repeat these steps if upload_to_play_store returns any errors
 such as a missing title or similar.
@@ -69,29 +65,28 @@ to set the correct language code:
 
 https://support.google.com/googleplay/android-developer/answer/9844778?hl=en#zippy=%2Cview-list-of-available-languages
 
-3) Push tags to trigger release
+3) Trigger a release
 
-Make sure that the commit that will be tagged was already pushed or didn't change
-any dart code, otherwise the automatic linter might push a "correction" commit
-and the build step will fail.
+The release process must be manually triggered on Github (clik on "run workflow", use
+use x.y.z format for the version). This will set the given version in pubspec.yaml,
+create a tag, and bump the build number. The workflow will then build the app for
+the different platforms and upload the file to the Play Store as well as to a newly
+created release on Github.
 
-Set the vX.Y.Z tag locally, push it and delete it. It will get recreated to X.Y.Z.
-by github actions::
+https://github.com/wger-project/flutter/actions/workflows/make-release.yml
 
-  TAG=vX.Y.Z && git tag $TAG && git push origin $TAG && git tag -d $TAG
-
-
-4) Edit release
-
-If necessary, edit the created release on github, e.g. to generate the release notes from
-the pull requests.
-
-5) Merge pull requests
+4) Merge pull requests
 
 * in the flathub
   repo: https://github.com/flathub/de.wger.flutter/compare/master...wger-project:de.wger.flutter:master
-* in the flutter repo: https://github.com/wger-project/flutter/branches
 * in the fork, sync master https://github.com/wger-project/de.wger.flutter
+
+5) Update f-droid
+
+It might be necessary to update the f-droid metadata. The metadata file for wger
+is located here:
+
+https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/de.wger.flutter.yml
 
 
 Updating screenshots
