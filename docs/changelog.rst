@@ -1,10 +1,13 @@
 Changelog
 =========
 
-2.3 - IN DEVELOPMENT
+Changelog
+=========
+
+2.4 - IN DEVELOPMENT
 --------------------
 
-🔧 Upgrade steps from 2.2
+🔧 Upgrade steps from 2.3
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 * Update python libraries ``pip3 install -r requirements.txt``
 * Migrate database ``python manage.py migrate``
@@ -16,13 +19,55 @@ Changelog
 ~~~~~~~~~~~
 *
 
-🧰 Maintenance
-~~~~~~~~~~~~~~
-* Added UUID fields to exercise aliases and comments for better synchronization
 
-🐛 Bug Fixes
-~~~~~~~~~~~~
-*
+
+2.3
+----
+
+**2025-04-05**
+
+
+🔧 Upgrade steps from 2.2
+~~~~~~~~~~~~~~~~~~~~~~~~~
+* Update python libraries ``pip3 install -r requirements.txt``
+* Migrate database ``python manage.py migrate``
+* Update CSS and JS libraries ``yarn install``
+* Compile the CSS ``yarn build:css:sass``
+* Update static files (only production): ``python3 manage.py collectstatic``
+
+🚀 Features
+~~~~~~~~~~~
+
+* Axes behind reverse proxy by :github:user:`@bbkz <bbkz>` in :github:pull:`1521`
+* Fix wrong default setting in docker image by :github:user:`@bbkz <bbkz>` in :github:pull:`1531`
+* Add sync method for ingredients by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1546`
+* Add progress bar to load-online-fixtures by :github:user:`@ebwinters <ebwinters>` in :github:pull:`1561`
+* Move to pyproject.toml by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1565`
+* Add full text search by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1594`
+* put building/obtaining image instructions before trying to run it. by :github:user:`@Dieterbe <Dieterbe>` in :github:pull:`1655`
+* add support for fiber goal by :github:user:`@Dieterbe <Dieterbe>` in :github:pull:`1664`
+* Add myself to the Polish translators  by :github:user:`@Maniues <Maniues>` in :github:pull:`1661`
+* fix calendar accordion by :github:user:`@bbkz <bbkz>` in :github:pull:`1681`
+* Refactor product/ingredient import by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1666`
+* Export prometheus metrics by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1685`
+* Fixed a typo by :github:user:`@JLaField <JLaField>` in :github:pull:`1695`
+* Allow deactivating the language filter when searching for ingredients and exercises by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1687`
+* docker image: support loading exercise videos, fixtures, nutrition info by :github:user:`@Dieterbe <Dieterbe>` in :github:pull:`1746`
+* Allow env specification of Redis connection SSL parameters by :github:user:`@taylor-fuller <taylor-fuller>` in :github:pull:`1751`
+* Improve docker image by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1786`
+* give dummy meals names by :github:user:`@Dieterbe <Dieterbe>` in :github:pull:`1795`
+* Update django.po by :github:user:`@victorbmlabs <victorbmlabs>` in :github:pull:`1798`
+* Dynamically update WeightUnit from user preferences when creating workout by :github:user:`@kmoy1 <kmoy1>` in :github:pull:`1807`
+* Rework the calendar page by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1824`
+* make __main__ use pyinvoke ``Program`` as entrypoint by :github:user:`@eyJhb <eyJhb>` in :github:pull:`1833`
+* Fix incorrectly placed <h1> tag and replace it with an <h4> tag for the "Members List" DataTable. by :github:user:`@navyjosh <navyjosh>` in :github:pull:`1843`
+* Fix/registration by :github:user:`@Maralai <Maralai>` in :github:pull:`1855`
+* fixes #1278 by :github:user:`@blsouthcott <blsouthcott>` in :github:pull:`1365`
+* Add Management Command for Async Ingredient Synchronization by :github:user:`@crypto-a <crypto-a>` in :github:pull:`1876`
+* Add language filter to sync-ingredients management command. by :github:user:`@navyjosh <navyjosh>` in :github:pull:`1875`
+* Fixes for adding language filter to sync-ingredients management command. by :github:user:`@scrapcode <scrapcode>` in :github:pull:`1894`
+* Clean apt temporary files in the base Docker image by :github:user:`@PeterDaveHello <PeterDaveHello>` in :github:pull:`1906`
+* Flexible routines by :github:user:`@rolandgeider <rolandgeider>` in :github:pull:`1827`
 
 
 2.2

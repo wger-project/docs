@@ -33,7 +33,11 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
+    'sphinx_toolbox.github',
 ]
+
+github_username = 'wger-project'
+github_repository = 'wger'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
