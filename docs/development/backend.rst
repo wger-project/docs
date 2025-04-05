@@ -98,7 +98,7 @@ This might also be one of the reasons why there are not that many releases...
 
 Bump the version in:
 
-* ``wger/__init__.py``
+* ``wger/version.py``
 * ``package.json`` (not really needed, but since it's there, let's keep it up to date)
 * All the ``.github/workflows/docker-*.yml`` files
 * ``docs/conf.py`` (in the docs repo)
