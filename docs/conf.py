@@ -109,6 +109,15 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 html_theme = 'sphinx_rtd_theme'
 
+# Add 'Edit on Github' link instead of 'View page source'
+html_context = {
+  "display_github": True,
+  "github_user": "wger-project",
+  "github_repo": 'docs',
+  "github_version": "master",
+  "conf_py_path": "/docs/",
+}
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further. For a list of options available for each theme, see the
 # documentation.
