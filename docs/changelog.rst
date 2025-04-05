@@ -1,9 +1,6 @@
 Changelog
 =========
 
-Changelog
-=========
-
 2.4 - IN DEVELOPMENT
 --------------------
 
