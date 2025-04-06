@@ -23,8 +23,11 @@ It is recommended to add a dedicated user for the application::
 The following steps assume you did, but it is not necessary (nor is it
 necessary to call it 'wger'). In that case, change the paths as needed.
 
-Apache
-------
+
+Webserver
+---------
+
+**Apache**
 
 Install apache and the WSGI module::
 
@@ -77,6 +80,50 @@ Activate the settings and disable apache's default::
     sudo a2dissite 000-default.conf
     sudo a2ensite wger
     sudo service apache2 reload
+
+**Alternatives**
+
+You don't *need* to use apache, you can also use nginx, caddy or other web
+server. Just set them up as a reverse proxy to a WSGI application server, and
+serve the static and media files. Here's an example with Caddy:
+
+.. code-block:: ini
+
+    # /etc/systemd/system/gunicorn.service
+
+    [Unit]
+    Description=gunicorn daemon
+    After=network.target
+
+    [Service]
+    User=apache
+    Group=apache
+    WorkingDirectory=/var/www/wger/src
+    ExecStart=/var/www/wger/venv/bin/gunicorn --access-logfile - --workers 3 wger.wsgi:application -b :8000
+
+    [Install]
+    WantedBy=multi-user.target
+
+
+.. code-block::
+
+    # /etc/caddy/Caddyfile
+
+    your-domain {
+        reverse_proxy localhost:8000
+
+        handle_path /static/* {
+            file_server {
+                root "/var/www/wger/static"
+            }
+        }
+
+        handle_path /media/* {
+            file_server {
+                root "/var/www/wger/media"
+            }
+       }
+    }
 
 Database
 --------
