@@ -165,9 +165,22 @@ SSL certificates for you and is very easy to use.
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 
+Monitoring with grafana
+-----------------------
+
+There's a pre-configured grafana and prometheus setup that can be used to monitor
+the wger application as well as the logs with Loki and Alloy. To start, set the
+``EXPOSE_PROMETHEUS_METRICS`` to true in the env file and restart the application,
+then go into the ``grafana`` folder and start the compose file.
+
+To access the dashboards, go to http://localhost:3000 and log in with ``admin``, password
+``adminadmin``. To change the pre defined password, edit ``grafana/web.yml``.
+
+Others
+-------
 
 If you get CSRF errors
-----------------------
+``````````````````````
 
 You will most probably run into CSRF errors when you try to use the application,
 specially if you configured a domain and django's
@@ -189,7 +202,7 @@ To solve this, update the env file and either
 
 
 Automatically start service
----------------------------
+```````````````````````````
 
 If everything works correctly, you will want to start the compose file as a
 service so that it auto restarts when you reboot the server. If you use systemd,
@@ -221,7 +234,7 @@ well. With ``systemctl enable wger`` the service will be automatically restarted
 after a reboot.
 
 Backup
-------
+``````
 
 **Database volume:** The most important thing to backup. For this just make
 a dump and restore it when needed
@@ -252,7 +265,7 @@ you have, please consult these possibilities:
 on startup, no need to backup anything
 
 Postgres Upgrade
-----------------
+````````````````
 
 It is sadly not possible to automatically upgrade between postgres versions,
 you need to perform the upgrade manually. Since the amount of data the app
@@ -287,7 +300,7 @@ See also https://github.com/docker-library/postgres/issues/37
     rm backup.sql
 
 Building the image
--------------------
+``````````````````
 
 If you want to build your own image, you can do so by running the following
 commands from the server's source folder:

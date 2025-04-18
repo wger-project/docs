@@ -85,7 +85,12 @@ Activate the settings and disable apache's default::
 
 You don't *need* to use apache, you can also use nginx, caddy or other web
 server. Just set them up as a reverse proxy to a WSGI application server, and
-serve the static and media files. Here's an example with Caddy:
+serve the static and media files:
+
+https://docs.djangoproject.com/en/dev/howto/deployment/
+
+
+Here's an example with Caddy:
 
 .. code-block:: ini
 
