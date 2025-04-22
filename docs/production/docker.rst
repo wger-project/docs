@@ -35,6 +35,7 @@ changes you might have while ``sync-ingredients`` should be used afterward once
 you have imported the initial fixtures:
 
 .. code-block:: bash
+
     docker compose exec web python3 manage.py sync-exercises
     docker compose exec web python3 manage.py download-exercise-images
     docker compose exec web python3 manage.py download-exercise-videos
