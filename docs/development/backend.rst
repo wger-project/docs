@@ -15,21 +15,25 @@ Development with docker
 Local installation
 -------------------
 
-Install ``npm``, ``yarn`` (1.x) and ``sass``
-
-Create a new virtualenv::
-
-  python3 -m venv venv-wger
-  source venv-wger/bin/activate
+Install ``npm``, ``yarn`` (1.x) ``sass`` and, optionally, `uv <https://docs.astral.sh/uv/>`_
 
 Download the source code::
 
-  git clone https://github.com/wger-project/wger.git src
-  cd src
+  git clone https://github.com/wger-project/wger.git server
+  cd server
 
-Install python requirements::
+If using ``uv``::
 
-  pip install -r requirements_dev.txt
+    uv sync
+    uv pip install -e .
+    source .venv/bin/activate
+
+Overwise, manually create a new virtualenv and install everything::
+
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install --upgrade pip
+  pip install --group dev .
   pip install -e .
 
 This will download the required JS and CSS libraries and create an SQLite
