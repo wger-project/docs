@@ -32,16 +32,21 @@ Start docker watch in the docker folder:
 
     docker compose up --watch
 
-Docker watch will now automatically sync the code changes to and from the container
-and rebuild the image when needed. This solves the problem of using a file mount
+Docker watch will now automatically sync the code changes to the container and
+rebuild the image when needed. This solves the problem of using a file mount
 where the user ID of the host and the container are different and works by having
 docker automatically sync the files using the user defined in the docker file.
-When you change the requirements.txt file docker automatically rebuilds the image
-and restarts the container. When this happens you will probably see some messages
-like:
+When you edit the pyproject.toml or package.json files docker automatically
+rebuilds the image and restarts the container. When this happens you will see
+messages like:
 
 * Syncing service "web" after 1 changes were detected
 * Rebuilding service(s) ["web"] after changes were detected...
+
+.. note::
+    Files that only exist within the container will be lost when the container
+    is disposed! This applies to generated files like migrations or the db when
+    it's first created. Make sure to copy them over to the host (see below).
 
 For more information: https://docs.docker.com/compose/how-tos/file-watch/
 
@@ -56,13 +61,6 @@ CSS libraries and start the development server.
     # this creates initial db tables, runs yarn install, yarn build:css:sass, etc
     wger bootstrap
 
-    # Alternatively, or if package.json changed, you can also run
-    # yarn install
-    # yarn build:css:sass
-
-    # safe to ignore: Your models in app(s): 'exercises', 'nutrition' have changes
-    # that are not yet reflected in a migration, and so won't be applied.
-    python3 manage.py migrate
 
 After this you can run the following commands to load the initial data:
 
@@ -74,12 +72,9 @@ After this you can run the following commands to load the initial data:
     # pull nutrition information
     wger load-online-fixtures
 
-    # if you use sqlite, at this time you can make a backup if you want
-    # such that if you mess something up, you don't have to start from scratch
-    cp /home/wger/db/database.sqlite /home/wger/db/database.sqlite.orig
-
     # finally, this is important, start the actual server!
     python3 manage.py runserver 0.0.0.0:8000
+
 
 You can now login on http://localhost:8000 with the default administrator user
 (afterwards you just need to start the server, no need to bootstrap again):
@@ -87,10 +82,14 @@ You can now login on http://localhost:8000 with the default administrator user
 * username: ``admin``
 * password: ``adminadmin``
 
+To copy the database to your source folder::
 
-If you use ``dev`` you can use the ``sqlite3`` program to execute queries
-against the database file. For ``postgres-sqlite`` you can use
-``pgcli -h localhost -p 5432 -u wger`` on your host, with password `wger`
+    docker compose cp web:/home/wger/src/database.sqlite /my/wger/path
+
+    # at this time you can make a backup if you want such that if you mess
+    # something up, you don't have to start from scratch (just copy orig back)
+    cd /my/wger/path
+    cp database.sqlite database.sqlite.orig
 
 
 You will probably want to configure your IDE to use the python interpreter
@@ -118,4 +117,23 @@ be changed to just::
 
 to take effect immediately directly.
 
+Other useful commands:
+
+.. code-block:: bash
+
+    # Apply new db migrations
+    # safe to ignore: Your models in app(s): 'exercises', 'nutrition' have changes
+    # that are not yet reflected in a migration, and so won't be applied.
+    python3 manage.py migrate
+
+    # If you edited the theme CSS files
+    yarn build:css:sass
+
+    # Access the db directly
+    python3 manage.py dbshell
+
+    # Sync exercises
+    python3 manage.py sync-exercises
+    python3 manage.py download-exercise-images
+    python3 manage.py download-exercise-videos
 
