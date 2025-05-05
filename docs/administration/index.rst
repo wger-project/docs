@@ -12,4 +12,5 @@ production or development.
 
    commands
    settings
+   auth_proxy
    gym
