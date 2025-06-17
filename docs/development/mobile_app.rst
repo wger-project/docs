@@ -44,11 +44,15 @@ there are some manual steps involved to prepare the release:
 
 If we use a new version, update the version in ``.github/actions/flutter-common/action.yml``
 
-2) Dry-run release before uploading
+2) Update cocoapods for iOS and Mac.
+
+In the ``ios`` and ``macos`` folders run ``pod update``.
+
+3) Dry-run release before uploading
 
 We use `fastlane <https://fastlane.tools/>`_ to automate the release process. To
 test the that the update works, you can make a dry-run (needs the different
-  publishing keys available)
+publishing keys available)
 
 * Increase build nr in pubspec.yaml (revert after the dry-run was successful):
   ``flutter pub run cider bump build``
@@ -65,7 +69,7 @@ to set the correct language code:
 
 https://support.google.com/googleplay/android-developer/answer/9844778?hl=en#zippy=%2Cview-list-of-available-languages
 
-3) Trigger a release
+4) Trigger a release
 
 The release process must be manually triggered on Github (clik on "run workflow", use
 use x.y.z format for the version). This will set the given version in pubspec.yaml,
@@ -75,13 +79,13 @@ created release on Github.
 
 https://github.com/wger-project/flutter/actions/workflows/make-release.yml
 
-4) Merge pull requests
+5) Merge pull requests
 
 * in the flathub
   repo: https://github.com/flathub/de.wger.flutter/compare/master...wger-project:de.wger.flutter:master
 * in the fork, sync master https://github.com/wger-project/de.wger.flutter
 
-5) Update f-droid
+6) Update f-droid
 
 It might be necessary to update the f-droid metadata. The metadata file for wger
 is located here:
