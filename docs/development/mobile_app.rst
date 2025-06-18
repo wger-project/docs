@@ -40,13 +40,23 @@ The release process itself is automated with github actions and fastlane, howeve
 there are some manual steps involved to prepare the release:
 
 
-1) Update flutter version
+1) Bump version
 
-If we use a new version, update the version in ``.github/actions/flutter-common/action.yml``
+If we use a new flutter version, update the version in ``.github/actions/flutter-common/action.yml``
+as well as ``flatpak-flutter.json`` in the ``de.wger.flutter`` repository (commit to master).
+
+If there is a new version of sqlite (very probably), make sure the flatpak-flutter
+script supports it. A PR to upstream might be needed in this case::
+
+    git clone https://github.com/TheAppgineer/flatpak-flutter.git
+    cd de.wger.flutter
+    ../flatpak-flutter/flatpak-flutter.py --app-module wger flatpak-flutter.json
+
 
 2) Update cocoapods for iOS and Mac.
 
-In the ``ios`` and ``macos`` folders run ``pod update``.
+In the ``ios`` and ``macos`` folders run ``pod update``. Check that builds are possible
+with ``flutter build macos --release`` and ``flutter build ios --release``.
 
 3) Dry-run release before uploading
 
