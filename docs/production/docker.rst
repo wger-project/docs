@@ -111,8 +111,17 @@ file called ``docker-compose.override.yml`` with the following content
 Now the port setting will be overwritten from the configured nginx service when
 you do a ``docker compose up``. However, note that compose will concatenate both sets
 of values so in this case the application will be binded to 8080 (from the override)
-*and* 80 (from the regular compose file). It seems that at the moment the only
-workaround is remove the ports settings altogether from the compose file.
+*and* 80 (from the regular compose file). 
+
+In Docker Compose 2.24.4 and later, you can fully override values using the !override 
+yaml directive. i.e.:
+
+.. code-block:: yaml
+
+    services:
+      nginx:
+        ports: !override
+          - "8080:80"
 
 The same applies to the env variables, just create a new file called e.g. ``my.env``
 and add it after the provided ``prod.env`` for the web service (again, this is
@@ -147,7 +156,7 @@ To add a web interface for the celery queue, add a new service to the override f
         celery_worker:
           condition: service_healthy
 
-For more information and possibilities consult https://docs.docker.com/compose/extends/
+For more information and possibilities consult https://docs.docker.com/compose/extends/ and https://docs.docker.com/reference/compose-file/merge/
 
 
 Deployment
