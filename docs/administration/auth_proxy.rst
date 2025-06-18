@@ -39,6 +39,24 @@ request before it processes the request, e.g. pseudocode for Caddy::
     }
 
 
+If you plan to use the mobile app, make sure to bypass the ``api/*`` subfolder
+from your proxy auth so that the app can access the api endpoint. In caddy,
+it might look something like this::
+
+    wger.example.com {
+      import cert
+      # allow api path to bypass auth (requires api key)
+      handle /api/* {
+        reverse_proxy wger_server:8000
+      }
+        # Enclosing in `route` forces execution order
+        route {
+            # Forward outpost path to actual outpost
+            reverse_proxy /outpost.goauthentik.io/* authentik_server:9000
+      ...
+    }
+
+
 **Settings**
 
 AUTH_PROXY_HEADER
