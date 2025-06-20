@@ -23,8 +23,10 @@ You can obviously use your own instance, but feel free to use the test server
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``
 
-Install node and yarn (1.x), then run::
+Install node (>22) and run::
 
+  yarn config set --home enableTelemetry 0
+  yarn config set nodeLinker node-modules
   yarn install
 
 Then, in the project directory, you can run::
