@@ -26,7 +26,6 @@ You can obviously use your own instance, but feel free to use the test server
 Install node (>22) and run::
 
   yarn config set --home enableTelemetry 0
-  yarn config set nodeLinker node-modules
   yarn install
 
 Then, in the project directory, you can run::
