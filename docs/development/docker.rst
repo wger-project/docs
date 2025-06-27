@@ -121,7 +121,7 @@ Other useful commands:
 
 .. code-block:: bash
 
-    # Apply new db migrations
+    # Apply new db migrations (e.g. if you get some OperationalError)
     # safe to ignore: Your models in app(s): 'exercises', 'nutrition' have changes
     # that are not yet reflected in a migration, and so won't be applied.
     python3 manage.py migrate
