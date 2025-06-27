@@ -179,8 +179,7 @@ Get the application::
 
   git clone https://github.com/wger-project/wger.git /home/wger/src
   cd /home/wger/src
-  pip install -r requirements_prod.txt
-  pip install -e .
+  pip install .
 
   # If using sqlite without the --database-path
   wger create-settings --database-path /home/wger/db/database.sqlite
@@ -272,7 +271,7 @@ Other changes
 
 * To keep the application updated, regularly pull new changes and
 
-  * install new or updated dependencies: ``pip install -r requirements.txt``
+  * install new or updated dependencies: ``pip install .``
   * apply new migrations: ``python manage.py migrate --all``
   * update the static files: ``yarn install``, ``yarn build:css:sass``
     and ``python manage.py collectstatic``

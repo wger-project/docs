@@ -6,7 +6,7 @@ Changelog
 
 🔧 Upgrade steps from 2.3
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Update python libraries ``pip3 install -r requirements.txt``
+* Update python libraries ``pip3 install .``
 * Migrate database ``python manage.py migrate``
 * Update CSS and JS libraries ``yarn install``
 * Compile the CSS ``yarn build:css:sass``
