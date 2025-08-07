@@ -61,7 +61,7 @@ with ``flutter build macos --release`` and ``flutter build ios --release``.
 3) Dry-run release before uploading
 
 We use `fastlane <https://fastlane.tools/>`_ to automate the release process. To
-test the that the update works, you can make a dry-run (needs the different
+test that the update works, you can make a dry-run (needs the different
 publishing keys available)
 
 * Increase build nr in pubspec.yaml (revert after the dry-run was successful):
@@ -81,7 +81,7 @@ https://support.google.com/googleplay/android-developer/answer/9844778?hl=en#zip
 
 4) Trigger a release
 
-The release process must be manually triggered on Github (clik on "run workflow", use
+The release process must be manually triggered on Github (click on "run workflow", use
 use x.y.z format for the version). This will set the given version in pubspec.yaml,
 create a tag, and bump the build number. The workflow will then build the app for
 the different platforms and upload the file to the Play Store as well as to a newly
