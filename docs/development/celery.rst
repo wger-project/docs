@@ -72,7 +72,7 @@ Create a configuration file called ``conf`` and paste this::
 
 Since we're running this as the wger user, we need to make sure the process can
 write the logs and the pid files. For this edit a new file ``/etc/tmpfiles.d/celery.conf``,
-past the following content and reboot the system::
+paste the following content and reboot the system::
 
     d /run/celery 0755 wger wger -
     d /var/log/celery 0755 wger wger -
