@@ -6,7 +6,7 @@ Manual installation
 Install ``npm``, ``yarn`` (1.x) and ``sass``
 
 If you plan to use video files, it's recommended you install ffmpeg as well
-(this is not sctrictly necessary, it's just used for better upload
+(this is not strictly necessary, it's just used for better upload
 validation as well as the extraction of some information from the video files
 such as resolution, codec, etc)::
 
