@@ -38,7 +38,7 @@ Days
 * ``description``, optional, 1000 chars max
 * ``is_rest`` flag indicating that this is a rest day
 
-A day is the building block of a routine. It consists of of several linked days
+A day is the building block of a routine. It consists of several linked days
 that can be configured in different ways.
 
 ::
@@ -95,8 +95,8 @@ have been completed, the next occurrence of the first day marks the start of a n
 iteration. Note that in practice, this will most likely be a week.
 
 With the ``need_logs_to_advance`` flag you can control whether there needs to be a
-logged session for the day for the day to proceed. Otherwise, the day will be repeated
-till a log is saved, like in the example below with day 3 where the user logged a
+logged session for the day to proceed. Otherwise, the day will be repeated
+until a log is saved, like in the example below with day 3 where the user logged a
 session on the 1.8.
 
 .. list-table::

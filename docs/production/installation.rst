@@ -6,9 +6,9 @@ Manual installation
 Install ``npm``, ``yarn`` (1.x) and ``sass``
 
 If you plan to use video files, it's recommended you install ffmpeg as well
-(not that this is not sctrictly necessary, it's just used for better upload
+(this is not strictly necessary, it's just used for better upload
 validation as well as the extraction of some information from the video files
-such as resulution, codec, etc)::
+such as resolution, codec, etc)::
 
     apt-get install ffmpeg
     pip install ffmpeg-python
@@ -83,7 +83,7 @@ Activate the settings and disable apache's default::
 
 **Alternatives**
 
-You don't *need* to use apache, you can also use nginx, caddy or other web
+You don't *need* to use apache, you can also use nginx, caddy or some other web
 server. Just set them up as a reverse proxy to a WSGI application server, and
 serve the static and media files:
 
