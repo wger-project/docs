@@ -199,11 +199,9 @@ To solve this, update the env file and either
 
 * manually set a list of your domain names and/or server IPs
   ``CSRF_TRUSTED_ORIGINS=https://my.domain.example.com,https://118.999.881.119:8008``
-  If you are unsure what origin to add here, set the debug setting to true, restart
-  and try again, the error message that appears will have the origin prominently
-  displayed. Note: the port is important!
-  To know which origins django has a problem with, set set ``DJANGO_DEBUG`` to true
-  and the error message will tell you exactly which origins are problematic.
+  If you are unsure what origin to add here, set set ``DJANGO_DEBUG`` to true,
+  restart the service and the error message will tell you exactly which one
+  django has a problem with. Note: the port is important!
 * or set the ``X-Forwarded-Proto`` header like in the example and set
   ``X_FORWARDED_PROTO_HEADER_SET=True``. If you do this consult the
   `documentation <https://docs.djangoproject.com/en/4.1/ref/settings/#secure-proxy-ssl-header>`_
