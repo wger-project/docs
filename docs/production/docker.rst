@@ -17,11 +17,15 @@ backup this data.
 It is recommended to regularly pull the latest version of the compose file,
 since sometimes new configurations or environmental variables are added.
 
-Kubernetes
-----------
+Other setups
+------------
 
-If you want to deploy the application with Kubernetes instead, consult the helm
-charts repository: https://github.com/wger-project/helm-charts
+  **Kubernetes**
+    There is a helm charts repository if you want to deploy the application with
+    kubernetes: https://github.com/wger-project/helm-charts
+
+  **trueNAS**
+    Consult this guide if you want to deploy the application to :ref:`truenas`
 
 First steps
 -----------
