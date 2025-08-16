@@ -1,5 +1,5 @@
 .. _truenas:
-true NAS SCALE
+TrueNAS SCALE
 ==============
 
 .. note::
