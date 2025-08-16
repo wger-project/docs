@@ -1,6 +1,6 @@
 .. _truenas:
-true NAS
-=========
+true NAS SCALE
+==============
 
 .. note::
     this guide was provided by  `@Phyxsius7 <https://github.com/Phyxsius7>`_ and

@@ -24,7 +24,7 @@ Other setups
     There is a helm charts repository if you want to deploy the application with
     kubernetes: https://github.com/wger-project/helm-charts
 
-  **trueNAS**
+  **trueNAS SCALE**
     Consult this guide if you want to deploy the application to :ref:`truenas`
 
 First steps
