@@ -1,5 +1,5 @@
 =======================================
-Welcome to wger |version| documentation
+Welcome to the wger |version| documentation
 =======================================
 
 .. image:: images/logo.png
@@ -16,6 +16,17 @@ https://github.com/wger-project
 
 This documentation is intended for developers and administrators of the software.
 
+User manual
+===========
+
+.. toctree::
+   :caption: Manual
+   :hidden:
+
+   manual/routines
+
+:doc:`manual/routines`
+    How to use the routines and the progression rules
 
 Installation (production)
 =========================
