@@ -30,6 +30,8 @@ Besides adding the new translations to the locale folder, they have to be
 activated in the Django settings file and in the application itself.
 
 * **django:** add an entry to ``LANGUAGES`` in ``wger/settings_global.py``
+  and create a new empty .po file with ``django-admin makemessages --extension py,html,tpl -l fr``
+  (use the ISO 639-1 language code)
 
 * **wger:** add the new language in the language admin page. For the short name,
   use the language code such as 'fr', for the long name the native name, in this
