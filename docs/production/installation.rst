@@ -205,6 +205,10 @@ Collect all static resources::
 
   python manage.py collectstatic
 
+Compile the translation (.po) files::
+
+  cd wger
+  django-admin compilemessages
 
 The bootstrap command will also create a default administrator user (you probably
 want to change the password as soon as you log in):
