@@ -52,6 +52,11 @@ You can of course also use other databases such as PostgresSQL or MariaDB. Creat
 a database and user and edit the DATABASES settings before calling bootstrap.
 Take a look at the :ref:`prod_postgres` on apache on how that could look like.
 
+Compile the translation files::
+
+  cd wger
+  django-admin compilemessages
+
 After all this you can just use Django's development server::
 
   $ python manage.py runserver
