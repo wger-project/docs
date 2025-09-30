@@ -27,16 +27,20 @@ Other setups
   **TrueNAS SCALE**
     Consult this guide if you want to deploy the application to :ref:`truenas`
 
-First steps
------------
+Quickstart
+----------
 To start all services::
 
     docker compose up -d
 
-Optionally download current exercises, exercise images and the ingredients
-from wger.de. Please note that ``load-online-fixtures`` will overwrite any local
-changes you might have while ``sync-ingredients`` should be used afterward once
-you have imported the initial fixtures:
+Then open http://localhost (or your server's IP) and log in as: **admin**,
+password **adminadmin**.
+
+**Updating exercises and ingredients**
+
+The docker image comes with a default set of exercises, but due to the size of
+the dataset, no ingredients. You can manually sync the datasets from the wger.de
+(or any other wger instance) API with the following commands:
 
 .. code-block:: bash
 
@@ -44,25 +48,31 @@ you have imported the initial fixtures:
     docker compose exec web python3 manage.py download-exercise-images
     docker compose exec web python3 manage.py download-exercise-videos
 
-    # Loads a base set of ingredients
+The full ingredient dataset is quite larger, taking around 1GB of space in the
+db and needs a far longer time to download and process:
+
+.. code-block:: bash
+
+    # (quickly) loads a base set of ingredients
     docker compose exec web wger load-online-fixtures
 
-    # optionally run this afterwards to sync all the ingredients (around 1GB,
-    # this process takes a loooong time):
+    # Downloads the full ingredient dataset, alternatively in the background
+    docker compose exec web python3 manage.py sync-ingredients
     docker compose exec web python3 manage.py sync-ingredients-async
 
-(these steps are configured by default to run regularly in the background, but
-can also run on startup as well, see the options in ``prod.env``.)
+The application is configured to perform these steps in the background, but you
+can turn them off by changing the ``SYNC_*`` options in ``prod.env``.
 
-
-Then open http://localhost (or your server's IP) and log in as: **admin**,
-password **adminadmin**
+Also note that these sync commands will not overwrite any exercises you might
+have added yourself to your instance.
 
 **Update the application**
 
 Just remove the containers and pull the newest version:
 
 .. code-block:: bash
+
+    docker compose down
     docker compose pull
     docker compose up -d
 
@@ -161,7 +171,6 @@ To add a web interface for the celery queue, add a new service to the override f
           condition: service_healthy
 
 For more information and possibilities consult https://docs.docker.com/compose/extends/ and https://docs.docker.com/reference/compose-file/merge/
-
 
 Deployment
 ----------
