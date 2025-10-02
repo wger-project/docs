@@ -149,6 +149,20 @@ those, which makes it easier to troubleshoot, etc.
         - ./config/prod.env
         - ./config/my.env
 
+Email verification links (``SITE_URL``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When self-hosting, verification emails may otherwise contain links like
+``http://localhost/...``. Set ``SITE_URL`` in your environment to your public
+base URL (no trailing slash) so links use your domain instead:
+
+.. code-block:: bash
+
+   SITE_URL=https://your.public.domain
+
+This value is used by the application to build absolute links in outgoing
+emails and other places where a full URL is required.
+
 To add a web interface for the celery queue, add a new service to the override file
 
 .. code-block:: yaml
