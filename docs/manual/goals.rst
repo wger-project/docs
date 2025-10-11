@@ -6,15 +6,15 @@ Macro goals define your daily targets for calories, protien, fat, and carbohydra
 Accessing goals
 
 ---------------
-1. Go to **Nutrition -> Goals**.
-2. Click **Add goal** or **Edit goal** to modify existing targets.
+1. Go to **Nutrition plan**.
+2. Toggle on **Add goals to this plan** to modify existing plan.
 
 Adjusting macros
 
 ----------------
-- You can set total daily calories and desired percentages for each macronutritient.
-- wger automatically calculates the gram values.
-- You can also set target ranges for weight or body fat if you track body metrics.
+- Enter **Energy goal** **Protein goal** **Carbohydrates** **Fat goal**
+**Fiber goal**
+- Click submit button
 
 Tracking progress
 -----------------
