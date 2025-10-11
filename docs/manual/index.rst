@@ -9,3 +9,8 @@ User manual for the wger app. Currently only a chapter for the routines is avail
    :maxdepth: 1
 
    routines
+   statistics
+   nutrition
+   meals
+   goals
+   
