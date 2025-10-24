@@ -40,7 +40,7 @@ password **adminadmin**.
 
 The docker image comes with a default set of exercises, but due to the size of
 the dataset, no ingredients. You can manually sync the datasets from the wger.de
-(or any other wger instance) API with the following commands:
+instance (or any other) with the following commands:
 
 .. code-block:: bash
 

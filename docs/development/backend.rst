@@ -15,7 +15,7 @@ Development with docker
 Local installation
 -------------------
 
-Install ``npm``, ``yarn`` (1.x) ``sass`` and, optionally, `uv <https://docs.astral.sh/uv/>`_
+Install ``npm``, ``sass`` and, optionally, `uv <https://docs.astral.sh/uv/>`_
 
 Download the source code::
 

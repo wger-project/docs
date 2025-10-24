@@ -25,31 +25,35 @@ You can obviously use your own instance, but feel free to use the test server
 
 Install node (>22) and run::
 
-  yarn config set --home enableTelemetry 0
-  yarn install
+  npm install
 
 Then, in the project directory, you can run::
 
-  yarn start
+  npm start
 
 and open http://localhost:3000 in the browser.
 
 To run the tests::
 
-  yarn test
+  npm run test
 
 
 Release process
 ---------------
 
-There is no release process as such for the frontend. When features are done and
-should be available on the django application, just run the build script::
+Update the version in ``package.json`` to use the current date::
 
-  yarn build
+    NEW_VERSION=$(date +%Y-%m-%d)
+    npm version "${NEW_VERSION}" --no-git-tag-version
 
-This creates a production bundle and copies it over the the django static folder.
-This assumes that the django server folder is next to the react one and is called
-"server". From there you can commit the changes and push them.
+Publish the new version to npm by manually triggering the workflow ``publish``
+in the github actions tab.
+
+In the django server, update the version in ``package.json`` to the same
+version and run::
+
+  npm install
+
 
 
 Rendering in django
@@ -59,3 +63,19 @@ We don't render the whole page with react, just a part of it. We use ``ReactView
 in django to render an emtpy div with a known ID and then let react take over.
 
 Take a look at ``src/index.tsx`` to see how we do this.
+
+If you want to test the new version locally, you can use ``npm link`` which will
+create a symlink to the dev repository and allow you to instantly see the changes::
+
+  cd /path/to/react/repo
+  npm link
+  cd /path/to/wger/server
+  npm link @wger-project/react-components
+
+
+Don't forget to unlink everything once you're done::
+
+  cd /path/to/wger/server
+  npm unlink @wger-project/react-components
+  cd /path/to/react/repo
+  npm unlink
