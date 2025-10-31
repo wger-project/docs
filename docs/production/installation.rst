@@ -3,7 +3,7 @@
 Manual installation
 ===================
 
-Install ``npm``, ``yarn`` (1.x) and ``sass``
+Install ``npm`` / ``nodejs`` >= 22,  and ``sass``
 
 If you plan to use video files, it's recommended you install ffmpeg as well
 (this is not strictly necessary, it's just used for better upload
@@ -277,7 +277,7 @@ Other changes
 
   * install new or updated dependencies: ``pip install .``
   * apply new migrations: ``python manage.py migrate --all``
-  * update the static files: ``yarn install``, ``yarn build:css:sass``
+  * update the static files: ``npm install``, ``npm run build:css:sass``
     and ``python manage.py collectstatic``
   * update data ``python3 manage.py sync-exercises``, ``python3 manage.py download-exercise-images``
     (something like weekly) and ``python3 manage.py sync-ingredients`` (monthly)

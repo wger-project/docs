@@ -58,7 +58,7 @@ CSS libraries and start the development server.
 
     docker compose exec web /bin/bash
 
-    # this creates initial db tables, runs yarn install, yarn build:css:sass, etc
+    # this creates initial db tables, runs npm install, npm run build:css:sass, etc
     wger bootstrap
 
 
@@ -127,7 +127,7 @@ Other useful commands:
     python3 manage.py migrate
 
     # If you edited the theme CSS files
-    yarn build:css:sass
+    npm run build:css:sass
 
     # Access the db directly
     python3 manage.py dbshell
