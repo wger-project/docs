@@ -97,6 +97,7 @@ to flatpak-flutter.json::
     flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     flatpak-builder --repo=repo --force-clean --sandbox --user --install --install-deps-from=flathub build de.wger.flutter.json
+    flatpak run de.wger.flutter
 
 Note: all these steps need to happen on a linux (virtual) machine.
 
