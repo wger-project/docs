@@ -52,8 +52,8 @@ as well as ``flatpak-flutter.json`` in the ``de.wger.flutter`` repository (commi
 
 **2) Update cocoapods for iOS and Mac.**
 
-In the ``ios`` and ``macos`` folders run ``pod update``. Check that builds are possible
-with ``flutter build macos --release`` and ``flutter build ios --release --no-codesign``.
+In the ``ios`` and ``macos`` folders run ``pod update`` (or ``gem update``). Check that builds
+are possible with ``flutter build macos --release`` and ``flutter build ios --release --no-codesign``.
 
 **3) Dry-run release before uploading**
 
