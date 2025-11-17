@@ -185,7 +185,7 @@ the routine. A label accepts the following properties:
 Sets and exercises
 ------------------
 
-**Endpoints** ``/api/v2/slot/`` and ``/api/v2/slotconfig/``
+**Endpoints** ``/api/v2/slot/`` and ``/api/v2/slot-entry/``
 
 **Possible values:**
 
@@ -212,7 +212,7 @@ the magic happens.
 
 Supersets
 `````````
-If you add more than one slot config to a slot, it automatically becomes a superset.
+If you add more than one slot entry to a slot, it automatically becomes a superset.
 The specific oder of exercises (in the gym mode only!) is the interleaved list
 of exercises. Not all exercises need to have the same number of sets, e.g.:
 
