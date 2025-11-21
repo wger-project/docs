@@ -149,20 +149,6 @@ those, which makes it easier to troubleshoot, etc.
         - ./config/prod.env
         - ./config/my.env
 
-Email verification links (``SITE_URL``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-When self-hosting, verification emails may otherwise contain links like
-``http://localhost/...``. Set ``SITE_URL`` in your environment to your public
-base URL (no trailing slash) so links use your domain instead:
-
-.. code-block:: bash
-
-   SITE_URL=https://your.public.domain
-
-This value is used by the application to build absolute links in outgoing
-emails and other places where a full URL is required.
-
 To add a web interface for the celery queue, add a new service to the override file
 
 .. code-block:: yaml
@@ -216,8 +202,22 @@ To access the dashboards, go to http://localhost:3000 and log in with ``admin``,
 Others / Common error and pitfalls
 ----------------------------------
 
+Email verification links
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+When self-hosting, verification emails may otherwise contain links like
+``http://localhost/...``. Set ``SITE_URL`` in your environment to your public
+base URL (no trailing slash) so links use your domain instead:
+
+.. code-block:: bash
+
+   SITE_URL=https://your.public.domain
+
+This value is used by the application to build absolute links in outgoing
+emails and other places where a full URL is required.
+
 CSRF errors
-```````````
+~~~~~~~~~~~
 
 You will most probably run into CSRF errors when you try to use the application,
 specially if you configured a domain and django's
@@ -235,7 +235,7 @@ To solve this, update the env file and either
   as there are some security considerations.
 
 Missing static files
-````````````````````
+~~~~~~~~~~~~~~~~~~~~
 
 If you start the application and don't see any CSS styles, images, etc., there's a
 problem with the static files. This happens often.
@@ -268,9 +268,8 @@ to see how this can look like.
 For more information, consult `django's documentation <https://docs.djangoproject.com/en/4.1/ref/settings/#secure-proxy-ssl-header>`_.
 
 
-
 Automatically start service
-```````````````````````````
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If everything works correctly, you will want to start the compose file as a
 service so that it auto restarts when you reboot the server. If you use systemd,
@@ -302,10 +301,11 @@ well. With ``systemctl enable wger`` the service will be automatically restarted
 after a reboot.
 
 Backup
-``````
+~~~~~~
 
 **Database volume:** The most important thing to backup. For this just make
-a dump and restore it when needed
+a dump and restore it when needed (you should try to run this once to make
+sure it works).:
 
 .. code-block:: bash
 
@@ -321,9 +321,20 @@ a dump and restore it when needed
     cat backup.sql | docker compose exec -T db psql --username wger --dbname wger
     docker compose up
 
-**Media volume:** If you haven't uploaded any own images (exercises, gallery),
-you don't need to backup this, the contents can just be downloaded again. If
-you have, please consult these possibilities:
+**Media volume:** If you haven't uploaded  to exercises or the gallery, you
+don't need to backup this, the contents can just be downloaded again.
+Just delete any data in the appropriate tables and run the sync commands again:
+
+.. code-block:: bash
+
+    docker compose exec db psql -U wger "TRUNCATE TABLE exercises_exerciseimage, exercises_exercisevideo;";
+    docker compose exec db psql -U wger "TRUNCATE TABLE nutrition_image;";
+
+    docker compose exec web python3 manage.py download-exercise-images
+    ...
+
+
+If you have, please consult these possibilities:
 
 * https://www.docker.com/blog/back-up-and-share-docker-volumes-with-this-extension/
 * https://github.com/BretFisher/docker-vackup
@@ -333,7 +344,7 @@ you have, please consult these possibilities:
 on startup, no need to backup anything
 
 Postgres Upgrade
-````````````````
+~~~~~~~~~~~~~~~~
 
 It is sadly not possible to automatically upgrade between postgres versions,
 you need to perform the upgrade manually. Since the amount of data the app
@@ -368,7 +379,7 @@ See also https://github.com/docker-library/postgres/issues/37
     rm backup.sql
 
 Building the image
-``````````````````
+~~~~~~~~~~~~~~~~~~
 
 If you want to build your own image, you can do so by running the following
 commands from the server's source folder:

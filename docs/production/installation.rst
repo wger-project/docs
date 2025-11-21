@@ -13,7 +13,7 @@ such as resolution, codec, etc)::
     apt-get install ffmpeg
     pip install ffmpeg-python
 
-Wger user
+wger user
 ---------
 
 It is recommended to add a dedicated user for the application::
