@@ -104,3 +104,23 @@ Here are some of the most important ones:
 ``dummy-generator-*``
   Use to generate dummy data for the different entry types. For more information
   see the :ref:`dummy_generator` section.
+
+
+Celery
+------
+
+To list the currently scheduled tasks:
+
+.. code-block:: bash
+
+    celery -A wger inspect active
+
+To to clear the currently waiting tasks:
+
+.. code-block:: python
+
+    from wger.celery_configuration import app
+    app.control.purge()
+
+For other possible commands, consult the
+`celery documentation <https://docs.celeryq.dev/en/latest/reference/celery.app.control.html>`_.
