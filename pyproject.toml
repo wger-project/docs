@@ -5,9 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "sphinx==8.2.3",
+    "sphinx~=8.2.3",
     "sphinx-rtd-theme==3.0.2",
-    "sphinx-toolbox>=3.9.0",
+    "sphinx-toolbox~=4.1.0",
 ]
 
 [dependency-groups]
