@@ -391,3 +391,46 @@ commands from the server's source folder:
 
 There is also a "base" image located in ``extras/docker/base`` which the
 server one uses as a base.
+
+Using sqlite
+~~~~~~~~~~~~
+
+You can also easily use sqlite as a database backend instead of postgres. If you
+want to use an existing database, copy it to next to the docker compose file,
+otherwise create an empty file, make sure the permissions are correct and then
+change these settings::
+
+  touch ./database.sqlite
+  chmod 664 ./database.sqlite
+
+In the env file::
+
+  DJANGO_DB_ENGINE=django.db.backends.sqlite3
+  DJANGO_DB_DATABASE=/home/wger/db/database.sqlite
+
+In the ``docker-compose.yml`` file, change the volume mapping for the web and celery
+services, remove the dependency on the db service and remove the entire db service
+definition:
+
+.. code-block:: yaml
+
+    web:
+      image: docker.io/wger/server:latest
+      depends_on:
+        # delete this
+        db:
+          condition: service_healthy
+        [...]
+      volumes:
+        - ./database.sqlite:/home/wger/db/database.sqlite
+        [...]
+
+    celery_worker:
+      image: docker.io/wger/server:latest
+      volumes:
+        - ./database.sqlite:/home/wger/db/database.sqlite
+        [...]
+
+    # remove the db service
+    db:
+      [...]
