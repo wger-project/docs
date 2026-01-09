@@ -39,7 +39,8 @@ Overwise, manually create a new virtualenv and install everything::
 This will download the required JS and CSS libraries and create an SQLite
 database and populate it with data on the first run::
 
-  wger create-settings
+  export DJANGO_SETTINGS_MODULE=settings.local_dev
+  export PYTHONPATH=/path/to/wger/server
   wger bootstrap
   wger load-online-fixtures
 

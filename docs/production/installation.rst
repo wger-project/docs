@@ -181,19 +181,36 @@ Get the application::
   cd /home/wger/src
   pip install .
 
-  # If using sqlite without the --database-path
-  wger create-settings --database-path /home/wger/db/database.sqlite
+Set the python path so that the settings file can be imported from anywhere::
 
-Edit the generated settings file (``/home/wger/src/settings.py``)
+    export PYTHONPATH=/home/wger/src
 
-* Add the correct values for the database (use ``django.db.backends.postgresql``
-  for the engine) if you are using postgres
+You can configure the application by setting environmental variables. For a commented list,
+refer to
 
-* Set ``MEDIA_ROOT`` to ``/home/wger/media`` and ``STATIC_ROOT`` to ``/home/wger/static``.
+https://github.com/wger-project/docker/blob/master/config/prod.env
 
-* Add the domains that your site will be accessed to `ALLOWED_HOSTS=['example.com', 'www.example.com']`
-  (you might want to do this as the last step when you know everything else is
-  working correctly)
+Some important ones are:
+
+.. code-block:: bash
+
+    export DJANGO_SECRET_KEY='your-very-long-and-random-secret-key'
+    export TIME_ZONE='Europe/Berlin'
+    export MEDIA_ROOT='/home/wger/media'
+    export STATIC_ROOT='/home/wger/static'
+    export ALLOWED_HOSTS='example.com,www.example.com'
+
+    # Postgres
+    export DJANGO_DB_ENGINE='django.db.backends.postgresql'
+    export DJANGO_DB_NAME='wger'
+    export DJANGO_DB_USER='wger'
+    export DJANGO_DB_PASSWORD='wger'
+    export DJANGO_DB_HOST='localhost'
+    export DJANGO_DB_PORT='5432'
+
+    # Sqlite
+    export DJANGO_DB_ENGINE='django.db.backends.sqlite3'
+    export DJANGO_DB_NAME='/home/wger/db/database.sqlite'
 
 Run the installation script, this will download some CSS and JS libraries and
 load all initial data::
@@ -224,17 +241,19 @@ Email
 
 The application is configured to use Django's console email backend by default, which causes messages intended to be sent via email to be written to ``stdout``.
 
-In order to use a real email server, another backend listed in `Django's documentation`_ can be configured instead. Parameters for the backend are set as variables in ``settings.py``. For example, the following allows an SMTP server at ``smtp.example.com`` to be used::
+In order to use a real email server, another backend listed in `Django's documentation`_ can be configured instead. Parameters for the backend are set as variables in ``settings.py``. For example, the following allows an SMTP server at ``smtp.example.com`` to be used:
 
-   Email_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-   ENABLE_EMAIL = True
-   EMAIL_HOST = 'smtp.example.com'
-   EMAIL_PORT = 587
-   EMAIL_HOST_USER = 'wger@example.com'
-   EMAIL_HOST_PASSWORD = 'example_password'
-   EMAIL_USE_TLS = True
-   EMAIL_USE_SSL = False
-   DEFAULT_FROM_EMAIL = 'wger Workout Manager <wger@example.com>'
+.. code-block:: bash
+
+   export ENABLE_EMAIL = True
+   export EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+   export EMAIL_HOST = 'smtp.example.com'
+   export EMAIL_PORT = 587
+   export EMAIL_HOST_USER = 'wger@example.com'
+   export EMAIL_HOST_PASSWORD = 'example_password'
+   export EMAIL_USE_TLS = True
+   export EMAIL_USE_SSL = False
+   export FROM_EMAIL = 'wger Workout Manager <wger@example.com>'
 
 Django provides a ``sendtestemail`` command via ``manage.py`` to test email settings::
 
