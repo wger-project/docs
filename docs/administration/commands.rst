@@ -21,10 +21,6 @@ Here are some of the most important ones:
   creates a default administrator user. While it can also work with e.g. a PostgreSQL
   database, you will need to create it yourself:
 
-``create-settings``
-  Creates a new settings file-based. If you call it without further arguments it
-  will create the settings in the default locations:
-
 ``create-or-reset-admin``
   Makes sure that the default administrator user exists. If you change the password,
   it is reset.
@@ -54,9 +50,6 @@ Here are some of the most important ones:
   Imports and updates products from the Open Food Facts database. You can select
   whether to use a local file with the full database dump, the daily delta
   updates or use a mongo database, see the help for more information.
-
-
-
 
 Management commands
 -------------------

@@ -22,10 +22,6 @@ out the wger server git repo:
     cp .env.example .env
     echo "WGER_CODEPATH=/my/wger/path" > .env
 
-Copy in the wger folder the default settings file to the root::
-
-    cp extras/docker/production/settings.py .
-
 Start docker watch in the docker folder:
 
 .. code-block:: bash
