@@ -1,21 +1,11 @@
 Changelog
 =========
 
-2.4 - IN DEVELOPMENT
---------------------
+2.4
+---
+**2026-01-18**
 
-🔧 Upgrade steps from 2.3
-~~~~~~~~~~~~~~~~~~~~~~~~~
-* Update python libraries ``pip3 install .``
-* Migrate database ``python manage.py migrate``
-* Update CSS and JS libraries ``yarn install``
-* Compile the CSS ``yarn build:css:sass``
-* Update static files (only production): ``python3 manage.py collectstatic``
-
-🚀 Features
-~~~~~~~~~~~
-*
-
+See https://github.com/wger-project/wger/releases/tag/2.4
 
 
 2.3
