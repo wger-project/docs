@@ -234,6 +234,25 @@ To solve this, update the env file and either
   `documentation <https://docs.djangoproject.com/en/4.1/ref/settings/#secure-proxy-ssl-header>`_
   as there are some security considerations.
 
+
+Wrong pagination links
+~~~~~~~~~~~~~~~~~~~~~~
+
+(note that this mostly applies if you are running your own reverse proxy)
+
+For the application to work correctly, you need to make sure that the reverse
+proxy is correctly configured.
+
+If this is not the case, some features might break in subtle ways. E.g. the
+pagination links in the api are constructed by django from the passed headers.
+In this case you might be able to correctly reach and fetch some data but the
+"next" link might then point to "localhost", which will not work, only work
+while in your home network, etc.
+
+Make sure that you forward the host header as well as the protocol header to
+the application. Consult the `Django docs <https://docs.djangoproject.com/en/6.0/ref/request-response/#django.http.HttpRequest.get_host>`_
+for details.
+
 Missing static files
 ~~~~~~~~~~~~~~~~~~~~
 
