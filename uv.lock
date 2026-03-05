@@ -722,7 +722,7 @@ wheels = [
 
 [[package]]
 name = "sphinx-toolbox"
-version = "4.1.0"
+version = "4.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apeye" },
@@ -744,9 +744,9 @@ dependencies = [
     { name = "tabulate" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/33/57/d9f2cfa638864eac5565c263e994d117d577898a9eca91800f806a225b71/sphinx_toolbox-4.1.0.tar.gz", hash = "sha256:5da890f4bb0cacea4f1cf6cef182c5be480340d0ead43c905f51f7e5aacfc19c", size = 113632, upload-time = "2025-12-05T23:23:53.23Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/16/769454374719569f6165149a16d06b8da27cda8330fe5f932c2c65a77a04/sphinx_toolbox-4.1.2.tar.gz", hash = "sha256:c30a4f86c4c29e97adb0eb9337d35f5093cb96a44f49caffcf7d5bc58a88b781", size = 114911, upload-time = "2026-01-14T17:33:02.156Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fd/6e/e6a9f56972c971eb1556b604c82bb957c2286c68d50f39f64a7526907216/sphinx_toolbox-4.1.0-py3-none-any.whl", hash = "sha256:9024a7482b92ecf4572f83940c87ae26c2eca3ca49ff3df5f59806e88da958f6", size = 196115, upload-time = "2025-12-05T23:23:51.713Z" },
+    { url = "https://files.pythonhosted.org/packages/fa/38/6763a5a981770a21a18b66d3593a8bbb801884d9828c126866efdd01d41a/sphinx_toolbox-4.1.2-py3-none-any.whl", hash = "sha256:0438f8342ba1c6c0d6e47207f4eac167adba61742e8c2b1dc9624ff955b7bc89", size = 196812, upload-time = "2026-01-14T17:33:00.51Z" },
 ]
 
 [[package]]
