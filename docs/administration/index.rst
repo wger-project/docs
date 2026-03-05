@@ -10,6 +10,7 @@ production or development.
 .. toctree::
    :maxdepth: 1
 
+   errors
    commands
    settings
    auth_proxy

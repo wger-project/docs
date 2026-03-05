@@ -43,6 +43,8 @@ Installation (production)
     Docker and Docker Compose.
 :doc:`production/installation`
     "Manual" installation of the application in a production environment.
+:doc:`production/errors`
+    Common errors and how to fix them in a production environment.
 
 
 Development
@@ -76,6 +78,7 @@ Administration
    :caption: Administration
    :hidden:
 
+   administration/errors
    administration/commands
    administration/settings
    administration/auth_proxy
