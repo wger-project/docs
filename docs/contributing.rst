@@ -23,9 +23,11 @@ Code
 Obviously, you can also contribute code. Before starting working on a new feature,
 please open an issue to discuss it with us. This is important to avoid duplicating
 work and to make sure that your contribution is in line with the project's goals.
-A good starting point could be the roadmap for the next release:
+A good starting point could be one of the issues marked with "good first issue"
+or the roadmap for the next release:
 
-    https://github.com/orgs/wger-project/projects/5
+    https://github.com/orgs/wger-project/projects/6
+
 
 This application has three main repositories, each with its own purpose (and
 quirks) and its own section describing how to set up a development environment:
