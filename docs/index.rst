@@ -43,8 +43,6 @@ Installation (production)
     Docker and Docker Compose.
 :doc:`production/installation`
     "Manual" installation of the application in a production environment.
-:doc:`production/errors`
-    Common errors and how to fix them in a production environment.
 
 
 Development
@@ -63,10 +61,8 @@ Development
     For developers who want to work on the backend / django part of the application
     (note that this is the main part of the application and also does parts of the
     frontend)
-
 :doc:`development/frontend`
     For developers who want to work on the frontend part of the application
-
 :doc:`development/mobile_app`
     For developers who want to work on the mobile app part of the application
 
@@ -84,6 +80,8 @@ Administration
    administration/auth_proxy
    administration/gym
 
+:doc:`administration/errors`
+    Common errors and how to fix them in a production environment.
 :doc:`administration/commands`
     Available commands to manage the application and sync exercises and ingredients
 :doc:`administration/settings`
