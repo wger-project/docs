@@ -33,7 +33,7 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinx_toolbox.github',
+    # 'sphinx_toolbox.github',
 ]
 
 github_username = 'wger-project'
