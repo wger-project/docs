@@ -372,3 +372,75 @@ definition:
     # remove the db service
     db:
       [...]
+
+S3 / Object Storage
+~~~~~~~~~~~~~~~~~~~
+
+Wger, or rather django, supports serving static files from an S3-compatible object
+store. At the moment there are configuration options to serve the media files
+(i.e. everything that is dynamically uploaded such as the exercise or ingredient
+images, the gallery entries, etc.) from S3, but not the static files such as JS
+files.
+
+``USE_S3_MEDIA_FILES``
+  bool, default: ``False``
+
+  Enable S3-backed media storage.
+
+``AWS_ACCESS_KEY_ID``
+  access key
+
+``AWS_SECRET_ACCESS_KEY``
+  secret key
+
+``AWS_STORAGE_BUCKET_NAME``
+  bucket name
+
+``AWS_S3_REGION_NAME``
+  region used to build endpoints such as ``eu-central-1`` or ``hel1``
+
+``AWS_S3_DOMAIN``
+  base domain used to build endpoints such as ``amazonaws.com``
+
+``AWS_S3_ENDPOINT_URL``
+  string, default: ``https://{AWS_S3_REGION_NAME}.{AWS_S3_DOMAIN}``
+
+  explicit endpoint, change if needed
+
+``AWS_S3_CUSTOM_DOMAIN``
+  string, default: ``{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.{AWS_S3_DOMAIN}``
+
+  custom domain, change if needed
+
+``USE_S3_URL_FOR_MEDIA``
+  (bool, default: ``True``) — when true, the app sets ``MEDIA_URL`` to
+  ``https://{AWS_S3_CUSTOM_DOMAIN}/`` (otherwise use ``MEDIA_URL`` value). Set
+  this to false only if you want to use a reverse proxy to make the media files
+  appear under the same domain as the application, e.g. with nginx's ``proxy_pass``.
+
+``AWS_QUERYSTRING_AUTH``
+  bool, default: ``False``
+
+  controls signed URLs; currently set to ``False`` (public URLs)
+
+Examples for different providers:
+
+**AWS**
+
+* ``AWS_STORAGE_BUCKET_NAME=my-bucket``
+* ``AWS_S3_REGION_NAME=eu-central-1``
+* ``AWS_S3_DOMAIN=amazonaws.com``
+* ``AWS_S3_ENDPOINT_URL=https://s3.eu-central-1.amazonaws.com``
+* ``AWS_S3_CUSTOM_DOMAIN=my-bucket.s3.eu-central-1.amazonaws.com``
+
+**Hetzner**
+
+* ``AWS_STORAGE_BUCKET_NAME=my-bucket``
+* ``AWS_S3_REGION_NAME=hel1``
+* ``AWS_S3_DOMAIN=your-objectstorage.com``
+
+For other options or services, consult the django-storages documentation:
+https://django-storages.readthedocs.io
+
+Note that iff you already have files in a local folder, you will need to
+copy them over with a tool like ``awscli`` or ``rclone``.
