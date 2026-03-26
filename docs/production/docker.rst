@@ -381,7 +381,9 @@ Wger, or rather django, supports serving static (JS, CSS, etc.) as well as media
 object store.
 
 Note that if you enable this, you don't need nginx to serve these files, you can
-just reverse proxy the application
+just reverse proxy the application. Also note that you will probably need to edit
+the CORS settings in the storage provider to allow the application to access the
+files from the S3 domain.
 
 ``USE_S3_MEDIA_FILES``
   bool, default: ``False``
