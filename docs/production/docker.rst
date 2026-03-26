@@ -376,16 +376,24 @@ definition:
 S3 / Object Storage
 ~~~~~~~~~~~~~~~~~~~
 
-Wger, or rather django, supports serving static files from an S3-compatible object
-store. At the moment there are configuration options to serve the media files
-(i.e. everything that is dynamically uploaded such as the exercise or ingredient
-images, the gallery entries, etc.) from S3, but not the static files such as JS
-files.
+Wger, or rather django, supports serving static (JS, CSS, etc.) as well as media
+(gallery images, exercise and ingredient images, etc.) files from an S3-compatible
+object store.
+
+Note that if you enable this, you don't need nginx to serve these files, you can
+just reverse proxy the application
 
 ``USE_S3_MEDIA_FILES``
   bool, default: ``False``
 
   Enable S3-backed media storage.
+
+``USE_S3_STATIC_FILES``
+  bool, default: ``False``
+
+  Enable S3-backed static files storage. Note that if you enable this, it's
+  recommended to set ``DJANGO_COLLECTSTATIC_ON_STARTUP``to false since the collectstatic
+  command will needlessly increase the startup time.
 
 ``AWS_ACCESS_KEY_ID``
   access key
@@ -413,10 +421,23 @@ files.
   custom domain, change if needed
 
 ``USE_S3_URL_FOR_MEDIA``
-  (bool, default: ``True``) — when true, the app sets ``MEDIA_URL`` to
+  bool, default: ``True``
+
+  when true, the app sets ``MEDIA_URL`` to
   ``https://{AWS_S3_CUSTOM_DOMAIN}/`` (otherwise use ``MEDIA_URL`` value). Set
   this to false only if you want to use a reverse proxy to make the media files
   appear under the same domain as the application, e.g. with nginx's ``proxy_pass``.
+
+``USE_S3_URL_FOR_STATIC``
+  bool, default: ``True``
+
+  when true, the app sets ``STATIC_URL`` to
+  ``https://{AWS_S3_CUSTOM_DOMAIN}/`` (otherwise use ``STATIC_URL`` value).
+
+``S3_MEDIA_FILES_LOCATION`` and ``S3_STATIC_FILES_LOCATION``
+  string, default: ``media`` and ``static``
+
+  Used to control the prefix for media and static files in the bucket.
 
 ``AWS_QUERYSTRING_AUTH``
   bool, default: ``False``
