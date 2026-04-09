@@ -86,6 +86,8 @@ Administration
     Available commands to manage the application and sync exercises and ingredients
 :doc:`administration/settings`
     Available settings for the application
+:doc:`administration/social_auth`
+    Social authentication (OAuth2) settings
 :doc:`administration/auth_proxy`
     Alternative authentication settings
 
