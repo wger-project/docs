@@ -104,9 +104,9 @@ steps are still necessary.
 Yes, some of these steps could and should be automated, but for now they are not.
 This might also be one of the reasons why there are not that many releases...
 
-**1) Bump version**
+**1) Bump versions**
 
-Bump the version in:
+Bump the app version as well as the minimum required mobile app version in:
 
 * ``wger/version.py``
 * ``package.json`` (not really needed, but since it's there, let's keep it up to date)

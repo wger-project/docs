@@ -45,10 +45,14 @@ there are some manual steps involved to prepare the release:
 Preflight checks
 ----------------
 
-**1) Bump flutter version**
+**1) Bump versions**
 
-If we use a new flutter version, update the version in ``.github/actions/flutter-common/action.yml``
-as well as ``flatpak-flutter.json`` in the ``de.wger.flutter`` repository (commit to master).
+*Flutter:* If we use a new flutter version, update the version in
+``.github/actions/flutter-common/action.yml`` as well as ``flatpak-flutter.json``
+in the ``de.wger.flutter`` repository (commit to master).
+
+*Min Server version:* If the new version of the app requires a new minimum server
+version, update the version in ``MIN_SERVER_VERSION``
 
 **2) Update cocoapods for iOS and Mac.**
 
