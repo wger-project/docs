@@ -144,11 +144,16 @@ Create a new tag for the release::
   git tag -a 1.2.3 -m "Release 1.2.3"
   git push origin 1.2.3
 
+Create a final tag for docker without "-dev" (obviously after the images have been built)::
+
+  docker login
+  docker buildx imagetools create --tag wger/server:1.2.3 wger/server:latest
+
 **6) Create a new release on GitHub**
 
 Finally, create a new release on GitHub from the tag. Generate the description
-from the pull requests and edit if necessary. Copy this changelog to the docs
-repo and add it to the existing changelog.rst.
+from the pull requests and edit if necessary, then link to this from the changelog
+in the docs repo.
 
 **7) Talk about it!**
 
