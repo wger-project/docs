@@ -153,7 +153,9 @@ Create a final tag for docker without "-dev" (obviously after the images have be
 
 Finally, create a new release on GitHub from the tag. Generate the description
 from the pull requests and edit if necessary, then link to this from the changelog
-in the docs repo.
+in the docs repo::
+
+  gh release create "X.Y" --generate-notes
 
 **7) Talk about it!**
 
