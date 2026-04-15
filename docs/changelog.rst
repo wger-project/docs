@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.5
+---
+**2026-04-16**
+
+See https://github.com/wger-project/wger/releases/tag/2.5
+
 2.4
 ---
 **2026-01-18**
