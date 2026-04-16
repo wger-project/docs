@@ -75,6 +75,14 @@ Is this the first time you contribute to an open source project? No problem!
 Feel free to ping us if you need help setting everything up, it can be very
 overwhelming at first. We are happy to help you get started.
 
+**What about AI?**
+
+We are open to contributions that use AI, but we ask you to read and understand the code
+that was produced. It's very tempting to let the agent do its thing and just accept
+everything, resist this! Specially when attempting to do bigger features, it's
+important to split the work into smaller chunks.
+
+
 Exercises
 ---------
 
