@@ -52,16 +52,15 @@ instance (or any other) with the following commands:
     docker compose exec web python3 manage.py download-exercise-videos
 
 The full ingredient dataset is quite larger, taking around 1GB of space in the
-db and needs a far longer time to download and process:
+db and needs a longer time to download and process:
 
 .. code-block:: bash
 
     # (quickly) loads a base set of ingredients
     docker compose exec web wger load-online-fixtures
 
-    # Downloads the full ingredient dataset, alternatively in the background
-    docker compose exec web python3 manage.py sync-ingredients
-    docker compose exec web python3 manage.py sync-ingredients-async
+    # Downloads the full ingredient dataset (use "--set-mode update" with an existing db)
+    docker compose exec web ./manage.py sync-ingredients-bulk --set-mode insert
 
 The application is configured to perform these steps in the background, but you
 can turn them off by changing the ``SYNC_*`` options in ``prod.env``.
