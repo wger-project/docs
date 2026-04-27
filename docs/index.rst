@@ -78,6 +78,7 @@ Administration
    administration/commands
    administration/settings
    administration/auth_proxy
+   administration/social_auth
    administration/gym
 
 :doc:`administration/errors`
