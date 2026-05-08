@@ -1,7 +1,7 @@
 .. _installation:
 
-Manual installation
-===================
+From source
+===========
 
 Install ``npm`` / ``nodejs`` >= 22,  and ``sass``
 
@@ -59,8 +59,6 @@ Create a systemd service file at ``/etc/systemd/system/wger.service``:
     User=wger
     Group=wger
     WorkingDirectory=/home/wger/src
-    Environment="PYTHONPATH=/home/wger/src"
-    Environment="DJANGO_SETTINGS_MODULE=wger.settings"
     EnvironmentFile=/home/wger/wger.env
     ExecStart=/home/wger/venv/bin/gunicorn wger.wsgi:application \
         --preload \
@@ -165,10 +163,9 @@ As the wger user, make a virtualenv for python and activate it::
   python3 -m venv /home/wger/venv
   source /home/wger/venv/bin/activate
 
-Create folders to collect all static resources and save uploaded files. The
-``static`` folder will only contain CSS and JS files, so it must be readable
-by the apache process while ``media`` will contain the uploaded files and must
-be writeable as well::
+Create folders for static resources and uploaded files. The ``static`` folder
+contains generated CSS and JS files (read by Caddy), the ``media`` folder
+receives uploads (read by Caddy, written by gunicorn)::
 
   mkdir /home/wger/{static,media}
   chmod o+w /home/wger/media
@@ -179,55 +176,84 @@ Get the application::
   cd /home/wger/src
   pip install .
 
-Set the python path so that the settings file can be imported from anywhere::
+Configuration
+~~~~~~~~~~~~~
 
-    export PYTHONPATH=/home/wger/src
+wger reads its configuration from environment variables. Place them in
+``/home/wger/wger.env`` so the systemd unit defined earlier can pick them
+up (via its ``EnvironmentFile=`` directive), and so you can source them
+into a shell when running one-off commands.
 
-You can configure the application by setting environmental variables. For a commented list,
-refer to
-
+For a complete commented list of available settings, use the Docker
+setup's ``prod.env`` as a reference:
 https://github.com/wger-project/docker/blob/master/config/prod.env
 
-Some important ones are:
+A minimal example:
 
 .. code-block:: bash
 
-    export DJANGO_SECRET_KEY='your-very-long-and-random-secret-key'
-    export TIME_ZONE='Europe/Berlin'
-    export MEDIA_ROOT='/home/wger/media'
-    export STATIC_ROOT='/home/wger/static'
-    export ALLOWED_HOSTS='example.com,www.example.com'
+    # /home/wger/wger.env
+
+    # Required: Django setup
+    DJANGO_SETTINGS_MODULE=settings.main
+    PYTHONPATH=/home/wger/src
+
+    # Application
+    DJANGO_SECRET_KEY=your-very-long-and-random-secret-key
+    TIME_ZONE=Europe/Berlin
+    MEDIA_ROOT=/home/wger/media
+    STATIC_ROOT=/home/wger/static
+    ALLOWED_HOSTS=example.com,www.example.com
 
     # Postgres
-    export DJANGO_DB_ENGINE='django.db.backends.postgresql'
-    export DJANGO_DB_NAME='wger'
-    export DJANGO_DB_USER='wger'
-    export DJANGO_DB_PASSWORD='wger'
-    export DJANGO_DB_HOST='localhost'
-    export DJANGO_DB_PORT='5432'
+    DJANGO_DB_ENGINE=django.db.backends.postgresql
+    DJANGO_DB_NAME=wger
+    DJANGO_DB_USER=wger
+    DJANGO_DB_PASSWORD=wger
+    DJANGO_DB_HOST=localhost
+    DJANGO_DB_PORT=5432
 
-    # Sqlite
-    export DJANGO_DB_ENGINE='django.db.backends.sqlite3'
-    export DJANGO_DB_NAME='/home/wger/db/database.sqlite'
+For SQLite, swap the database block for::
 
-Run the installation script, this will download some CSS and JS libraries and
-load all initial data::
+    DJANGO_DB_ENGINE=django.db.backends.sqlite3
+    DJANGO_DB_NAME=/home/wger/db/database.sqlite
 
-  wger bootstrap
+The file contains secrets, so restrict permissions::
 
+    sudo chown wger:wger /home/wger/wger.env
+    sudo chmod 600 /home/wger/wger.env
+
+.. note::
+
+   The file uses systemd's ``EnvironmentFile`` syntax: ``KEY=VALUE`` per
+   line, no ``export`` prefix and no spaces around ``=``. Quotes around
+   values are usually unnecessary; if you do need them, use single quotes.
+
+Bootstrap
+~~~~~~~~~
+
+For one-off commands (bootstrap, migrate, collectstatic, …) the env file
+needs to be sourced into the current shell. As the wger user with the
+virtualenv active::
+
+    set -a; . /home/wger/wger.env; set +a
+
+Run the installation script — this downloads JS/CSS libraries and loads
+initial data::
+
+    wger bootstrap
 
 Collect all static resources::
 
-  python manage.py collectstatic
+    python manage.py collectstatic
 
 Compile the translation (.po) files::
 
-  cd wger
-  django-admin compilemessages
+    cd wger
+    django-admin compilemessages
 
-The bootstrap command will also create a default administrator user (you probably
-want to change the password as soon as you log in):
-
+The bootstrap command also creates a default administrator user. **Change
+the password immediately after first login:**
 
 * **username**: admin
 * **password**: adminadmin

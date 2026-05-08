@@ -13,22 +13,24 @@ option, but they're not as extensively tested or are submitted by a third party.
    :hidden:
 
    docker
+   kubernetes
    from-source
    truenas
-   kubernetes
    proxmox
 
 :doc:`docker`
-    Recommended production setup, using Docker and Docker Compose.
-
-:doc:`from-source`
-    Installation from source, when Docker isn't an option.
-
-:doc:`truenas`
-    Community-contributed installation guide for TrueNAS SCALE.
+    Recommended production setup, uses Docker and Docker Compose.
 
 :doc:`kubernetes`
     Helm charts for deploying to a Kubernetes cluster.
 
+:doc:`from-source`
+    Installation from source, when Docker isn't an option.
+
+**Community-contributed installation guides:**
+
+:doc:`truenas`
+    Installation guide for TrueNAS SCALE.
+
 :doc:`proxmox`
-    Pointer to a community-maintained Proxmox installation script.
+    Proxmox installation script.
