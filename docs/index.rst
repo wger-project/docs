@@ -20,7 +20,7 @@ This documentation is intended for developers and administrators of the software
 :doc:`manual/index`
     User-facing manual: how to use routines and progression rules.
 
-:doc:`production/index`
+:doc:`installation/index`
     Setting up wger in production. Docker is the recommended path.
 
 :doc:`administration/index`
@@ -44,7 +44,7 @@ This documentation is intended for developers and administrators of the software
    :hidden:
 
    manual/index
-   production/index
+   installation/index
    administration/index
    development/index
    api/index
