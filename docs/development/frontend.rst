@@ -38,24 +38,6 @@ To run the tests::
   npm run test
 
 
-Release process
----------------
-
-Update the version in ``package.json`` to use the current date::
-
-    NEW_VERSION=$(date +%Y-%m-%d)
-    npm version "${NEW_VERSION}" --no-git-tag-version
-
-Publish the new version to npm by manually triggering the workflow ``publish``
-in the github actions tab.
-
-In the django server, update the version in ``package.json`` to the same
-version and run::
-
-  npm install
-
-
-
 Rendering in django
 -------------------
 

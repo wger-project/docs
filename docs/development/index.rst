@@ -18,6 +18,7 @@ topics for the development workflow.
    celery
    i18n
    dummy_data
+   release
 
 :doc:`backend`
     Set up a development environment for the Django backend (the main part of
@@ -41,3 +42,6 @@ topics for the development workflow.
 
 :doc:`dummy_data`
     Generate dummy data for development and testing.
+
+:doc:`release`
+    Steps for cutting a new backend release.
