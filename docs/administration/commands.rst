@@ -38,10 +38,6 @@ Here are some of the most important ones:
   download-online-fixtures.
 
 ``load-online-fixtures``
-  Downloads a subset of ingredients, the weight units fixtures and installs them.
-  If you want to download all ingredients, you need to use the manage.py command
-  with the ``sync-ingredients`` (see below).
-
   Downloads a subset of ingredients and the weight units fixtures, then installs
   them. To download all ingredients, use the manage.py command with the
   ``sync-ingredients`` option (see below).
