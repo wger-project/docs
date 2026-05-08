@@ -102,6 +102,7 @@ the application more accessible. To start just visit
     https://hosted.weblate.org/engage/wger
 
 .. _donation:
+
 Support the Project
 -------------------
 This project is free and open-source, but running it isn’t! Your support helps

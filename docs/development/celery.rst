@@ -114,8 +114,8 @@ Add a new file `/etc/systemd/system/celery.service` with the following contents
 
 Read the file with ``systemctl daemon-reload`` and start it with ``systemctl start celery``.
 If there are no errors and ``systemctl status celery`` shows that the service is
-active, everything went well. With ``systemctl enable celery.service``the service
-will be automatically restarted after a reboot.
+active, everything went well. With ``systemctl enable celery.service`` the
+service will be automatically restarted after a reboot.
 
 For more up to date information on how this could look like:
 https://docs.celeryq.dev/en/stable/userguide/daemonizing.html

@@ -1,7 +1,5 @@
-.. _api:
-
 Using the API
-==============
+=============
 
 Public endpoints, such as the list of exercises or the ingredients can be
 accessed without authentication. For user owned objects such as

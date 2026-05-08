@@ -51,7 +51,7 @@ bootstrap, just copy it to some other place::
 
 You can of course also use other databases such as PostgresSQL or MariaDB. Create
 a database and user and edit the DATABASES settings before calling bootstrap.
-Take a look at the :ref:`prod_postgres` on apache on how that could look like.
+Take a look at the :ref:`PostgreSQL setup <prod_postgres>` for how that could look like.
 
 Compile the translation files::
 
