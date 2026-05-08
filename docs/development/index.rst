@@ -17,7 +17,7 @@ topics for the development workflow.
    docker
    celery
    i18n
-   others
+   dummy_data
 
 :doc:`backend`
     Set up a development environment for the Django backend (the main part of
@@ -33,10 +33,11 @@ topics for the development workflow.
     Run a development environment with Docker compose.
 
 :doc:`celery`
-    Set up Celery for running background tasks during development.
+    Set up Celery for running background tasks (development and bare-metal
+    installations).
 
 :doc:`i18n`
     Manage and update translation files.
 
-:doc:`others`
-    Generate dummy data and other development tooling.
+:doc:`dummy_data`
+    Generate dummy data for development and testing.
