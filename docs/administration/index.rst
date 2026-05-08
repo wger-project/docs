@@ -27,6 +27,7 @@ administrators running a wger instance.
    backup
    postgres
    monitoring
+   storage
    gym
 
 :doc:`errors`
@@ -52,6 +53,10 @@ administrators running a wger instance.
 
 :doc:`monitoring`
     Monitor the application with Grafana and Prometheus.
+
+:doc:`storage`
+    Choose your database backend (Postgres, SQLite) and configure S3-compatible
+    object storage for media and static files.
 
 :doc:`gym`
     Manage gyms, members, trainers and contracts.
