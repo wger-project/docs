@@ -27,108 +27,106 @@ necessary to call it 'wger'). In that case, change the paths as needed.
 Webserver
 ---------
 
-**Apache**
+The recommended setup runs **gunicorn** as the WSGI application server, with
+**Caddy** as a reverse proxy in front of it that also serves the static and
+media files. This mirrors how the Docker image is configured internally.
 
-Install apache and the WSGI module::
-
-  sudo apt-get install apache2 libapache2-mod-wsgi-py3
-  sudo vim /etc/apache2/sites-available/wger.conf
-
-
-Configure apache to serve the application:
-
-.. code-block:: apache
-
-    <Directory /home/wger/src>
-        <Files wsgi.py>
-            Require all granted
-        </Files>
-    </Directory>
-
-
-    <VirtualHost *:80>
-        WSGIApplicationGroup %{GLOBAL}
-        WSGIDaemonProcess wger python-path=/home/wger/src python-home=/home/wger/venv
-        WSGIProcessGroup wger
-        WSGIScriptAlias / /home/wger/src/wger/wsgi.py
-        WSGIPassAuthorization On
-
-        Alias /static/ /home/wger/static/
-        <Directory /home/wger/static>
-            Require all granted
-        </Directory>
-
-        Alias /media/ /home/wger/media/
-        <Directory /home/wger/media>
-            Require all granted
-        </Directory>
-
-        ErrorLog ${APACHE_LOG_DIR}/wger-error.log
-        CustomLog ${APACHE_LOG_DIR}/wger-access.log combined
-    </VirtualHost>
-
-Apache has a problem when uploading files that have non-ASCII characters, e.g.
-for exercise images. To avoid this, add to /etc/apache2/envvars (if there is
-already an ``export LANG``, replace it) or set your system's locale::
-
-    export LANG='en_US.UTF-8'
-    export LC_ALL='en_US.UTF-8'
-
-
-Activate the settings and disable apache's default::
-
-    sudo a2dissite 000-default.conf
-    sudo a2ensite wger
-    sudo service apache2 reload
-
-**Alternatives**
-
-You don't *need* to use apache, you can also use nginx, caddy or some other web
-server. Just set them up as a reverse proxy to a WSGI application server, and
-serve the static and media files:
-
+If you prefer nginx, Apache or another webserver, the building blocks are the
+same — set up a reverse proxy that forwards to gunicorn and serves
+``/static/`` and ``/media/`` directly. See Django's deployment guide:
 https://docs.djangoproject.com/en/dev/howto/deployment/
 
+gunicorn
+~~~~~~~~
 
-Here's an example with Caddy:
+gunicorn is not part of wger's base dependencies (the docker setup pulls it
+in via the ``docker`` dependency group). For a from-source installation,
+install it into your virtualenv:
+
+.. code-block:: bash
+
+    sudo -u wger /home/wger/venv/bin/pip install gunicorn
+
+Create a systemd service file at ``/etc/systemd/system/wger.service``:
 
 .. code-block:: ini
 
-    # /etc/systemd/system/gunicorn.service
-
     [Unit]
-    Description=gunicorn daemon
+    Description=wger gunicorn daemon
     After=network.target
 
     [Service]
-    User=apache
-    Group=apache
-    WorkingDirectory=/var/www/wger/src
-    ExecStart=/var/www/wger/venv/bin/gunicorn --access-logfile - --workers 3 wger.wsgi:application -b :8000
+    User=wger
+    Group=wger
+    WorkingDirectory=/home/wger/src
+    Environment="PYTHONPATH=/home/wger/src"
+    Environment="DJANGO_SETTINGS_MODULE=wger.settings"
+    EnvironmentFile=/home/wger/wger.env
+    ExecStart=/home/wger/venv/bin/gunicorn wger.wsgi:application \
+        --preload \
+        --bind 127.0.0.1:8000 \
+        --workers 3 \
+        --threads 2 \
+        --worker-class gthread \
+        --timeout 240 \
+        --access-logfile -
 
     [Install]
     WantedBy=multi-user.target
 
+The worker count of ``(2 × $num_cores) + 1`` is a common starting point. Place
+your environment variables (database, secret key, etc. — set up in the
+"Application" section below) in ``/home/wger/wger.env`` so the unit can pick
+them up via ``EnvironmentFile``.
+
+Reload systemd and start the service::
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now wger
+
+Check that it's running with ``systemctl status wger`` and ``journalctl -u wger -f``.
+
+Caddy
+~~~~~
+
+Install Caddy following the official instructions:
+https://caddyserver.com/docs/install
+
+Create ``/etc/caddy/Caddyfile``:
 
 .. code-block::
 
-    # /etc/caddy/Caddyfile
+    your-domain.example.com {
+        encode
 
-    your-domain {
-        reverse_proxy localhost:8000
-
-        handle_path /static/* {
-            file_server {
-                root "/var/www/wger/static"
-            }
+        reverse_proxy 127.0.0.1:8000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {http.X-Forwarded-For} {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Http-Version {http.request.proto}
         }
 
-        handle_path /media/* {
-            file_server {
-                root "/var/www/wger/media"
-            }
-       }
+        handle /static/* {
+            root * /home/wger
+            header Cache-Control "public, max-age=31536000, immutable"
+            file_server
+        }
+
+        handle /media/* {
+            root * /home/wger
+            file_server
+        }
     }
+
+Caddy automatically obtains and renews a Let's Encrypt certificate as long as
+the domain's DNS points to your server. Reload Caddy to pick up the config::
+
+    sudo systemctl reload caddy
+
+The ``X-Forwarded-*`` headers are important — without them, generated URLs
+(e.g. pagination links in the API) and CSRF protection can break. If you see
+CSRF errors after setup, check :doc:`/administration/errors`.
 
 Database
 --------
