@@ -3,145 +3,431 @@
 Settings
 ========
 
-WGER_SETTINGS dictionary
-------------------------
+wger is configured via environment variables. In a Docker setup, these go in
+your env file (typically extending ``prod.env``; see :doc:`/installation/docker`
+for the override mechanism). For from-source installations, they go in
+``/home/wger/wger.env`` (see :doc:`/installation/from-source`).
 
-You can configure some of the application behaviour with the ``WGER_SETTINGS``
-dictionary in your settings file. Currently, the following options are supported:
+The reference ``prod.env`` in the docker repository contains commented
+examples for every option and is the canonical source for what's available:
+https://github.com/wger-project/docker/blob/master/config/prod.env
 
-``ALLOW_GUEST_USERS``
-  Default ``True``
+This page is the structured reference. For a few specialized topics — S3
+storage, SSO via reverse proxy, monitoring — the relevant settings live on
+their dedicated pages, linked below.
 
-  Controls whether users can use the site as a guest user or if an administrator
-  has to create the user accounts, as with the option above.
+Required
+--------
 
-``ALLOW_REGISTRATION``
-  Default ``True``
+These should be set explicitly for any non-trivial deployment. Leaving the
+defaults means new keys are generated on every restart, which invalidates
+sessions and tokens.
 
-  Controls whether users can register on their own or if a gym administrator has
-  to create the user accounts.
+``SECRET_KEY``
+  Django's secret key, used for cryptographic signing (sessions, CSRF tokens,
+  password reset links, etc.). Generate a random 50-character string::
 
-``DOWNLOAD_INGREDIENTS_FROM``
-  Default ``WGER``
+      python -c "import secrets; print(secrets.token_urlsafe(50))"
 
-  Where to download ingredient images from. Set to 'None' to deactivate.
+``SIGNING_KEY``
+  JWT signing key for the API. Use a *different* value than ``SECRET_KEY``.
+  Same generation method.
 
-``EMAIL_FROM``
-  Default ``wger Workout Manager <wger@example.com>``
+``TIME_ZONE`` / ``TZ``
+  Server timezone, e.g. ``Europe/Berlin``. See
+  https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-  The sender address used for sent emails by the system such as weight reminders
+``ALLOWED_HOSTS``
+  Comma-separated list of hostnames the application accepts requests for,
+  e.g. ``example.com,www.example.com``.
 
-``EXERCISE_CACHE_TTL``
-  Default ``3600`` (one hour)
 
-  Sets how long the overview responses for exercise, exerciseinfo and exercisebaseinfo
-  are cached for.
+``SITE_URL``
+  Default ``http://localhost``. Public base URL of your instance, no trailing
+  slash. Used to build absolute links in outgoing emails.
 
-``INGREDIENT_CACHE_TTL``
-  Default ``604800`` (one week)
+CSRF and reverse proxy
+----------------------
 
-  Sets how long the overview responses for ingredients are cached for.
+If you run wger behind a reverse proxy (recommended), Django needs to know
+about your domain to accept form submissions. See :doc:`errors` if you run
+into CSRF problems.
 
-``ROUTINE_CACHE_TTL``
-  Default ``4 * 604800`` (four weeks)
+``CSRF_TRUSTED_ORIGINS``
+  Comma-separated list of full URLs (with scheme, and port if non-default),
+  e.g. ``https://wger.example.com,https://192.168.1.10:8080``.
 
-  Sets how long the overview responses for routines are cached for.
+``X_FORWARDED_PROTO_HEADER_SET``
+  Default ``False``. If your proxy sets the ``X-Forwarded-Proto`` header,
+  set this to ``True``. Read the security implications in
+  `Django's docs <https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header>`_.
 
-``MIN_ACCOUNT_AGE_TO_TRUST``
-  Default ``21``
+``NUMBER_OF_PROXIES``
+  Default ``1``. Number of proxies in front of the application. Used by
+  Django REST Framework's request throttling to determine the real client IP.
 
-  Users won't be able to contribute to exercises if their account age is
-  lower than this amount in days.
+URLs and media
+--------------
 
-``SYNC_EXERCISES_CELERY``
-  Default ``False``
+``MEDIA_URL`` / ``STATIC_URL``
+  Override the default ``/media/`` and ``/static/`` paths if you serve
+  files from a different host (CDN, S3 — see :doc:`storage`).
 
-  Whether to periodically synchronize the exercise database from the default wger
-  instance. Needs celery to be configured.
+``WGER_PORT``
+  Default ``8000``. Port gunicorn binds to inside the container. Rarely
+  changed.
 
-``SYNC_EXERCISE_IMAGES_CELERY``
-  Default ``False``
-
-  Whether to periodically synchronize the exercise images from the default wger
-  instance. Needs celery to be configured.
-
-``SYNC_EXERCISE_VIDEOS_CELERY``
-  Default ``False``
-
-  Whether to periodically synchronize the exercise videos from the default wger
-  instance. Needs celery to be configured.
-
-``USE_CELERY``
-  Default ``False``.
-
-  Whether celery is configured and can be used
-
-``USE_RECAPTCHA``
-  Default ``False``.
-
-  Controls whether a captcha challenge will be presented when new users register.
+Application
+-----------
 
 ``WGER_INSTANCE``
-  Default ``https://wger.de``.
+  Default ``https://wger.de``. Upstream wger instance to sync exercises and
+  ingredients from.
 
-  The wger instance from which commands like exercise synchronization will use
-  to fetch data from.
+``ALLOW_REGISTRATION``
+  Default ``True``. Whether users can register accounts on their own.
 
+``ALLOW_GUEST_USERS``
+  Default ``True``. Whether the application offers guest user functionality.
 
-.. note::
-  If you want to override a default setting, don't overwrite all the dictionary
-  but only the keys you need, e.g. ``WGER_SETTINGS['foo'] = 'bar'``. This avoids
-  problems when new keys are added in the global settings.
+``ALLOW_UPLOAD_VIDEOS``
+  Default ``True``. Whether users can upload exercise videos.
+
+``MIN_ACCOUNT_AGE_TO_TRUST``
+  Default ``21`` (days). Users below this account age cannot contribute to
+  exercises.
+
+Database
+--------
+
+See :doc:`storage` for switching between Postgres and SQLite.
+
+``DJANGO_DB_ENGINE``
+  Default ``django.db.backends.postgresql``. Use ``django.db.backends.sqlite3``
+  for SQLite.
+
+``DJANGO_DB_DATABASE``
+  Database name (Postgres) or full path to the SQLite file.
+
+``DJANGO_DB_USER``, ``DJANGO_DB_PASSWORD``, ``DJANGO_DB_HOST``, ``DJANGO_DB_PORT``
+  Postgres connection details. Ignored for SQLite.
+
+``DJANGO_PERFORM_MIGRATIONS``
+  Default ``True``. Apply pending database migrations on container startup.
+
+Cache (Redis)
+-------------
+
+``DJANGO_CACHE_BACKEND``
+  Default ``django_redis.cache.RedisCache``.
+
+``DJANGO_CACHE_LOCATION``
+  Default ``redis://cache:6379/1``. Redis connection URL for the Django cache.
+
+``DJANGO_CACHE_TIMEOUT``
+  Default ``1296000`` seconds (15 days).
+
+``DJANGO_CACHE_CLIENT_CLASS``
+  Default ``django_redis.client.DefaultClient``.
+
+``DJANGO_CACHE_CLIENT_PASSWORD``
+  Optional. Redis password if your Redis is configured with one.
+
+``DJANGO_CACHE_CLIENT_SSL_KEYFILE``, ``DJANGO_CACHE_CLIENT_SSL_CERTFILE``, ``DJANGO_CACHE_CLIENT_SSL_CERT_REQS``, ``DJANGO_CACHE_CLIENT_SSL_CHECK_HOSTNAME``
+  Optional TLS settings for Redis connections.
+
+Celery
+------
+
+Background task processing. See :doc:`/development/celery` for the worker
+setup.
+
+``USE_CELERY``
+  Default ``True`` in the Docker setup (``False`` otherwise). Master switch — most
+  ``SYNC_*_CELERY`` and ``CACHE_API_*_CELERY`` options require this.
+
+``CELERY_BROKER``, ``CELERY_BACKEND``
+  Default ``redis://cache:6379/2``. Redis URL for Celery's broker and
+  result backend.
+
+``CELERY_WORKER_CONCURRENCY``
+  Default ``4``. Set to ``1`` if using SQLite (which doesn't tolerate
+  concurrent writes well).
+
+``CELERY_FLOWER_PASSWORD``
+  Default ``adminadmin``. Password for the optional Celery Flower admin UI.
+
+Data sync
+---------
+
+See :doc:`sync-data` for the operational context.
+
+**On startup (synchronous, no Celery needed)**
+
+``SYNC_EXERCISES_ON_STARTUP``
+  Default ``False``. Sync the exercise database every time the application
+  starts. Slows startup; runs synchronously.
+
+``DOWNLOAD_EXERCISE_IMAGES_ON_STARTUP``, ``DOWNLOAD_EXERCISE_VIDEOS_ON_STARTUP``
+  Default ``False``. Download exercise images / videos on startup.
+
+``LOAD_ONLINE_FIXTURES_ON_STARTUP``
+  Default ``False``. Load a small base set of ingredients on startup.
+
+**Periodic via Celery**
+
+These tasks require ``USE_CELERY=True``. Each picks a random hour and minute
+on Celery worker startup and keeps that schedule until the worker restarts —
+so two instances won't hammer the upstream wger or Open Food Facts servers
+at the same time.
+
+``SYNC_EXERCISES_CELERY``, ``SYNC_EXERCISE_IMAGES_CELERY``, ``SYNC_EXERCISE_VIDEOS_CELERY``
+  Default ``True`` in the Docker setup (``False`` otherwise). Run **weekly** on a
+  random day of the week.
+
+``CACHE_API_EXERCISES_CELERY``
+  Default ``True`` in the Docker setup (``False`` otherwise). Periodically warms up
+  the exercise API cache. Runs **weekly** on a random day.
+
+``CACHE_API_EXERCISES_CELERY_FORCE_UPDATE``
+  Default ``True``. Always rebuild the cache on each scheduled run, even if
+  it looks current.
+
+``SYNC_INGREDIENTS_CELERY``
+  Default ``True`` in the Docker setup (``False`` otherwise). Downloads the full
+  ingredient dataset as a bulk dump. Runs **monthly** on a random day of
+  the month (1–28).
+
+``SYNC_INGREDIENTS_DUMP_URL``
+  Default points to the wger.de dump.
+
+``EXPORT_INGREDIENTS_BULK_CELERY``
+  Default ``False``. Generates the ingredient bulk dump that can be served
+  to other instances. Runs on the **1st and 15th of every month**. Mainly
+  used by the wger.de instance itself; you don't normally need to enable
+  this.
+
+``SYNC_OFF_DAILY_DELTA_CELERY``
+  Default ``False``. Imports Open Food Facts' daily delta product updates.
+  Runs **once a day** at a random time. Mainly
+  used by the wger.de instance itself; you don't normally need to enable
+  this.
+
+``DOWNLOAD_INGREDIENTS_FROM``
+  Default ``WGER`` (or ``None`` to disable). Where to fetch ingredient data
+  from when scanning a barcode for an unknown product. Requires Celery.
+
+**Always-on**
+
+When ``USE_CELERY=True``, expired JWT refresh tokens are flushed from the
+database **once a day** at a random time. There is no opt-out — without it
+the token table grows monotonically.
+
+JWT authentication
+------------------
+
+``ACCESS_TOKEN_LIFETIME``
+  Default ``10`` (minutes). Short-lived access token.
+
+``REFRESH_TOKEN_LIFETIME``
+  Default ``2880`` (hours, ≈ 4 months). Long-lived refresh token.
+
+For SSO via reverse proxy (``AUTH_PROXY_*``), see :doc:`auth_proxy`.
+
+Brute-force protection
+----------------------
+
+Powered by `django-axes <https://django-axes.readthedocs.io/>`_.
+
+``AXES_ENABLED``
+  Default ``True``.
+
+``AXES_FAILURE_LIMIT``
+  Default ``10``. Failed login attempts before lockout.
+
+``AXES_COOLOFF_TIME``
+  Default ``30`` (minutes). Lockout duration.
+
+``AXES_HANDLER``
+  Default ``axes.handlers.cache.AxesCacheHandler``.
+
+``AXES_LOCKOUT_PARAMETERS``
+  Default ``ip_address``. What to lock on (IP, username, etc.).
+
+``AXES_IPWARE_PROXY_COUNT``, ``AXES_IPWARE_META_PRECEDENCE_ORDER``
+  Advanced settings for IP detection behind proxies. See django-axes docs.
+
+reCAPTCHA
+---------
+
+``USE_RECAPTCHA``
+  Default ``False``. Show a captcha challenge during user registration.
+
+``RECAPTCHA_PUBLIC_KEY``, ``RECAPTCHA_PRIVATE_KEY``
+  Your keys from https://www.google.com/recaptcha/
+
+``RECAPTCHA_REQUIRED_SCORE``
+  Default ``0.75``.
 
 .. _email:
 
 Email
 -----
 
-The application is configured to use Django's console email backend by default,
-which causes messages intended to be sent via email to be written to ``stdout``.
+By default wger uses Django's console email backend (writes outgoing emails
+to stdout). To use a real SMTP server:
 
-In order to use a real email server, another backend listed in
-`Django's documentation`_ can be configured instead. Parameters for the backend
-are set as variables in ``settings.py``. For example, the following allows an
-SMTP server at ``smtp.example.com`` to be used:
+``ENABLE_EMAIL``
+  Default ``False``. Set to ``True`` to enable real email delivery.
 
-.. code-block:: bash
+``EMAIL_HOST``, ``EMAIL_PORT``
+  SMTP server hostname and port (commonly ``587``).
 
-   export ENABLE_EMAIL = True
-   export EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-   export EMAIL_HOST = 'smtp.example.com'
-   export EMAIL_PORT = 587
-   export EMAIL_HOST_USER = 'wger@example.com'
-   export EMAIL_HOST_PASSWORD = 'example_password'
-   export EMAIL_USE_TLS = True
-   export EMAIL_USE_SSL = False
-   export FROM_EMAIL = 'wger Workout Manager <wger@example.com>'
+``EMAIL_HOST_USER``, ``EMAIL_HOST_PASSWORD``
+  SMTP credentials.
 
-Django provides a ``sendtestemail`` command via ``manage.py`` to test email
-settings::
+``EMAIL_USE_TLS``, ``EMAIL_USE_SSL``
+  Default ``True`` and ``False``. Pick whichever your provider uses
+  (typically TLS for port 587, SSL for port 465).
 
-  python manage.py sendtestemail user@example.com
+``FROM_EMAIL``
+  Default ``wger Workout Manager <wger@example.com>``. The "From:" address
+  on outgoing emails.
 
-.. _`Django's documentation`: https://docs.djangoproject.com/en/dev/topics/email/#email-backends
+``DJANGO_ADMINS``
+  Optional. ``Name,email@example.com`` to receive notifications about
+  internal server errors. Requires a working email configuration.
+
+To verify your setup, run::
+
+    python manage.py sendtestemail user@example.com
+
+(In Docker: ``docker compose exec web python3 manage.py sendtestemail …``)
+
+Logging
+-------
+
+``LOG_LEVEL_PYTHON``
+  Default ``INFO``. Possible values: ``DEBUG``, ``INFO``, ``WARNING``,
+  ``ERROR``, ``CRITICAL``.
+
+``DJANGO_DEBUG``
+  Default ``False``. **Never enable in production** — Django leaks internal
+  details (stack traces, settings) on error pages.
+
+Static files
+------------
+
+For S3-backed static and media files, see :doc:`storage`.
+
+``DJANGO_COLLECTSTATIC_ON_STARTUP``
+  Default ``True``. Run ``collectstatic`` on every container start. Set to
+  ``False`` for faster startup if you call collectstatic manually.
+
+``DJANGO_CLEAR_STATIC_FIRST``
+  Default ``False``. Delete the static directory before re-collecting. Useful
+  if stale files are causing problems after upgrades.
+
+``COMPRESS_ENABLED``
+  Optional. Enables django-compressor to bundle CSS/JS into single files.
+
+Gunicorn
+--------
+
+``WGER_USE_GUNICORN``
+  Default ``True`` in production, ``False`` in dev (uses Django's
+  development server).
+
+``GUNICORN_CMD_ARGS``
+  Default ``--workers 3 --threads 2 --worker-class gthread --timeout 240``.
+  A common starting point for worker count is ``(2 × $num_cores) + 1``.
+  See https://docs.gunicorn.org/en/stable/settings.html
+
+Monitoring
+----------
+
+``EXPOSE_PROMETHEUS_METRICS``
+  Default ``False``. Expose Prometheus metrics endpoints. See :doc:`monitoring`.
+
+WGER_SETTINGS dictionary
+------------------------
+
+A handful of options don't have an env var and are configured in Python via
+the ``WGER_SETTINGS`` dictionary in your settings module:
+
+.. code-block:: python
+
+    WGER_SETTINGS['EXERCISE_CACHE_TTL'] = 7200
+
+.. note::
+
+   Override only the keys you need (``WGER_SETTINGS['key'] = value``).
+   Replacing the whole dictionary will break when new keys are added in
+   future versions.
+
+Most entries here are also overridable via env var (``EXERCISE_CACHE_TTL``,
+``USE_CELERY``, etc.) — listed here for reference. The Python override is
+useful when you want a value that isn't read from the environment.
+
+``ALLOW_GUEST_USERS``
+  Default ``True``. Also via ``ALLOW_GUEST_USERS`` env var.
+
+``ALLOW_REGISTRATION``
+  Default ``True``. Also via ``ALLOW_REGISTRATION`` env var.
+
+``DOWNLOAD_INGREDIENTS_FROM``
+  Default ``WGER``. Also via ``DOWNLOAD_INGREDIENTS_FROM`` env var.
+
+``EMAIL_FROM``
+  Default ``wger Workout Manager <wger@example.com>``. Sender address for
+  system emails. Also via ``FROM_EMAIL`` env var.
+
+``EXERCISE_CACHE_TTL``
+  Default ``3600`` (one hour). Also via ``EXERCISE_CACHE_TTL`` env var.
+
+``INGREDIENT_CACHE_TTL``
+  Default ``604800`` (one week). Python-only.
+
+``ROUTINE_CACHE_TTL``
+  Default ``4 * 604800`` (four weeks). Python-only.
+
+``MIN_ACCOUNT_AGE_TO_TRUST``
+  Default ``21`` (days). Also via ``MIN_ACCOUNT_AGE_TO_TRUST`` env var.
+
+``SYNC_EXERCISES_CELERY``, ``SYNC_EXERCISE_IMAGES_CELERY``, ``SYNC_EXERCISE_VIDEOS_CELERY``
+  Default ``False``. Also via env vars of the same name.
+
+``USE_CELERY``
+  Default ``False``. Also via ``USE_CELERY`` env var.
+
+``USE_RECAPTCHA``
+  Default ``False``. Also via ``USE_RECAPTCHA`` env var.
+
+``WGER_INSTANCE``
+  Default ``https://wger.de``. Also via ``WGER_INSTANCE`` env var.
 
 .. _site-settings:
 
-Site settings
--------------
+Site settings (Django sites framework)
+--------------------------------------
 
-Some wger features make use of Django's site name and domain settings in the
-``contrib.sites`` framework. These should be set through the Python shell::
+Some wger features use Django's ``contrib.sites`` framework for the site
+domain and name. The Docker entrypoint sets these from ``SITE_URL``
+automatically via the ``set-site-url`` management command. For from-source
+installations or to override manually, run::
 
-   python manage.py shell
-   >>> from django.contrib.sites.models import Site
-   >>> site = Site.objects.get(pk=1)
-   >>> site.domain = 'wger.example.com'
-   >>> site.name = 'example.com wger Workout Manager'
-   >>> site.save()
+    python manage.py set-site-url https://wger.example.com
 
-where ``wger.example.com`` is the domain of the wger instance. This assumes
-that wger is using the default site ID of 1. If a different site ID is being
-used, it must be specified in ``settings.py``::
+Or, equivalently, through the Python shell::
 
-  SITE_ID = 2
+    python manage.py shell
+    >>> from django.contrib.sites.models import Site
+    >>> site = Site.objects.get(pk=1)
+    >>> site.domain = 'wger.example.com'
+    >>> site.name = 'example.com wger Workout Manager'
+    >>> site.save()
+
+This assumes the default site ID of 1. If you use a different one, set it
+in your settings module::
+
+    SITE_ID = 2
