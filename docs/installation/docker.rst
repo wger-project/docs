@@ -78,35 +78,6 @@ Just remove the containers and pull the newest version:
     docker compose pull
     docker compose up -d
 
-**Lifecycle Management**
-
-To stop all services issue a stop command, this will preserve all containers
-and volumes::
-
-    docker compose stop
-
-To start everything up again::
-
-    docker compose start
-
-To remove all containers (except for the volumes)::
-
-    docker compose down
-
-To view the logs::
-
-    docker compose logs -f
-
-You might need to issue other commands or do other manual work in the container,
-e.g.:
-
-.. code-block:: bash
-
-     docker compose exec web python3 manage.py migrate
-     docker compose exec --user root web /bin/bash
-     docker compose exec db psql wger -U wger
-     docker compose exec cache redis-cli FLUSHALL
-
 Configuration
 -------------
 
@@ -193,38 +164,6 @@ and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 Others
 ------
 
-
-Automatically start service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If everything works correctly, you will want to start the compose file as a
-service so that it auto restarts when you reboot the server. If you use systemd,
-this can be done with a simple file. Create the file ``/etc/systemd/system/wger.service``
-and enter the following content (check where the absolute path of the docker
-command is with ``which docker``)
-
-.. code-block:: ini
-
-    [Unit]
-    Description=wger docker compose service
-    PartOf=docker.service
-    After=docker.service
-
-    [Service]
-    Type=oneshot
-    RemainAfterExit=true
-    WorkingDirectory=/path/to/the/docker/compose/
-    ExecStart=/usr/bin/docker compose up -d --remove-orphans
-    ExecStop=/usr/bin/docker compose down
-
-    [Install]
-    WantedBy=multi-user.target
-
-Read the file with ``systemctl daemon-reload`` and start it with
-``systemctl start wger``. If there are no errors and ``systemctl status wger``
-shows that the service is active (this might take some time), everything went
-well. With ``systemctl enable wger`` the service will be automatically restarted
-after a reboot.
 
 Building the image
 ~~~~~~~~~~~~~~~~~~
@@ -384,6 +323,7 @@ Next steps
 Once your installation is running, see the :ref:`administration` section for
 ongoing operations:
 
+* :doc:`/administration/lifecycle` — stop/start the application, run commands, set up auto-start with systemd
 * :doc:`/administration/backup` — back up and restore your database and media
 * :doc:`/administration/postgres` — upgrade Postgres to a newer major version
 * :doc:`/administration/monitoring` — monitor the application with Grafana and Prometheus

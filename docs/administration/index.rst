@@ -23,6 +23,7 @@ administrators running a wger instance.
    commands
    settings
    auth_proxy
+   lifecycle
    backup
    postgres
    monitoring
@@ -39,6 +40,9 @@ administrators running a wger instance.
 
 :doc:`auth_proxy`
     Delegate authentication to a reverse proxy or external SSO provider.
+
+:doc:`lifecycle`
+    Stop, start, inspect, and auto-start the application via systemd.
 
 :doc:`backup`
     Backup and restore your wger instance.
