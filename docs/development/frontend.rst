@@ -18,7 +18,7 @@ Copy ``.env.TEMPLATE`` to ``.env.development`` and edit it to your needs.
 You can obviously use your own instance, but feel free to use the test server
 (the db is reset every day):
 
-* URL: ``https://wger-master.rge.uber.space``
+* URL: ``https://dev.wger.de``
 * username: ``user``
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``

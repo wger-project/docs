@@ -18,7 +18,7 @@ https://docs.flutter.dev/get-started/install
 2) Start a wger server. You can either run your own instance
 (see e.g. :ref:`development_docker`) or use the test server:
 
-* URL: ``https://wger-master.rge.uber.space``
+* URL: ``https://dev.wger.de``
 * username: ``user``
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``
