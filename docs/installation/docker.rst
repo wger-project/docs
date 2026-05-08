@@ -39,45 +39,6 @@ To start all services::
 Then open http://localhost (or your server's IP) and log in as: **admin**,
 password **adminadmin**.
 
-**Updating exercises and ingredients**
-
-The docker image comes with a default set of exercises, but due to the size of
-the dataset, no ingredients. You can manually sync the datasets from the wger.de
-instance (or any other) with the following commands:
-
-.. code-block:: bash
-
-    docker compose exec web python3 manage.py sync-exercises
-    docker compose exec web python3 manage.py download-exercise-images
-    docker compose exec web python3 manage.py download-exercise-videos
-
-The full ingredient dataset is quite larger, taking around 1GB of space in the
-db and needs a longer time to download and process:
-
-.. code-block:: bash
-
-    # (quickly) loads a base set of ingredients
-    docker compose exec web wger load-online-fixtures
-
-    # Downloads the full ingredient dataset (use "--set-mode update" with an existing db)
-    docker compose exec web ./manage.py sync-ingredients-bulk --set-mode insert
-
-The application is configured to perform these steps in the background, but you
-can turn them off by changing the ``SYNC_*`` options in ``prod.env``.
-
-Also note that these sync commands will not overwrite any exercises you might
-have added yourself to your instance.
-
-**Update the application**
-
-Just remove the containers and pull the newest version:
-
-.. code-block:: bash
-
-    docker compose down
-    docker compose pull
-    docker compose up -d
-
 Configuration
 -------------
 
@@ -186,6 +147,8 @@ Once your installation is running, see the :ref:`administration` section for
 ongoing operations:
 
 * :doc:`/administration/lifecycle` — stop/start the application, run commands, set up auto-start with systemd
+* :doc:`/administration/updating` — update wger to a new release
+* :doc:`/administration/sync-data` — sync exercises and ingredients from upstream
 * :doc:`/administration/backup` — back up and restore your database and media
 * :doc:`/administration/postgres` — upgrade Postgres to a newer major version
 * :doc:`/administration/monitoring` — monitor the application with Grafana and Prometheus

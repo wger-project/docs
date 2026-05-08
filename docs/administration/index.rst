@@ -24,6 +24,8 @@ administrators running a wger instance.
    settings
    auth_proxy
    lifecycle
+   updating
+   sync-data
    backup
    postgres
    monitoring
@@ -44,6 +46,12 @@ administrators running a wger instance.
 
 :doc:`lifecycle`
     Stop, start, inspect, and auto-start the application via systemd.
+
+:doc:`updating`
+    Update wger to a new release.
+
+:doc:`sync-data`
+    Sync exercises and ingredients from upstream.
 
 :doc:`backup`
     Backup and restore your wger instance.

@@ -292,11 +292,7 @@ Other changes
   * **tos.html**, for your own Terms Of Service here
   * **about.html**, for your contact address or other such legal requirements
 
-* To keep the application updated, regularly pull new changes and
-
-  * install new or updated dependencies: ``pip install .``
-  * apply new migrations: ``python manage.py migrate --all``
-  * update the static files: ``npm install``, ``npm run build:css:sass``
-    and ``python manage.py collectstatic``
-  * update data ``python3 manage.py sync-exercises``, ``python3 manage.py download-exercise-images``
-    (something like weekly) and ``python3 manage.py sync-ingredients`` (monthly)
+* For ongoing operations once the instance is running, see the
+  :ref:`administration` section — in particular :doc:`/administration/updating`
+  for keeping wger up to date and :doc:`/administration/sync-data` for syncing
+  exercises and ingredients.
