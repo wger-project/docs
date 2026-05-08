@@ -190,17 +190,6 @@ SSL certificates for you and is very easy to use.
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 
-Monitoring with grafana
------------------------
-
-There's a pre-configured grafana and prometheus setup that can be used to monitor
-the wger application as well as the logs with Loki and Alloy. To start, set the
-``EXPOSE_PROMETHEUS_METRICS`` to true in the env file and restart the application,
-then go into the ``grafana`` folder and start the compose file.
-
-To access the dashboards, go to http://localhost:3000 and log in with ``admin``, password
-``adminadmin``. To change the pre defined password, edit ``grafana/web.yml``.
-
 Others
 ------
 
@@ -236,84 +225,6 @@ Read the file with ``systemctl daemon-reload`` and start it with
 shows that the service is active (this might take some time), everything went
 well. With ``systemctl enable wger`` the service will be automatically restarted
 after a reboot.
-
-Backup
-~~~~~~
-
-**Database volume:** The most important thing to backup. For this just make
-a dump and restore it when needed (you should try to run this once to make
-sure it works).:
-
-.. code-block:: bash
-
-    # Stop all other containers so the db is not changed while you export it
-    docker compose stop web nginx cache celery_worker celery_beat
-    docker compose exec db pg_dumpall --clean --username wger > backup.sql
-    docker compose start
-
-    # When you need to restore it
-    docker compose stop
-    docker volume remove docker_postgres-data
-    docker compose up db
-    cat backup.sql | docker compose exec -T db psql --username wger --dbname wger
-    docker compose up
-
-**Media volume:** If you haven't uploaded  to exercises or the gallery, you
-don't need to backup this, the contents can just be downloaded again.
-Just delete any data in the appropriate tables and run the sync commands again:
-
-.. code-block:: bash
-
-    docker compose exec db psql -U wger "TRUNCATE TABLE exercises_exerciseimage, exercises_exercisevideo;";
-    docker compose exec db psql -U wger "TRUNCATE TABLE nutrition_image;";
-
-    docker compose exec web python3 manage.py download-exercise-images
-    ...
-
-
-If you have, please consult these possibilities:
-
-* https://www.docker.com/blog/back-up-and-share-docker-volumes-with-this-extension/
-* https://github.com/BretFisher/docker-vackup
-
-
-**Static volume:** The contents of this volume are 100% generated and recreated
-on startup, no need to backup anything
-
-Postgres Upgrade
-~~~~~~~~~~~~~~~~
-
-It is sadly not possible to automatically upgrade between postgres versions,
-you need to perform the upgrade manually. Since the amount of data the app
-generates is small a simple dump and restore is the simplest way to do this.
-
-If you pulled new changes from this repo and got the error message "The data
-directory was initialized by PostgreSQL version 12, which is not compatible
-with this version 15." this is for you.
-
-See also https://github.com/docker-library/postgres/issues/37
-
-.. code-block:: bash
-
-    # Checkout the last version of the composer file that uses postgres 12
-    git checkout pg-12
-
-    # Stop all other containers
-    docker compose stop web nginx cache celery_worker celery_beat
-
-    # Make a dump of the database and remove the container and volume
-    docker compose exec db pg_dumpall --clean --username wger > backup.sql
-    docker compose stop db
-    docker compose down
-    docker volume remove docker_postgres-data
-
-    # Checkout current version, import the dump and start everything
-    git checkout master
-    docker compose up db
-    cat backup.sql | docker compose exec -T db psql --username wger --dbname wger
-    docker compose exec -T db psql --username wger --dbname wger -c "ALTER USER wger WITH PASSWORD 'wger'"
-    docker compose up
-    rm backup.sql
 
 Building the image
 ~~~~~~~~~~~~~~~~~~
@@ -466,3 +377,14 @@ https://django-storages.readthedocs.io
 
 Note that iff you already have files in a local folder, you will need to
 copy them over with a tool like ``awscli`` or ``rclone``.
+
+Next steps
+----------
+
+Once your installation is running, see the :ref:`administration` section for
+ongoing operations:
+
+* :doc:`/administration/backup` — back up and restore your database and media
+* :doc:`/administration/postgres` — upgrade Postgres to a newer major version
+* :doc:`/administration/monitoring` — monitor the application with Grafana and Prometheus
+
