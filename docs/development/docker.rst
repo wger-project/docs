@@ -133,3 +133,15 @@ Other useful commands:
     python3 manage.py download-exercise-images
     python3 manage.py download-exercise-videos
 
+Building the image
+------------------
+
+If you want to build your own image, run the following from the server's
+source folder:
+
+.. code-block:: bash
+
+    docker build -f extras/docker/development/Dockerfile -t wger/server .
+
+There is also a "base" image located in ``extras/docker/base`` which the
+server image uses as a base.

@@ -122,24 +122,6 @@ SSL certificates for you and is very easy to use.
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 
-Others
-------
-
-
-Building the image
-~~~~~~~~~~~~~~~~~~
-
-If you want to build your own image, you can do so by running the following
-commands from the server's source folder:
-
-.. code-block:: bash
-
-    docker build -f extras/docker/development/Dockerfile -t wger/server .
-
-
-There is also a "base" image located in ``extras/docker/base`` which the
-server one uses as a base.
-
 Next steps
 ----------
 

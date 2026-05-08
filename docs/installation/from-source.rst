@@ -234,51 +234,6 @@ want to change the password as soon as you log in):
 * **username**: admin
 * **password**: adminadmin
 
-.. _email:
-
-Email
------
-
-The application is configured to use Django's console email backend by default, which causes messages intended to be sent via email to be written to ``stdout``.
-
-In order to use a real email server, another backend listed in `Django's documentation`_ can be configured instead. Parameters for the backend are set as variables in ``settings.py``. For example, the following allows an SMTP server at ``smtp.example.com`` to be used:
-
-.. code-block:: bash
-
-   export ENABLE_EMAIL = True
-   export EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-   export EMAIL_HOST = 'smtp.example.com'
-   export EMAIL_PORT = 587
-   export EMAIL_HOST_USER = 'wger@example.com'
-   export EMAIL_HOST_PASSWORD = 'example_password'
-   export EMAIL_USE_TLS = True
-   export EMAIL_USE_SSL = False
-   export FROM_EMAIL = 'wger Workout Manager <wger@example.com>'
-
-Django provides a ``sendtestemail`` command via ``manage.py`` to test email settings::
-
-  python manage.py sendtestemail user@example.com
-
-.. _`Django's documentation`: https://docs.djangoproject.com/en/dev/topics/email/#email-backends
-
-.. _site-settings:
-
-Site Settings
--------------
-
-Some wger features make use of Django's site name and domain settings in the ``contrib.sites`` framework. These should be set through the Python shell::
-
-   python manage.py shell
-   >>> from django.contrib.sites.models import Site
-   >>> site = Site.objects.get(pk=1)
-   >>> site.domain = 'wger.example.com'
-   >>> site.name = 'example.com wger Workout Manager'
-   >>> site.save()
-
-where ``wger.example.com`` is the domain of the wger instance. This assumes that wger is using the default site ID of 1. If a different site ID is being used, it must be specified in ``settings.py``::
-
-  SITE_ID = 2
-
 .. _other-changes:
 
 Other changes
@@ -292,7 +247,16 @@ Other changes
   * **tos.html**, for your own Terms Of Service here
   * **about.html**, for your contact address or other such legal requirements
 
-* For ongoing operations once the instance is running, see the
-  :ref:`administration` section — in particular :doc:`/administration/updating`
-  for keeping wger up to date and :doc:`/administration/sync-data` for syncing
-  exercises and ingredients.
+Next steps
+----------
+
+Once your installation is running, see the :ref:`administration` section for
+ongoing operations:
+
+* :doc:`/administration/lifecycle` — stop/start the application, run commands, set up auto-start with systemd
+* :doc:`/administration/updating` — update wger to a new release
+* :doc:`/administration/sync-data` — sync exercises and ingredients from upstream
+* :doc:`/administration/backup` — back up and restore your database and media
+* :doc:`/administration/postgres` — upgrade Postgres to a newer major version
+* :doc:`/administration/monitoring` — monitor the application with Grafana and Prometheus
+* :doc:`/administration/storage` — switch to SQLite or use S3-compatible object storage
