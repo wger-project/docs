@@ -9,14 +9,13 @@ and the source code can be found at
 https://github.com/wger-project/flutter
 
 
-**Building the app:**
-
-1) Install flutter (the app currently uses the flutter version in .github/actions/flutter-common/action.yml)
+1) Install flutter (the app currently uses the flutter version in
+   ``.github/actions/flutter-common/action.yml``)
 
 https://docs.flutter.dev/get-started/install
 
-2) Start a wger server. You can either run your own instance
-(see e.g. :ref:`development_docker`) or use the test server:
+2) Start a wger server. You can either run your own instance (see e.g.
+   :ref:`development_docker`) or use the test server:
 
 * URL: ``https://dev.wger.de``
 * username: ``user``
@@ -29,9 +28,7 @@ The db is reset every day, so feel free to edit or delete anything.
 3) Start the application with ``flutter run`` or use your IDE
 
 Please note that depending on how you run your emulator you will need to change
-the IP address of the server.
+the IP address of the server (on iOS ``http://localhost:8000`` while on android
+you need ``http://10.0.2.2:8000``).
 
-You can run the tests with the ``flutter test``
-
-
-
+You can run the tests with ``flutter test``

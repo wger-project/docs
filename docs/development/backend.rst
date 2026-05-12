@@ -28,7 +28,7 @@ If using ``uv``::
     uv pip install -e .
     source .venv/bin/activate
 
-Overwise, manually create a new virtualenv and install everything::
+Otherwise, manually create a new virtualenv and install everything::
 
   python3 -m venv .venv
   source .venv/bin/activate
@@ -49,7 +49,7 @@ bootstrap, just copy it to some other place::
 
   cp database.sqlite database.sqlite.orig
 
-You can of course also use other databases such as PostgresSQL or MariaDB. Create
+You can of course also use other databases such as PostgreSQL or MariaDB. Create
 a database and user and edit the DATABASES settings before calling bootstrap.
 Take a look at the :ref:`PostgreSQL setup <prod_postgres>` for how that could look like.
 
@@ -75,7 +75,7 @@ And now
 
 * For a description of the available settings consult :ref:`settings`.
 
-* You might need to start :ref:`celery` as well if you want to to run certain
+* You might need to start :ref:`celery` as well if you want to run certain
   commands in the background.
 
 * For managing i18n files consult :ref:`i18n`.

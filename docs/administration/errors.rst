@@ -34,7 +34,7 @@ If you want to use your own, exising, web server, you need to make sure that
 the files are read and served under the right URLS. Take a look at our nginx.conf
 to see how this can look like.
 
-For more information, consult `django's documentation <https://docs.djangoproject.com/en/4.1/ref/settings/#secure-proxy-ssl-header>`_.
+For more information, consult `django's documentation <https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header>`_.
 
 Email verification links
 ------------------------
@@ -65,7 +65,7 @@ To solve this, update the env file and either
   django has a problem with. Note: the port is important!
 * or set the ``X-Forwarded-Proto`` header like in the example and set
   ``X_FORWARDED_PROTO_HEADER_SET=True``. If you do this consult the
-  `documentation <https://docs.djangoproject.com/en/4.1/ref/settings/#secure-proxy-ssl-header>`_
+  `documentation <https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header>`_
   as there are some security considerations.
 
 
@@ -84,5 +84,5 @@ In this case you might be able to correctly reach and fetch some data but the
 while in your home network, etc.
 
 Make sure that you forward the host header as well as the protocol header to
-the application. Consult the `Django docs <https://docs.djangoproject.com/en/6.0/ref/request-response/#django.http.HttpRequest.get_host>`_
+the application. Consult the `Django docs <https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.get_host>`_
 for details.
