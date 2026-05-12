@@ -23,6 +23,7 @@ administrators running a wger instance.
    commands
    settings
    auth_proxy
+   anubis
    lifecycle
    updating
    sync-data
@@ -43,6 +44,9 @@ administrators running a wger instance.
 
 :doc:`auth_proxy`
     Delegate authentication to a reverse proxy or external SSO provider.
+
+:doc:`anubis`
+    Protect public-facing instances from AI scrapers.
 
 :doc:`lifecycle`
     Stop, start, inspect, and auto-start the application via systemd.
