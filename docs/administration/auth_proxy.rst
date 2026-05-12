@@ -31,7 +31,7 @@ request before it processes the request, e.g. pseudocode for Caddy::
         reverse_proxy http://<wger_backend_ip>:<port> {
 
             # Remove header
-            header_up header_up delete X-Remote-User
+            header_up delete X-Remote-User
 
             # Set header based on auth service response
             header_up +X-Remote-User {http.reverse_proxy.upstream.header.Upstream-User}

@@ -12,8 +12,8 @@ The reference ``prod.env`` in the docker repository contains commented
 examples for every option and is the canonical source for what's available:
 https://github.com/wger-project/docker/blob/master/config/prod.env
 
-This page is the structured reference. For a few specialized topics — S3
-storage, SSO via reverse proxy, monitoring — the relevant settings live on
+This page is the structured reference. For a few specialized topics like S3
+storage, SSO via reverse proxy, monitoring, the relevant settings live on
 their dedicated pages, linked below.
 
 Required
@@ -71,7 +71,7 @@ URLs and media
 
 ``MEDIA_URL`` / ``STATIC_URL``
   Override the default ``/media/`` and ``/static/`` paths if you serve
-  files from a different host (CDN, S3 — see :doc:`storage`).
+  files from a different host (CDN, S3 see :doc:`storage`).
 
 ``WGER_PORT``
   Default ``8000``. Port gunicorn binds to inside the container. Rarely
@@ -143,7 +143,7 @@ Background task processing. See :doc:`/development/celery` for the worker
 setup.
 
 ``USE_CELERY``
-  Default ``True`` in the Docker setup (``False`` otherwise). Master switch — most
+  Default ``True`` in the Docker setup (``False`` otherwise). Master switch, most
   ``SYNC_*_CELERY`` and ``CACHE_API_*_CELERY`` options require this.
 
 ``CELERY_BROKER``, ``CELERY_BACKEND``
@@ -177,7 +177,7 @@ See :doc:`sync-data` for the operational context.
 **Periodic via Celery**
 
 These tasks require ``USE_CELERY=True``. Each picks a random hour and minute
-on Celery worker startup and keeps that schedule until the worker restarts —
+on Celery worker startup and keeps that schedule until the worker restarts,
 so two instances won't hammer the upstream wger or Open Food Facts servers
 at the same time.
 
@@ -220,7 +220,7 @@ at the same time.
 **Always-on**
 
 When ``USE_CELERY=True``, expired JWT refresh tokens are flushed from the
-database **once a day** at a random time. There is no opt-out — without it
+database **once a day** at a random time. There is no opt-out, without it
 the token table grows monotonically.
 
 JWT authentication
@@ -312,7 +312,7 @@ Logging
   ``ERROR``, ``CRITICAL``.
 
 ``DJANGO_DEBUG``
-  Default ``False``. **Never enable in production** — Django leaks internal
+  Default ``False``. **Never enable in production**, Django leaks internal
   details (stack traces, settings) on error pages.
 
 Static files
@@ -366,7 +366,7 @@ the ``WGER_SETTINGS`` dictionary in your settings module:
    future versions.
 
 Most entries here are also overridable via env var (``EXERCISE_CACHE_TTL``,
-``USE_CELERY``, etc.) — listed here for reference. The Python override is
+``USE_CELERY``, etc.), listed here for reference. The Python override is
 useful when you want a value that isn't read from the environment.
 
 ``ALLOW_GUEST_USERS``
@@ -431,3 +431,28 @@ This assumes the default site ID of 1. If you use a different one, set it
 in your settings module::
 
     SITE_ID = 2
+
+Template customization
+----------------------
+
+If you run a public instance, you might want or need to customize a couple of
+templates to match info and legal requirements:
+
+* ``wger/software/templates/tos.html`` for your Terms of Service
+* ``wger/core/templates/misc/about.html`` for your contact address or other
+  legal information
+
+With Docker, the simplest option is to mount your replacements over the
+files inside the container via your ``docker-compose.override.yml``.
+
+.. code-block:: yaml
+
+    services:
+      web:
+        volumes:
+          - ./my-tos.html:/home/wger/src/wger/software/templates/tos.html:ro
+          - ./my-about.html:/home/wger/src/wger/core/templates/misc/about.html:ro
+
+For other setups, these are standard Django templates. See `Django's docs on
+overriding templates <https://docs.djangoproject.com/en/dev/howto/overriding-templates/>`_
+for the general approach.

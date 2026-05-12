@@ -63,7 +63,7 @@ wger supports serving static files (JS, CSS, etc.) and media files (gallery
 images, exercise and ingredient images, etc.) from an S3-compatible object
 store.
 
-If you enable this, you don't need nginx to serve these files anymore — a
+If you enable this, you don't need nginx to serve these files anymore, a
 plain reverse proxy in front of the application is enough. You will likely
 need to adjust the CORS settings on your storage provider so the application
 can fetch the files from the S3 domain.
@@ -80,7 +80,7 @@ Settings
   bool, default: ``False``
 
   Enable S3-backed static files storage. When enabled, set
-  ``DJANGO_COLLECTSTATIC_ON_STARTUP`` to false — the collectstatic command
+  ``DJANGO_COLLECTSTATIC_ON_STARTUP`` to false, the collectstatic command
   will otherwise needlessly increase startup time.
 
 ``AWS_ACCESS_KEY_ID``

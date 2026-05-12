@@ -11,7 +11,7 @@ administrators running a wger instance.
    Most examples on the following pages assume a Docker compose setup, since
    that is the recommended and most extensively tested deployment. If you
    installed wger from source or via a community script, the concepts apply
-   unchanged — adapt the commands to your environment (e.g.,
+   unchanged, adapt the commands to your environment (e.g.,
    ``docker compose exec web ./manage.py …`` becomes ``./manage.py …``
    directly in your activated virtualenv).
 

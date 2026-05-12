@@ -5,9 +5,8 @@ Docker compose
 
 https://github.com/wger-project/docker
 
-The prod docker compose file starts up a production environment with gunicorn
-as the webserver, postgres as a database and redis for caching with nginx
-used as a reverse proxy.
+The prod docker compose file starts up gunicorn as the application server,
+postgres as the database, redis for caching, and nginx as a reverse proxy.
 
 The database, static files and uploaded images are mounted as volumes so
 the data is persisted. The only thing you need to do is update the docker
@@ -20,15 +19,6 @@ since sometimes new configurations or environmental variables are added.
 If after installing not everything works, consult the :ref:`errors_and_pitfalls`
 section for common errors and how to fix them.
 
-Other setups
-------------
-
-  **Kubernetes**
-    There is a helm charts repository if you want to deploy the application with
-    kubernetes: https://github.com/wger-project/helm-charts
-
-  **TrueNAS SCALE**
-    Consult this guide if you want to deploy the application to :ref:`truenas`
 
 Quickstart
 ----------
@@ -38,6 +28,10 @@ To start all services::
 
 Then open http://localhost (or your server's IP) and log in as: **admin**,
 password **adminadmin**.
+
+.. warning::
+    If your instance is reachable over the internet, change the default password
+    after logging in for the first time.
 
 Configuration
 -------------
@@ -116,8 +110,10 @@ set the port to some value, e.g. ``"8080:80"`` then configure your proxy to forw
 requests to it, e.g. for nginx (no other ports need to be changed, they are used
 only within the application's docker network).
 
-There is also an example with Caddy, a webserver that can automatically generate
-SSL certificates for you and is very easy to use.
+The docker repo ships a `Caddyfile.example
+<https://github.com/wger-project/docker/blob/master/config/Caddyfile.example>`_
+for users who'd rather use Caddy than nginx in front of the application. Caddy
+automatically obtains and renews SSL certificates from Let's Encrypt.
 
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
@@ -126,13 +122,4 @@ Next steps
 ----------
 
 Once your installation is running, see the :ref:`administration` section for
-ongoing operations:
-
-* :doc:`/administration/lifecycle` — stop/start the application, run commands, set up auto-start with systemd
-* :doc:`/administration/updating` — update wger to a new release
-* :doc:`/administration/sync-data` — sync exercises and ingredients from upstream
-* :doc:`/administration/backup` — back up and restore your database and media
-* :doc:`/administration/postgres` — upgrade Postgres to a newer major version
-* :doc:`/administration/monitoring` — monitor the application with Grafana and Prometheus
-* :doc:`/administration/storage` — switch to SQLite or use S3-compatible object storage
-
+ongoing operations.

@@ -6,7 +6,7 @@ Installation
 It is *very* recommended to use the Docker image for production: everything is
 already set up and configured, and it's what we use for the official wger.de
 server. The other installation paths exist for cases where Docker isn't an
-option, but they're not as extensively tested or are submitted by a third party.
+option, but they're not as extensively tested or are submitted by the community.
 
 .. toctree::
    :maxdepth: 1

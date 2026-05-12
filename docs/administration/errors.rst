@@ -1,7 +1,7 @@
 .. _errors_and_pitfalls:
 
-Common error and pitfalls
-=========================
+Common errors and pitfalls
+==========================
 
 Missing static files
 --------------------

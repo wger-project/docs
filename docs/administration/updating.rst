@@ -16,7 +16,7 @@ Remove the containers and pull the newest images:
     docker compose pull
     docker compose up -d
 
-That's it — database migrations and static files are applied automatically on
+That's it, database migrations and static files are applied automatically on
 container start.
 
 **From source**

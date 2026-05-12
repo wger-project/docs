@@ -3,7 +3,7 @@
 Backup
 ======
 
-The most important thing to back up is the **Postgres database** — that's where
+The most important thing to back up is the **Postgres database**, that's where
 all user data lives. The media volume can usually be re-fetched from upstream,
 and static files are regenerated on every container start.
 
@@ -36,7 +36,7 @@ Media
 -----
 
 If you haven't uploaded your own exercise images, exercise videos or gallery
-images, you don't need to back up the media volume — the contents can be
+images, you don't need to back up the media volume, the contents can be
 re-downloaded from the upstream wger instance. Truncate the relevant tables
 and run the sync commands again:
 
@@ -57,5 +57,5 @@ options for backing up Docker volumes:
 Static files
 ------------
 
-The contents of the static volume are 100% generated and recreated on startup —
+The contents of the static volume are 100% generated and recreated on startup,
 no need to back up anything.
