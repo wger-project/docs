@@ -42,14 +42,14 @@ and run the sync commands again:
 
 .. code-block:: bash
 
-    docker compose exec db psql -U wger "TRUNCATE TABLE exercises_exerciseimage, exercises_exercisevideo;"
-    docker compose exec db psql -U wger "TRUNCATE TABLE nutrition_image;"
+    docker compose exec db psql -U wger -c "TRUNCATE TABLE exercises_exerciseimage, exercises_exercisevideo;"
+    docker compose exec db psql -U wger -c "TRUNCATE TABLE nutrition_image;"
 
     docker compose exec web python3 manage.py download-exercise-images
     docker compose exec web python3 manage.py download-exercise-videos
 
-If you do have uploaded media that needs to be preserved, consult these
-options for backing up Docker volumes:
+If you do have uploaded media that needs to be preserved, such as gallery entries,
+consult these options for backing up Docker volumes:
 
 * https://www.docker.com/blog/back-up-and-share-docker-volumes-with-this-extension/
 * https://github.com/BretFisher/docker-vackup

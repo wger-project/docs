@@ -34,7 +34,7 @@ while to download and process. For a quick start, load a smaller base set:
 
     docker compose exec web wger load-online-fixtures
 
-To download the full dataset:
+For the full dataset:
 
 .. code-block:: bash
 

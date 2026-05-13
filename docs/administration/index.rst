@@ -9,44 +9,27 @@ administrators running a wger instance.
 .. note::
 
    Most examples on the following pages assume a Docker compose setup, since
-   that is the recommended and most extensively tested deployment. If you
-   installed wger from source or via a community script, the concepts apply
-   unchanged, adapt the commands to your environment (e.g.,
-   ``docker compose exec web ./manage.py …`` becomes ``./manage.py …``
-   directly in your activated virtualenv).
+   that is the recommended deployment. If you installed wger differently, just
+   adapt the commands to your environment (e.g., ``docker compose exec web ./manage.py …``
+   might become ``./manage.py …``).
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
-   errors
-   commands
-   settings
-   auth_proxy
-   anubis
    lifecycle
    updating
-   sync-data
    backup
-   postgres
+   sync-data
    monitoring
+   settings
+   commands
+   errors
    storage
+   auth_proxy
+   anubis
+   postgres
    gym
-
-:doc:`errors`
-    Common errors and how to fix them in a production environment.
-
-:doc:`commands`
-    Reference for the available administration and management commands.
-
-:doc:`settings`
-    Available configuration options for the application.
-
-:doc:`auth_proxy`
-    Delegate authentication to a reverse proxy or external SSO provider.
-
-:doc:`anubis`
-    Protect public-facing instances from AI scrapers.
 
 :doc:`lifecycle`
     Stop, start, inspect, and auto-start the application via systemd.
@@ -54,21 +37,36 @@ administrators running a wger instance.
 :doc:`updating`
     Update wger to a new release.
 
-:doc:`sync-data`
-    Sync exercises and ingredients from upstream.
-
 :doc:`backup`
     Backup and restore your wger instance.
 
-:doc:`postgres`
-    Upgrade Postgres to a newer major version.
+:doc:`sync-data`
+    Sync exercises and ingredients from upstream.
 
 :doc:`monitoring`
     Monitor the application with Grafana and Prometheus.
 
+:doc:`settings`
+    Available configuration options for the application.
+
+:doc:`commands`
+    Reference for the available administration and management commands.
+
+:doc:`errors`
+    Common errors and how to fix them.
+
 :doc:`storage`
-    Choose your database backend (Postgres, SQLite) and configure S3-compatible
-    object storage for media and static files.
+    Database backend (Postgres, SQLite) and S3-compatible object storage
+    for media and static files.
+
+:doc:`auth_proxy`
+    Delegate authentication to a reverse proxy or external SSO provider.
+
+:doc:`anubis`
+    Protect public-facing instances from AI scrapers.
+
+:doc:`postgres`
+    Upgrade Postgres to a newer major version.
 
 :doc:`gym`
     Manage gyms, members, trainers and contracts.

@@ -349,62 +349,24 @@ Monitoring
 ``EXPOSE_PROMETHEUS_METRICS``
   Default ``False``. Expose Prometheus metrics endpoints. See :doc:`monitoring`.
 
-WGER_SETTINGS dictionary
-------------------------
+Python-only settings
+--------------------
 
-A handful of options don't have an env var and are configured in Python via
-the ``WGER_SETTINGS`` dictionary in your settings module:
+Docker users can skip this section; everything common is exposed as an env
+var above. If you maintain a custom settings module (see
+:doc:`/development/backend`), there are two cache settings that can only be
+set in Python via the ``WGER_SETTINGS`` dictionary:
 
 .. code-block:: python
 
-    WGER_SETTINGS['EXERCISE_CACHE_TTL'] = 7200
-
-.. note::
-
-   Override only the keys you need (``WGER_SETTINGS['key'] = value``).
-   Replacing the whole dictionary will break when new keys are added in
-   future versions.
-
-Most entries here are also overridable via env var (``EXERCISE_CACHE_TTL``,
-``USE_CELERY``, etc.), listed here for reference. The Python override is
-useful when you want a value that isn't read from the environment.
-
-``ALLOW_GUEST_USERS``
-  Default ``True``. Also via ``ALLOW_GUEST_USERS`` env var.
-
-``ALLOW_REGISTRATION``
-  Default ``True``. Also via ``ALLOW_REGISTRATION`` env var.
-
-``DOWNLOAD_INGREDIENTS_FROM``
-  Default ``WGER``. Also via ``DOWNLOAD_INGREDIENTS_FROM`` env var.
-
-``EMAIL_FROM``
-  Default ``wger Workout Manager <wger@example.com>``. Sender address for
-  system emails. Also via ``FROM_EMAIL`` env var.
-
-``EXERCISE_CACHE_TTL``
-  Default ``3600`` (one hour). Also via ``EXERCISE_CACHE_TTL`` env var.
+    WGER_SETTINGS['INGREDIENT_CACHE_TTL'] = 86400
+    WGER_SETTINGS['ROUTINE_CACHE_TTL'] = 86400
 
 ``INGREDIENT_CACHE_TTL``
-  Default ``604800`` (one week). Python-only.
+  Default ``604800`` (one week). How long ingredient list responses are cached.
 
 ``ROUTINE_CACHE_TTL``
-  Default ``4 * 604800`` (four weeks). Python-only.
-
-``MIN_ACCOUNT_AGE_TO_TRUST``
-  Default ``21`` (days). Also via ``MIN_ACCOUNT_AGE_TO_TRUST`` env var.
-
-``SYNC_EXERCISES_CELERY``, ``SYNC_EXERCISE_IMAGES_CELERY``, ``SYNC_EXERCISE_VIDEOS_CELERY``
-  Default ``False``. Also via env vars of the same name.
-
-``USE_CELERY``
-  Default ``False``. Also via ``USE_CELERY`` env var.
-
-``USE_RECAPTCHA``
-  Default ``False``. Also via ``USE_RECAPTCHA`` env var.
-
-``WGER_INSTANCE``
-  Default ``https://wger.de``. Also via ``WGER_INSTANCE`` env var.
+  Default ``2419200`` (four weeks). How long routine list responses are cached.
 
 .. _site-settings:
 
