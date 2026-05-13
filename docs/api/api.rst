@@ -1,17 +1,36 @@
 Using the API
 =============
 
-Public endpoints, such as the list of exercises or the ingredients can be
-accessed without authentication. For user owned objects such as
-routines, you need to authenticate.
+The wger REST API is served under ``/api/v2/``. It returns JSON by default,
+supports filtering, ordering and pagination, and uses standard HTTP status
+codes and verbs.
+
+Public endpoints, such as the list of exercises or the ingredients, can be
+accessed without authentication. For user-owned objects such as routines,
+you need to authenticate.
 
 
-For some info on how to create routines over the API, see
+For specific info on how to create routines over the API, see
 
 .. toctree::
    :maxdepth: 1
 
    routines
+
+
+Interactive reference
+---------------------
+
+wger ships a complete OpenAPI specification for every endpoint, generated
+automatically from the code. Two interactive viewers are exposed:
+
+* ``/api/v2/`` The API endpoints themselves render as HTML when opened in a
+  browser
+* ``/api/v2/schema`` The raw OpenAPI schema, in JSON format
+* ``/api/v2/schema/ui/`` Swagger UI, lets you try requests
+  directly in the browser
+* ``/api/v2/schema/redoc/`` ReDoc, cleaner read-only view
+
 
 
 JWT Tokens
