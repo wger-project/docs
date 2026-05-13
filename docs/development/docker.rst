@@ -1,6 +1,6 @@
 .. _development_docker:
 
-Development with docker
+Backend dev with Docker
 ========================
 
 You can get a development environment up and running in a few minutes with docker.
@@ -133,15 +133,9 @@ Other useful commands:
     python3 manage.py download-exercise-images
     python3 manage.py download-exercise-videos
 
-Building the image
-------------------
+    # Force a rebuild of the image (compose watch usually handles this,
+    # but useful e.g. after switching branches)
+    docker compose build web
 
-If you want to build your own image, run the following from the server's
-source folder:
-
-.. code-block:: bash
-
-    docker build -f extras/docker/development/Dockerfile -t wger/server .
-
-There is also a "base" image located in ``extras/docker/base`` which the
-server image uses as a base.
+    # Prune the build cache if it has grown too large over time
+    docker builder prune

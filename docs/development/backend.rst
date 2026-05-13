@@ -7,10 +7,11 @@ The backend is a Django application, the repository can be found at:
 
 https://github.com/wger-project/wger
 
-Development with docker
-------------------------
+.. tip::
 
-:ref:`development_docker` provides a quick way to setup a development environment
+   The easiest way to get a backend running is via the Docker dev environment,
+   see :ref:`development_docker`. The instructions below cover a native install
+   on your machine.
 
 Local installation
 -------------------

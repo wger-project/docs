@@ -11,27 +11,28 @@ topics for the development workflow.
    :maxdepth: 1
    :hidden:
 
+   docker
    backend
    frontend
    mobile_app
-   docker
    celery
    i18n
    dummy_data
    release
 
+:doc:`docker`
+    **Recommended starting point.** A Docker-based dev environment for the
+    Django backend, no local Python install needed.
+
 :doc:`backend`
-    Set up a development environment for the Django backend (the main part of
-    the application).
+    Native install of the Django backend on your machine. Useful if you prefer
+    to debug directly from your IDE without going through a container.
 
 :doc:`frontend`
     Set up a development environment for the web frontend.
 
 :doc:`mobile_app`
     Set up a development environment for the mobile app.
-
-:doc:`docker`
-    Run a development environment with Docker compose.
 
 :doc:`celery`
     Set up Celery for running background tasks (development and bare-metal

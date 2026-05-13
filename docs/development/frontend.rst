@@ -23,6 +23,12 @@ You can obviously use your own instance, but feel free to use the test server
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``
 
+.. note::
+
+   If you want to run a local backend instead (useful when you're changing the
+   backend at the same time), the quickest setup is the
+   :ref:`Docker dev environment <development_docker>`.
+
 Install node (>22) and run::
 
   npm install
