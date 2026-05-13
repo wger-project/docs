@@ -9,8 +9,8 @@ and the source code can be found at
 https://github.com/wger-project/flutter
 
 
-1) Install flutter (the app currently uses the flutter version in
-   ``.github/actions/flutter-common/action.yml``)
+1) Install flutter (the app currently uses the flutter version pinned in
+   `action.yml <https://github.com/wger-project/flutter/blob/master/.github/actions/flutter-common/action.yml>`_)
 
 https://docs.flutter.dev/get-started/install
 
