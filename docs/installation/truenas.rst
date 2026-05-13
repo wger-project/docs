@@ -1,6 +1,7 @@
 .. _truenas:
+
 TrueNAS SCALE
-==============
+=============
 
 .. note::
     this guide was provided by  `@Phyxsius7 <https://github.com/Phyxsius7>`_ and
@@ -98,7 +99,7 @@ For each storage below:
 Click Install
 
 Quick checklist (if install fails)
-----------------
+----------------------------------
 
 * Each child dataset has POSIX 0777 (User/Group/Other all RWX) and was applied recursively.
 * Trusted Origins is not empty and includes a full URL with scheme + port.

@@ -1,16 +1,17 @@
 .. _backend:
 
 Backend
-===========
+=======
 
 The backend is a Django application, the repository can be found at:
 
 https://github.com/wger-project/wger
 
-Development with docker
-------------------------
+.. tip::
 
-:ref:`development_docker` provides a quick way to setup a development environment
+   The easiest way to get a backend running is via the Docker dev environment,
+   see :ref:`development_docker`. The instructions below cover a native install
+   on your machine.
 
 Local installation
 -------------------
@@ -28,7 +29,7 @@ If using ``uv``::
     uv pip install -e .
     source .venv/bin/activate
 
-Overwise, manually create a new virtualenv and install everything::
+Otherwise, manually create a new virtualenv and install everything::
 
   python3 -m venv .venv
   source .venv/bin/activate
@@ -40,7 +41,6 @@ This will download the required JS and CSS libraries and create an SQLite
 database and populate it with data on the first run::
 
   export DJANGO_SETTINGS_MODULE=settings.local_dev
-  export PYTHONPATH=/path/to/wger/server
   wger bootstrap
   wger load-online-fixtures
 
@@ -49,9 +49,10 @@ bootstrap, just copy it to some other place::
 
   cp database.sqlite database.sqlite.orig
 
-You can of course also use other databases such as PostgresSQL or MariaDB. Create
-a database and user and edit the DATABASES settings before calling bootstrap.
-Take a look at the :ref:`prod_postgres` on apache on how that could look like.
+You can of course also use other databases such as PostgreSQL or MariaDB. Create
+a database and user with the usual tools (``createdb``, ``CREATE USER``, etc.)
+and point Django at it via the ``DJANGO_DB_*`` env vars (see :doc:`/administration/settings`)
+before calling bootstrap.
 
 Compile the translation files::
 
@@ -70,12 +71,41 @@ That's it. You can log in with the default administrator user:
 You can reset the admin's password with ``wger create-or-reset-admin``.
 
 
-And now
--------
+Running the tests
+-----------------
+
+The backend uses Django's built-in test runner. Each app keeps its tests under
+``wger/<app>/tests/``. To run the tests::
+
+  # Full text suite
+  python manage.py test
+
+  # In multi core machines
+  python manage.py test --parallel auto
+
+  # Only some tests
+  python manage.py test wger.exercises
+  python manage.py test wger.exercises.tests.test_categories
+
+
+Code style
+----------
+
+The project uses ``ruff`` for formatting and ``isort`` for import sorting, both
+configured in ``pyproject.toml``. Before opening a PR::
+
+  ruff format
+  isort .
+
+CI runs the same checks, so it's worth doing it locally first.
+
+
+Next steps
+----------
 
 * For a description of the available settings consult :ref:`settings`.
 
-* You might need to start :ref:`celery` as well if you want to to run certain
+* You might need to start :ref:`celery` as well if you want to run certain
   commands in the background.
 
 * For managing i18n files consult :ref:`i18n`.
@@ -95,68 +125,3 @@ And now
     pip install django_extensions werkzeug
     python manage.py runserver_plus [options]
 
-
-Release process
----------------
-Before releasing a new (major or minor) version of the backend, a couple of manual
-steps are still necessary.
-
-Yes, some of these steps could and should be automated, but for now they are not.
-This might also be one of the reasons why there are not that many releases...
-
-**1) Bump versions**
-
-Bump the app version as well as the minimum required mobile app version in:
-
-* ``wger/version.py``
-* ``package.json`` (not really needed, but since it's there, let's keep it up to date)
-* All the ``.github/workflows/docker-*.yml`` files
-* ``docs/conf.py`` (in the docs repo)
-
-Update the project ID in `docs/contributing.rst`.
-
-
-**2) Update contributors list**
-
-Run the script that updates the contributors list::
-
-  python3 extras/authors/generate_authors_api.py
-
-
-**3) Update exercise fixture**
-
-It's recommended to update the exercise fixture before a release. To do this extract
-them from a current database, split the files and and copy them as appropriate::
-
-    python ./manage.py dumpdata --indent 4 --natural-foreign exercises > extras/scripts/data.json
-    cd extras/scripts/
-    python3 filter-fixtures.py
-    cp categories.json ../../wger/exercises/fixtures/
-
-**4) Update translations**
-
-Update the po files as described in :ref:`i18n`.
-
-**5) Tag the release**
-
-Create a new tag for the release::
-
-  git tag -a 1.2.3 -m "Release 1.2.3"
-  git push origin 1.2.3
-
-Create a final tag for docker without "-dev" (obviously after the images have been built)::
-
-  docker login
-  docker buildx imagetools create --tag wger/server:1.2.3 wger/server:latest
-
-**6) Create a new release on GitHub**
-
-Finally, create a new release on GitHub from the tag. Generate the description
-from the pull requests and edit if necessary, then link to this from the changelog
-in the docs repo::
-
-  gh release create "X.Y" --generate-notes
-
-**7) Talk about it!**
-
-Write an announcement, and post it on discord, mastodon, etc.

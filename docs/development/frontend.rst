@@ -18,10 +18,16 @@ Copy ``.env.TEMPLATE`` to ``.env.development`` and edit it to your needs.
 You can obviously use your own instance, but feel free to use the test server
 (the db is reset every day):
 
-* URL: ``https://wger-master.rge.uber.space``
+* URL: ``https://dev.wger.de``
 * username: ``user``
 * password: ``flutteruser``
 * API key: ``31e2ea0322c07b9df583a9b6d1e794f7139e78d4``
+
+.. note::
+
+   If you want to run a local backend instead (useful when you're changing the
+   backend at the same time), the quickest setup is the
+   :ref:`Docker dev environment <development_docker>`.
 
 Install node (>22) and run::
 
@@ -33,27 +39,13 @@ Then, in the project directory, you can run::
 
 and open http://localhost:3000 in the browser.
 
-To run the tests::
+
+Running the tests
+-----------------
+
+The components ship with a Vitest test suite::
 
   npm run test
-
-
-Release process
----------------
-
-Update the version in ``package.json`` to use the current date::
-
-    NEW_VERSION=$(date +%Y-%m-%d)
-    npm version "${NEW_VERSION}" --no-git-tag-version
-
-Publish the new version to npm by manually triggering the workflow ``publish``
-in the github actions tab.
-
-In the django server, update the version in ``package.json`` to the same
-version and run::
-
-  npm install
-
 
 
 Rendering in django

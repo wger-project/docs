@@ -16,101 +16,38 @@ https://github.com/wger-project
 
 This documentation is intended for developers and administrators of the software.
 
-User manual
-===========
+
+:doc:`manual/index`
+    User-facing manual: how to use routines and progression rules.
+
+:doc:`installation/index`
+    Setting up wger in production. Docker is the recommended path.
+
+:doc:`administration/index`
+    Day-to-day operations: updates, backups, settings, commands.
+
+:doc:`development/index`
+    For developers who want to work on wger itself (backend, frontend, mobile app).
+
+:doc:`api/index`
+    REST API reference for client integrations.
+
+:doc:`contributing`
+    How to contribute code, exercises, ingredients or translations.
+
+:doc:`changelog`
+    Release notes and version history.
+
 
 .. toctree::
-   :caption: Manual
+   :maxdepth: 2
    :hidden:
 
-   manual/routines
-
-:doc:`manual/routines`
-    How to use the routines and the progression rules
-
-Installation (production)
-=========================
-
-.. toctree::
-   :caption: Installation (prod)
-   :hidden:
-
-   production/docker
-   production/installation
-
-:doc:`production/docker`
-    Recommended setup to run the application in a production environment, uses
-    Docker and Docker Compose.
-:doc:`production/installation`
-    "Manual" installation of the application in a production environment.
-
-
-Development
-===========
-
-.. toctree::
-   :caption: Development
-   :maxdepth: 1
-   :hidden:
-
-   development/backend
-   development/frontend
-   development/mobile_app
-
-:doc:`development/backend`
-    For developers who want to work on the backend / django part of the application
-    (note that this is the main part of the application and also does parts of the
-    frontend)
-:doc:`development/frontend`
-    For developers who want to work on the frontend part of the application
-:doc:`development/mobile_app`
-    For developers who want to work on the mobile app part of the application
-
-
-Administration
-==============
-
-.. toctree::
-   :caption: Administration
-   :hidden:
-
-   administration/errors
-   administration/commands
-   administration/settings
-   administration/auth_proxy
-   administration/gym
-
-:doc:`administration/errors`
-    Common errors and how to fix them in a production environment.
-:doc:`administration/commands`
-    Available commands to manage the application and sync exercises and ingredients
-:doc:`administration/settings`
-    Available settings for the application
-:doc:`administration/auth_proxy`
-    Alternative authentication settings
-
-API
-===
-
-.. toctree::
-   :caption: API
-   :hidden:
-
-   api/api
-   api/routines
-
-:doc:`api/api`
-    For developers who want to use the API, and it contains information
-    about the API endpoints.
-
-:doc:`api/routines`
-    The data model used for the flexible routines and how to create and read them
-    over the API.
-
-.. toctree::
-   :caption: All the rest
-   :hidden:
-
+   manual/index
+   installation/index
+   administration/index
+   development/index
+   api/index
    contributing
    changelog
 
@@ -131,6 +68,9 @@ Sources
 
 All the code and the content is freely available and is hosted on GitHub:
 https://github.com/wger-project
+
+See :doc:`contributors` and :doc:`translators` for everyone who has helped
+build the project.
 
 
 Licence

@@ -53,7 +53,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'wger project'
-copyright = '2025, Roland Geider'
+copyright = '2026, wger Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

@@ -38,22 +38,10 @@ Here are some of the most important ones:
   download-online-fixtures.
 
 ``load-online-fixtures``
-  Downloads a subset of ingredients, the weight units fixtures and installs them.
-  If you want to download all ingredients, you need to use the manage.py command
-  with the ``sync-ingredients`` (see below).
-
   Downloads a subset of ingredients and the weight units fixtures, then installs
   them. To download all ingredients, use the manage.py command with the
-  ``sync-ingredients`` option (see below).
+  ``sync-ingredients-bulk`` option (see below).
 
-``import-off-products``
-  Imports and updates products from the Open Food Facts database. You can select
-  whether to use a local file with the full database dump, the daily delta
-  updates or use a mongo database, see the help for more information. Note that
-  this command is not intended to be used on a regular basis in local installations,
-  in order to not put too much load on the Open Food Facts servers. To keep your
-  database up-to-date, you can use the ``sync-ingredients-bulk`` management
-  command (see below).
 
 Management commands
 -------------------
@@ -98,10 +86,14 @@ Here are some of the most important ones:
   synchronizes the exercise videos from the default wger instance to the local
   installation, does not overwrite existing videos.
 
-``exercises-health-check.py``
-  Performs a series of basic health checks. Basically sees if there are exercises
-  that don't have a default English translation or worse, don't have any
-  translation at all
+``import-off-products``
+  Imports and updates products from the Open Food Facts database. You can select
+  whether to use a local file with the full database dump, the daily delta
+  updates or use a mongo database, see the help for more information. Note that
+  this command is not intended to be used on a regular basis in local installations,
+  in order to not put too much load on the Open Food Facts servers. To keep your
+  database up-to-date, you can use the ``sync-ingredients-bulk`` management
+  command.
 
 ``extract-i18n``
   Used for development only. Extracts strings from the database that need to be
