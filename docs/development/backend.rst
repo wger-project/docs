@@ -40,7 +40,6 @@ This will download the required JS and CSS libraries and create an SQLite
 database and populate it with data on the first run::
 
   export DJANGO_SETTINGS_MODULE=settings.local_dev
-  export PYTHONPATH=/path/to/wger/server
   wger bootstrap
   wger load-online-fixtures
 
@@ -69,6 +68,35 @@ That's it. You can log in with the default administrator user:
 * **password**: adminadmin
 
 You can reset the admin's password with ``wger create-or-reset-admin``.
+
+
+Running the tests
+-----------------
+
+The backend uses Django's built-in test runner. Each app keeps its tests under
+``wger/<app>/tests/``. To run the tests::
+
+  # Full text suite
+  python manage.py test
+
+  # In multi core machines
+  python manage.py test --parallel auto
+
+  # Only some tests
+  python manage.py test wger.exercises
+  python manage.py test wger.exercises.tests.test_categories
+
+
+Code style
+----------
+
+The project uses ``ruff`` for formatting and ``isort`` for import sorting, both
+configured in ``pyproject.toml``. Before opening a PR::
+
+  ruff format
+  isort .
+
+CI runs the same checks, so it's worth doing it locally first.
 
 
 Next steps

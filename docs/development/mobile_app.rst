@@ -31,4 +31,11 @@ Please note that depending on how you run your emulator you will need to change
 the IP address of the server (on iOS ``http://localhost:8000`` while on android
 you need ``http://10.0.2.2:8000``).
 
-You can run the tests with ``flutter test``
+
+Running the tests
+-----------------
+
+The unit and widget tests run with::
+
+  flutter test
+

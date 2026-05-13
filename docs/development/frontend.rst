@@ -33,7 +33,11 @@ Then, in the project directory, you can run::
 
 and open http://localhost:3000 in the browser.
 
-To run the tests::
+
+Running the tests
+-----------------
+
+The components ship with a Vitest test suite::
 
   npm run test
 
