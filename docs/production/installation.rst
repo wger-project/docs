@@ -81,6 +81,16 @@ Activate the settings and disable apache's default::
     sudo a2ensite wger
     sudo service apache2 reload
 
+Many modern systemd installations utilize hardening of apache built into the systemd unit file preventing running of apps within a users home directory. To resolve this run the command::
+
+    sudo systemctl edit --full httpd
+
+and edit the configuration to set::
+
+.. code-block:: ini
+
+    ProtectHome=off
+
 **Alternatives**
 
 You don't *need* to use apache, you can also use nginx, caddy or some other web
