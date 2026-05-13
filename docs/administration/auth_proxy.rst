@@ -57,34 +57,35 @@ it might look something like this::
     }
 
 
-**Settings**
+Settings
+--------
 
-AUTH_PROXY_HEADER
-    (*required*) The name of the HTTP header that the reverse proxy sets with
-    the authenticated user's username. Usually ``Remote-User``, but can be any
-    name you choose. If set to an empty string (the default), the authentication
-    proxy feature is disabled. Add the name according to the django logic when
-    accessing headers: convert all characters to uppercase, replace any hyphens
-    with underscores and add an ``HTTP_`` prefix to the name. So if the header
-    is ``Remote-User`` set here ``HTTP_X_REMOTE_USER``
+``AUTH_PROXY_HEADER``
+  *Required.* The name of the HTTP header that the reverse proxy sets with
+  the authenticated user's username. Usually ``Remote-User``, but can be any
+  name you choose. Default is empty, which disables the feature.
 
-AUTH_PROXY_TRUSTED_IPS
-    (*required*) A list of trusted IP addresses from which the application will accept
-    authentication headers. Usually this will be the IP address of your reverse proxy.
-    If the proxy is on the same host, include ``127.0.0.1`` and/or ``::1``.
+  Apply Django's header-name convention: uppercase, replace hyphens with
+  underscores, prefix with ``HTTP_``. So if the proxy sets ``X-Remote-User``,
+  configure ``HTTP_X_REMOTE_USER`` here.
 
-AUTH_PROXY_CREATE_UNKNOWN_USER
-    A boolean value that determines whether to automatically create a new user
-    account if the authenticated user does not exist in the database. Default
-    is false.
+``AUTH_PROXY_TRUSTED_IPS``
+  *Required.* Comma-separated list of trusted IP addresses from which the
+  application accepts authentication headers. Usually this is the IP of your
+  reverse proxy. If the proxy runs on the same host, include ``127.0.0.1``
+  and/or ``::1``.
 
-AUTH_PROXY_USER_EMAIL_HEADER
-    If set, the content of this header will be used as the email for newly created
-    users (is ignored if ``AUTH_PROXY_CREATE_UNKNOWN_USER`` is not set). Same django
-    name conventions as with ``AUTH_PROXY_HEADER`` apply.
+``AUTH_PROXY_CREATE_UNKNOWN_USER``
+  Default ``False``. Whether to automatically create a new user account
+  if the authenticated user does not exist in the database yet.
 
-AUTH_PROXY_USER_NAME_HEADER
-    If set, the content of this header will be used as the name for newly created
-    users (is ignored if ``AUTH_PROXY_CREATE_UNKNOWN_USER`` is not set). Same django
-    name conventions as with ``AUTH_PROXY_HEADER`` apply.
+``AUTH_PROXY_USER_EMAIL_HEADER``
+  The header to read the email from for auto-created users. Ignored if
+  ``AUTH_PROXY_CREATE_UNKNOWN_USER`` is not set. Same Django header-name
+  convention as ``AUTH_PROXY_HEADER``.
+
+``AUTH_PROXY_USER_NAME_HEADER``
+  The header to read the display name from for auto-created users. Ignored
+  if ``AUTH_PROXY_CREATE_UNKNOWN_USER`` is not set. Same Django header-name
+  convention as ``AUTH_PROXY_HEADER``.
 

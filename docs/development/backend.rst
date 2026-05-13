@@ -1,7 +1,7 @@
 .. _backend:
 
 Backend
-===========
+=======
 
 The backend is a Django application, the repository can be found at:
 
@@ -50,8 +50,9 @@ bootstrap, just copy it to some other place::
   cp database.sqlite database.sqlite.orig
 
 You can of course also use other databases such as PostgreSQL or MariaDB. Create
-a database and user and edit the DATABASES settings before calling bootstrap.
-Take a look at the :ref:`PostgreSQL setup <prod_postgres>` for how that could look like.
+a database and user with the usual tools (``createdb``, ``CREATE USER``, etc.)
+and point Django at it via the ``DJANGO_DB_*`` env vars (see :doc:`/administration/settings`)
+before calling bootstrap.
 
 Compile the translation files::
 
@@ -70,8 +71,8 @@ That's it. You can log in with the default administrator user:
 You can reset the admin's password with ``wger create-or-reset-admin``.
 
 
-And now
--------
+Next steps
+----------
 
 * For a description of the available settings consult :ref:`settings`.
 
