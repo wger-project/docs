@@ -102,6 +102,9 @@ the application more accessible. To start just visit
 
     https://hosted.weblate.org/engage/wger
 
+A list of everyone who has contributed translations so far is on the
+:doc:`translators` page.
+
 .. _donation:
 
 Support the Project

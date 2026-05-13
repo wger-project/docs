@@ -69,6 +69,9 @@ Sources
 All the code and the content is freely available and is hosted on GitHub:
 https://github.com/wger-project
 
+See :doc:`contributors` and :doc:`translators` for everyone who has helped
+build the project.
+
 
 Licence
 =======

@@ -2,13 +2,14 @@
 
 Thank you all for contributing to the project, you are true heroes! 🫶
 
-*Generated on 2026-04-10*
+*Generated on 2026-05-13*
 
 ---
 
 ## Contributors
 
 - Roland Geider - [https://github.com/rolandgeider](https://github.com/rolandgeider)
+- Ben Reese - [https://github.com/benreese0](https://github.com/benreese0)
 - Katharina Jacoby - [https://github.com/KatharinaJacoby](https://github.com/KatharinaJacoby)
 - raulp93 - [https://github.com/raulp93](https://github.com/raulp93)
 - Jaron Stevenson - [https://github.com/jrstev](https://github.com/jrstev)
