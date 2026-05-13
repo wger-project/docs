@@ -256,6 +256,21 @@ The ``X-Forwarded-*`` headers are important, without them, generated URLs
 (e.g. pagination links in the API) and CSRF protection can break. If you see
 CSRF errors after setup, check :doc:`/administration/errors`.
 
+.. note::
+
+   If ``/static/`` or ``/media/`` return 403 or 404, check whether the webserver's
+   systemd unit has ``ProtectHome=true``, as it blocks reads from ``/home/wger/``.
+   Override the unit::
+
+       sudo systemctl edit caddy
+
+   and add::
+
+       [Service]
+       ProtectHome=off
+
+   Then reload: ``sudo systemctl daemon-reload && sudo systemctl restart caddy``.
+
 
 Next steps
 ----------
