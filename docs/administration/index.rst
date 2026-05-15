@@ -28,6 +28,7 @@ administrators running a wger instance.
    storage
    auth_proxy
    social_auth
+   mfa
    anubis
    postgres
    gym
@@ -65,6 +66,9 @@ administrators running a wger instance.
 
 :doc:`social_auth`
     Social authentication (OAuth2) via Google, GitHub, GitLab, and other providers.
+
+:doc:`mfa`
+    Two-factor authentication (TOTP, recovery codes) and passkeys (WebAuthn).
 
 :doc:`anubis`
     Protect public-facing instances from AI scrapers.
