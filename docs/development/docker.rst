@@ -1,6 +1,6 @@
 .. _development_docker:
 
-Development with docker
+Backend dev with Docker
 ========================
 
 You can get a development environment up and running in a few minutes with docker.
@@ -133,3 +133,9 @@ Other useful commands:
     python3 manage.py download-exercise-images
     python3 manage.py download-exercise-videos
 
+    # Force a rebuild of the image (compose watch usually handles this,
+    # but useful e.g. after switching branches)
+    docker compose build web
+
+    # Prune the build cache if it has grown too large over time
+    docker builder prune

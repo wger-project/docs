@@ -38,18 +38,10 @@ Here are some of the most important ones:
   download-online-fixtures.
 
 ``load-online-fixtures``
-  Downloads a subset of ingredients, the weight units fixtures and installs them.
-  If you want to download all ingredients, you need to use the manage.py command
-  with the ``sync-ingredients`` (see below).
-
   Downloads a subset of ingredients and the weight units fixtures, then installs
   them. To download all ingredients, use the manage.py command with the
-  ``sync-ingredients`` option (see below).
+  ``sync-ingredients-bulk`` option (see below).
 
-``import-off-products``
-  Imports and updates products from the Open Food Facts database. You can select
-  whether to use a local file with the full database dump, the daily delta
-  updates or use a mongo database, see the help for more information.
 
 Management commands
 -------------------
@@ -64,11 +56,20 @@ To get help on a specific command, call ``python manage.py <command_name> --help
 
 Here are some of the most important ones:
 
-``sync-ingredients[-async]``
-  synchronizes the ingredient database from the default wger instance to the local
+``sync-ingredients-bulk``
+  Options: `--set-mode=update|replace`
+
+  Synchronizes the ingredient database from the default wger instance to the local
   installation. Ingredients that you added manually to the database are not touched.
-  The ``async`` version uses celery to perform the task in the background. Also note
-  that this will use around 1GB of disk space and takes several hours to complete.
+  This command downloads a dump of the ingredient database from the default wger
+  instance, imports the data and then deletes it. This is the recommended way to
+  synchronize the ingredients. Setting the ``SYNC_INGREDIENTS_CELERY`` option uses
+  Celery to perform the synchronization in the background in regular intervals.
+
+``sync-ingredients[-async]``
+  Same as ``sync-ingredients-bulk``, but instead of downloading a dump, it uses the API to
+  retrieve the ingredients. This way is much slower, but is kept for backwards compatibility.
+  The ``-async`` version will use Celery to perform the synchronization in the background.
 
 ``sync-exercises``
   synchronizes the exercise database from the default wger instance to the local
@@ -85,10 +86,14 @@ Here are some of the most important ones:
   synchronizes the exercise videos from the default wger instance to the local
   installation, does not overwrite existing videos.
 
-``exercises-health-check.py``
-  Performs a series of basic health checks. Basically sees if there are exercises
-  that don't have a default English translation or worse, don't have any
-  translation at all
+``import-off-products``
+  Imports and updates products from the Open Food Facts database. You can select
+  whether to use a local file with the full database dump, the daily delta
+  updates or use a mongo database, see the help for more information. Note that
+  this command is not intended to be used on a regular basis in local installations,
+  in order to not put too much load on the Open Food Facts servers. To keep your
+  database up-to-date, you can use the ``sync-ingredients-bulk`` management
+  command.
 
 ``extract-i18n``
   Used for development only. Extracts strings from the database that need to be

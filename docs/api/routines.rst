@@ -3,62 +3,73 @@
 Using the routine API
 =====================
 
-This section explains how the data model behind the routines and its different
-calculations work and is only relevant to you if you plan on using the API
-directly.
+The routine data model is split across a handful of related objects and
+has a few non-obvious moving parts (iterations, day sequencing,
+progression rules). This page explains how everything fits together. It
+is **not** a field reference: for the full request/response schemas of
+every endpoint, use ``/api/v2/schema/redoc/``.
 
-**Endpoint:** ``/api/v2/routine/``
+A routine has a maximum duration of 120 days.
 
-**Possible values:**
 
-* ``name``, 50 chars max
-* ``description``, optional, 1000 chars max
-* ``start date`` and ``end date``
-* ``fit_in_week`` flag to indicate that the routine should fit in a week, after the
-  last regular workout day, the remainder of the week is filled with rest days
+Object hierarchy
+----------------
 
-Days
-----
+The routine itself is just a shell. The actual training data is split
+across several linked objects, each with its own endpoint:
 
-**Endpoint:** ``/api/v2/day/``
+.. code-block:: text
 
-**Possible values:**
+   Routine                           /api/v2/routine/
+   └── Day                           /api/v2/day/
+       └── Slot                      /api/v2/slot/
+           └── SlotEntry             /api/v2/slot-entry/
+               ├── WeightConfig      /api/v2/weight-config/      (+ max-)
+               ├── RepetitionsConfig /api/v2/repetitions-config/ (+ max-)
+               ├── SetsConfig        /api/v2/sets-config/        (+ max-)
+               ├── RirConfig         /api/v2/rir-config/         (+ max-)
+               └── RestConfig        /api/v2/rest-config/        (+ max-)
 
-* ``type`` the type of workout day. These will change the way the workout for a
-  specific day is handled, but currently this setting is ignored. Current values are:
-  * ``custom`` (default)
-  * ``enom``
-  * ``amrap``
-  * ``hiit``
-  * ``tabata``
-  * ``edt``
-  * ``rft``
-  * ``afap``
-* ``name``, 50 chars max
-* ``description``, optional, 1000 chars max
-* ``is_rest`` flag indicating that this is a rest day
+The actual training history lives in two more objects, both linked back
+to the routine:
 
-A day is the building block of a routine. It consists of several linked days
-that can be configured in different ways.
+.. code-block:: text
 
-::
+   WorkoutSession                    /api/v2/workoutsession/
+   └── WorkoutLog                    /api/v2/workoutlog/
 
-   +----------------+      +-----------------+      +-----------------+
-   |Day 1 - Push    |      |Day 2 - Pull     |      |Day 3 - Legs     |
-   |----------------+      |-----------------+      |-----------------+
-   |order=1         | ---> |order=2          | ---> |order=3          |
-   |rest=false      |      |rest=false       |      |rest=false       |
-   |needs_logs=true |      |needs_logs=false |      |needs_logs=false |
-   +----------------+      +-----------------+      +-----------------+
+Templates are exposed read-only through ``/api/v2/templates/`` (your
+own) and ``/api/v2/public-templates/`` (those shared by others).
 
-The routine will calculate from the list a sequence of days that are planned.
-This allows you to create very flexible setups. If the routine starts on the 1.1, it
-will create the following sequence:
+
+Iterations
+----------
+
+An "iteration" is one complete cycle through all the days of a routine.
+Once the last day has been done, the next occurrence of the first day
+starts a new iteration. In practice this will most often be a week, but
+the system doesn't require that.
+
+The iteration number is the key that ties progression rules to specific
+points in the routine: a ``WeightConfig`` with ``iteration=3`` and
+``value=60`` applies starting on the third pass through the days.
+
+
+Days and day sequencing
+-----------------------
+
+A routine is built from an ordered list of days (controlled by each
+day's ``order`` field). From this list, plus the routine's start and
+end date, wger computes a concrete date-by-date sequence.
+
+For a routine that starts on the 1.1 with three days, the basic
+sequence is:
 
 .. list-table::
    :header-rows: 1
 
-   * - 1.1
+   * -
+     - 1.1
      - 1.2
      - 1.3
      - 1.4
@@ -68,9 +79,7 @@ will create the following sequence:
      - 1.8
      - 1.9
      - 1.10
-   * - Day 1
-     - Day 2
-     - Day 3
+   * - Day
      - Day 1
      - Day 2
      - Day 3
@@ -78,7 +87,11 @@ will create the following sequence:
      - Day 2
      - Day 3
      - Day 1
-   * - 1
+     - Day 2
+     - Day 3
+     - Day 1
+   * - Iteration
+     - 1
      - 1
      - 1
      - 2
@@ -89,20 +102,18 @@ will create the following sequence:
      - 3
      - 4
 
-An important concept (and parameter) is the "iteration". An iteration is simply
-the complete cycle of all the days in the routine. Once all the days in the routine
-have been completed, the next occurrence of the first day marks the start of a new
-iteration. Note that in practice, this will most likely be a week.
+Two flags change this default behaviour:
 
-With the ``need_logs_to_advance`` flag you can control whether there needs to be a
-logged session for the day to proceed. Otherwise, the day will be repeated
-until a log is saved, like in the example below with day 3 where the user logged a
-session on the 1.8.
+**need_logs_to_advance** (on the day) stalls the sequence on a day
+until the user logs a session for it. Below, Day 3 has the flag set,
+the user finally logged a session on 1.8, and the sequence resumes on
+1.9:
 
 .. list-table::
    :header-rows: 1
 
-   * - 1.1
+   * -
+     - 1.1
      - 1.2
      - 1.3
      - 1.4
@@ -112,7 +123,8 @@ session on the 1.8.
      - 1.8
      - 1.9
      - 1.10
-   * - Day 1
+   * - Day
+     - Day 1
      - Day 2
      - Day 3
      - Day 1
@@ -122,7 +134,8 @@ session on the 1.8.
      - Day 3
      - Day 1
      - Day 2
-   * - 1
+   * - Iteration
+     - 1
      - 1
      - 1
      - 2
@@ -133,142 +146,106 @@ session on the 1.8.
      - 3
      - 3
 
-Days marked as "rest" can be used to pad training days and do not contain any exercises.
-
-Here is an example if the ``fit_in_week`` flag is set for the routine:
+**fit_in_week** (on the routine) pads each iteration with empty
+placeholder days (no day, no exercises) so the routine always restarts
+on a fixed weekday:
 
 .. list-table::
    :header-rows: 1
 
-   * - 1.1 - Monday
+   * -
+     - 1.1 (Mon)
      - 1.2
      - 1.3
      - 1.4
      - 1.5
      - 1.6
      - 1.7
-     - 1.8 - Monday
+     - 1.8 (Mon)
      - 1.9
      - 1.10
-   * - Day 1
-     - Day 2
-     - Day 3
-     - null
-     - null
-     - null
-     - null
+   * - Day
      - Day 1
      - Day 2
      - Day 3
-   * - 1
+     - --
+     - --
+     - --
+     - --
+     - Day 1
+     - Day 2
+     - Day 3
+   * - Iteration
      - 1
      - 1
-     - null
-     - null
-     - null
-     - null
+     - 1
+     - 1
+     - 1
+     - 1
+     - 1
      - 2
      - 2
      - 2
 
-
-**Labels**
-
-You can group the workout days (such as "Deload week" or similar) by adding labels to
-the routine. A label accepts the following properties:
-
-* ``start_offset``, the number of days after the start of the routine when this label becomes active
-* ``end_offset``, the number of days after the start of the routine when this label ceases being active
-* ``label``, the label that will be displayed in the UI
+Rest days are regular days with ``is_rest=true`` and no slots attached.
+They occupy a position in the sequence but produce no exercises.
 
 
-Sets and exercises
-------------------
+Slots and slot entries
+----------------------
 
-**Endpoints** ``/api/v2/slot/`` and ``/api/v2/slot-entry/``
+Inside a day, exercises aren't attached directly. They go through a
+two-level structure:
 
-**Possible values:**
+* a **slot** is one "position" in the day: roughly one exercise (or
+  one superset)
+* a **slot entry** attaches a specific exercise to that slot
 
-* ``type`` the type of set. These will change the way the set is handled or displayed,
-  but currently this setting is ignored. Current values are:
-  * ``normal`` (default)
-  * ``dropset``
-  * ``myo``
-  * ``partial``
-  * ``forced``
-  * ``tut``
-  * ``iso``
-  * ``jump``
-* ``repetition_rounding`` and ``weight_rounding``: Rounding factor for the respective
-  values. Note that this only applies to that specific slot config, if you want
-  to add a default value you can change the user pofile, which also has these
-  settings and, if set, will be written to the config table *when creating new
-  entries*.
-
-You can add exercises to a slot (set). These slots have a ``SlotConfig``
-entry, and different individual config entries for individual properties where
-the magic happens.
-
-
-Supersets
-`````````
-If you add more than one slot entry to a slot, it automatically becomes a superset.
-The specific oder of exercises (in the gym mode only!) is the interleaved list
-of exercises. Not all exercises need to have the same number of sets, e.g.:
+If a slot has more than one entry, it automatically becomes a superset.
+The ``/date-sequence-gym`` view interleaves the sets across the
+entries; they don't need to have the same number of sets. With
 
 * Exercise 1, 4 sets
 * Exercise 2, 2 sets
 * Exercise 3, 3 sets
 
-Would result in:
+the gym-mode output is:
 
-* Exercise 1
-* Exercise 2
-* Exercise 3
-* Exercise 1
-* Exercise 2
-* Exercise 3
-* Exercise 1
-* Exercise 3
-* Exercise 1
+.. code-block:: text
 
-(with the respective values for weight, reps, etc.)
+   Exercise 1
+   Exercise 2
+   Exercise 3
+   Exercise 1
+   Exercise 2
+   Exercise 3
+   Exercise 1
+   Exercise 3
+   Exercise 1
+
+The ``repetition_rounding`` and ``weight_rounding`` fields on a slot
+entry control how the computed values are rounded for display. If left
+empty when creating the entry, the defaults from the user profile are
+copied in.
 
 
-Weight, sets, repetitions, RiR, etc.
-------------------------------------
+Progression rules
+-----------------
 
-**Endpoints:**
+The actual values for weight, repetitions, sets, RiR and rest aren't
+stored on the slot entry. They live in separate config objects (one
+endpoint per field), each with a ``max-`` variant for ranges like
+"8 to 10 reps".
 
-* ``/api/v2/[max-]weight-config/``
-* ``/api/v2/[max-]sets-config/``
-* ``/api/v2/[max-]repetitions-config/``
-* ``/api/v2/[max-]rir-config/``
-* ``/api/v2/[max-]rest-config/``
+Each config record applies starting at a given ``iteration``. The value
+at iteration *n* is the stacked result of all preceding records: each
+record either replaces the value outright (``operation=r``) or adds /
+subtracts a value (``+`` / ``-``), either as an absolute number
+(``step=abs``) or a percentage (``step=percent``). The ``repeat`` flag
+keeps a rule active for every following iteration until another rule
+takes over, so "+1 kg every week" is a single record.
 
-**Possible values:**
-
-* ``iterations``: the iteration this takes effect on.
-* ``value``: Decimal number with the wanted value
-* ``operation``: Operation to perform: ``+``, ``-`` for adding or subtracting the value, or to replace it ``r``
-* ``step``: How to calculate the new value: ``abs`` or ``percent``
-* ``requirements``: JSON field, see above
-* ``repeat``: flag indicating whether this rule should be repeated till a new rule
-  takes effect (this allows you to e.g. increase the weight every week with only
-  one rule)
-
-To configure the specific values for weight, nr of sets, etc. use these endpoints
-to set the appropriate properties. All of these are optional, in which case they
-will return null over the API. In this case the number of sets will be set to 1.
-
-You can create progression rules that will happen at specific iterations and either
-modify the weight (+2kg, -10%) or replace it with a new value (45kg). The value
-at a specific iteration is the stacked calculated value (unless you just replace
-the value with a new one) of the previous ones. There are also a handful of
-possibilities on how to calculate the value such as increasing / decreasing or
-using an absolute value or a percentage.
-
-The behaviour is the same for all of them, here with a weight config example:
+A weight config example:
 
 .. list-table::
    :header-rows: 0
@@ -284,10 +261,10 @@ The behaviour is the same for all of them, here with a weight config example:
      - 8
    * - **Config**
      - 50kg
-     - -/-
-     - -/-
+     - --
+     - --
      - +10%
-     - -/-
+     - --
      - +2kg
      - +1kg
      - 45kg
@@ -301,60 +278,90 @@ The behaviour is the same for all of them, here with a weight config example:
      - 58kg
      - 45kg
 
+All configs are optional. If none is set for a field, that field will
+be ``null`` in the computed output, except for sets, which defaults to
+1.
 
 
-When exactly an iteration happens depends on how the days are configured, but
-realistically it's probably a week long.
+Requirements
+~~~~~~~~~~~~
 
-You can further control if a value increases by setting the ``requirements`` field.
-This field is a JSON object that can currently contains an object with the following
-keys::
+A progression rule can be made conditional on the user actually hitting
+the prescribed values in the previous iteration. Set the
+``requirements`` field to a JSON object of the form::
 
     {
-         "rules": [
+        "rules": [
             "weight",
             "repetitions",
             "rir",
             "rest"
-         ]
+        ]
     }
 
-You can add values to "rules" that need to be checked for the rule to apply. Only
-if all of them are met (i.e., the user logged them in the last iteration), the rule
-will be applied. For example, if the weight should change from 8x60 to 8x65, depends
-on the weight and repetitions but the user didn't log at least that in the last
-workout, it will stay at 8x60 until they do.
-
-If this is not enough, there is an escape hatch in the form of setting a custom python
-class that can perform any calculations you might need. Please consider that while this
-works, it is not currently in use so we would be happy if you got in touch with us.
+If the ``rules`` list is non-empty, the rule only applies when *all*
+listed fields were met in at least one log of the previous iteration.
+For example: if the target is to move from 8x60 kg to 8x65 kg, with
+``rules`` containing ``weight`` and ``repetitions``, the increase only
+happens once the user has actually logged 8 reps at 60 kg. Until then
+the field stays at the previous value.
 
 
+Custom calculation logic
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the rule-based system is not flexible enough, a slot entry's
+``class_name`` field can point to a Python class under
+``wger.manager.config_calculations`` that takes over all calculations
+for that entry. This is an escape hatch and not currently used; please
+get in touch if you have a use case for it.
 
 
-Using the results
+Sessions and logs
 -----------------
 
-Once you have added all your slots and progression rules, you can use the following
-endpoints to get computed values for each iteration/week:
+The training history is stored in two objects. A **WorkoutSession**
+represents one workout (one date, optional notes and impression). A
+**WorkoutLog** is one performed set, attached to a session and
+optionally back-linked to a routine, day, slot entry and iteration.
 
-``/api/v2/routine/{id}/date-sequence-display``
-    Returns a list of WorkoutDayData objects that contain the calculated values for
-    each day in the routine. This endpoint is used to display the routine in the
-    frontend and does some light grouping of the data.
+Each log carries both what was actually performed (``weight``,
+``repetitions``, ``rir``, ``rest``) and the originally prescribed
+values (``weight_target``, ``repetitions_target``, ``rir_target``,
+``rest_target``), so a log preserves both sides even when the routine
+later changes.
 
-``/api/v2/routine/{id}/date-sequence-gym``
-    Returns a list of WorkoutDayData objects to use in the gym. This endpoint returns
-    the data split into individual slots and interleaved in case of supersets as
-    described above.
 
-``/api/v2/routine/{id}/structure``
-    Returns the raw data structure of the routine, including all the days, slots
-    and slot configs.
+Computed endpoints
+------------------
 
-``/api/v2/routine/{id}/logs``
-    Returns all the sessions and logs for the routine.
+Once a routine is set up, these read-only sub-resources return
+calculated views of it:
 
-``/api/v2/routine/{id}/stats``
-    Returns the stats for the routine, including the total volume, total weight,
-    total reps, etc.
+``/api/v2/routine/{id}/structure/``
+    The full nested structure (routine → days → slots → slot entries),
+    suitable for an editor.
+
+``/api/v2/routine/{id}/date-sequence-display/``
+    One entry per date, with the matching day and slots already
+    resolved. Slots that contain repeated sets of the same exercise
+    are folded together for display.
+
+``/api/v2/routine/{id}/date-sequence-gym/``
+    Same data, but the slots are split into individual sets and
+    supersets are interleaved as described above. Use this for the
+    gym-mode view.
+
+``/api/v2/routine/{id}/logs/``
+    The workout sessions and logs for this routine, grouped by
+    session.
+
+``/api/v2/routine/{id}/stats/``
+    Aggregated statistics from the logs: volume, set count and
+    average intensity (estimated 1RM via the Brzycki formula), each
+    broken down by **day**, **ISO week**, **iteration** and the
+    **whole routine**, and further split into total, upper/lower body,
+    per muscle and per exercise.
+
+All five endpoints are cached server-side and invalidated when the
+underlying routine changes.

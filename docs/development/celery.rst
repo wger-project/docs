@@ -1,7 +1,7 @@
 .. _celery:
 
 Celery
-------
+======
 
 wger uses a celery queue for some background tasks. At the moment this is used
 for things like fetching the ingredient images or periodically synchronizing the
@@ -28,7 +28,7 @@ For alternatives, consult celery's documentation: https://docs.celeryq.dev/en/st
 
 
 Celery worker
-=============
+-------------
 
 For development, to start the celery worker just run in your virtual env::
 
@@ -114,8 +114,8 @@ Add a new file `/etc/systemd/system/celery.service` with the following contents
 
 Read the file with ``systemctl daemon-reload`` and start it with ``systemctl start celery``.
 If there are no errors and ``systemctl status celery`` shows that the service is
-active, everything went well. With ``systemctl enable celery.service``the service
-will be automatically restarted after a reboot.
+active, everything went well. With ``systemctl enable celery.service`` the
+service will be automatically restarted after a reboot.
 
 For more up to date information on how this could look like:
 https://docs.celeryq.dev/en/stable/userguide/daemonizing.html
@@ -123,7 +123,7 @@ https://docs.celeryq.dev/en/stable/userguide/daemonizing.html
 
 
 Celery beat
-===========
+-----------
 
 Celery beat is used to perform periodic tasks. This is used at the moment to
 regularly sync the exercises from the configured wger instance. A random time
@@ -171,7 +171,7 @@ Then as above, reload the server and start the service::
     systemctl start celery-beat
 
 Celery flower
-=============
+-------------
 
 Celery flower is a web app that allows you to take a look at the performed tasks
 

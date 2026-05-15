@@ -29,15 +29,12 @@ or the roadmap for the next release:
     https://github.com/orgs/wger-project/projects/6
 
 
-This application has three main repositories, each with its own purpose (and
-quirks) and its own section describing how to set up a development environment:
+This application has three main repositories, each with its own purpose
+(and quirks). The :doc:`development/index` section covers how to set up each:
 
-.. toctree::
-   :maxdepth: 1
-
-   development/backend
-   development/frontend
-   development/mobile_app
+* :doc:`development/backend`: Django backend
+* :doc:`development/frontend`: React components
+* :doc:`development/mobile_app`: Flutter mobile app
 
 In any case you should have a basic grasp of git and GitHub, as well as how to
 create pull requests. If you are not familiar with these concepts, please consult
@@ -52,14 +49,18 @@ Once you have the code ready:
 
 * make sure to write good commit messages. A good commit message should
   explain what the change is about and why it was made.
-* make sure the tests are running (``python3 manage.py test`` in the case of
-  python). At the latest you will notice they are failing when you open the pull
-  request, but it is better to check them before.
+* make sure the tests pass before opening the PR. CI will catch failures, but
+  it's faster to know locally, see the test command on the dev page for the
+  component you touched (:doc:`backend <development/backend>`,
+  :doc:`frontend <development/frontend>`,
+  :doc:`mobile <development/mobile_app>`).
 * if you write new code, write new tests. These don't need to test absolutely
   everything, but they should cover the most important parts of the code. If you
   are not sure what or how to test, just ask us.
-* make sure the code is formatted correctly (``ruff format && isort .`` for python)
-  and has a line length of 100 characters or less.
+* run the formatter for the language you're touching. For Python that's
+  ``ruff format && isort .`` with a line length of 100 characters (see
+  :doc:`development/backend`). Frontend (React) and mobile (Flutter) have their
+  own formatters configured in their respective repos.
 * think about UI/UX. If you are adding a new feature, make sure it is easy to use and
   understand. Nobody here is a designer, but we try our best!
 * finally open a new PR. You can expect a response from a maintainer within a week, if
@@ -74,6 +75,14 @@ best judgment, and feel free to propose changes to this document in a pull reque
 Is this the first time you contribute to an open source project? No problem!
 Feel free to ping us if you need help setting everything up, it can be very
 overwhelming at first. We are happy to help you get started.
+
+**What about AI?**
+
+We are open to contributions that use AI, but we ask you to read and understand the code
+that was produced. It's very tempting to let the agent do its thing and just accept
+everything, resist this! Specially when attempting to do bigger features, it's
+important to split the work into smaller chunks.
+
 
 Exercises
 ---------
@@ -93,7 +102,11 @@ the application more accessible. To start just visit
 
     https://hosted.weblate.org/engage/wger
 
+A list of everyone who has contributed translations so far is on the
+:doc:`translators` page.
+
 .. _donation:
+
 Support the Project
 -------------------
 This project is free and open-source, but running it isn’t! Your support helps
