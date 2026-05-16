@@ -27,6 +27,8 @@ administrators running a wger instance.
    errors
    storage
    auth_proxy
+   social_auth
+   mfa
    anubis
    postgres
    gym
@@ -61,6 +63,12 @@ administrators running a wger instance.
 
 :doc:`auth_proxy`
     Delegate authentication to a reverse proxy or external SSO provider.
+
+:doc:`social_auth`
+    Social authentication (OAuth2) via Google, GitHub, GitLab, and other providers.
+
+:doc:`mfa`
+    Two-factor authentication (TOTP, recovery codes) and passkeys (WebAuthn).
 
 :doc:`anubis`
     Protect public-facing instances from AI scrapers.
