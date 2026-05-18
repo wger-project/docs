@@ -109,6 +109,10 @@ Database
 
 See :doc:`storage` for switching between Postgres and SQLite.
 
+``PS_DATABASE_URI``
+  Single connection string of the form ``postgres://user:password@host:port/dbname``.
+  Takes precedence over the ``DJANGO_DB_*`` variables below.
+
 ``DJANGO_DB_ENGINE``
   Default ``django.db.backends.postgresql``. Use ``django.db.backends.sqlite3``
   for SQLite.
@@ -117,7 +121,8 @@ See :doc:`storage` for switching between Postgres and SQLite.
   Database name (Postgres) or full path to the SQLite file.
 
 ``DJANGO_DB_USER``, ``DJANGO_DB_PASSWORD``, ``DJANGO_DB_HOST``, ``DJANGO_DB_PORT``
-  Postgres connection details. Ignored for SQLite.
+  Postgres connection details. Ignored for SQLite. Not needed when
+  ``PS_DATABASE_URI`` is set.
 
 ``DJANGO_PERFORM_MIGRATIONS``
   Default ``True``. Apply pending database migrations on container startup.
