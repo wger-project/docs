@@ -29,9 +29,16 @@ sessions and tokens.
 
       python -c "import secrets; print(secrets.token_urlsafe(50))"
 
-``SIGNING_KEY``
-  JWT signing key for the API. Use a *different* value than ``SECRET_KEY``.
-  Same generation method.
+``JWT_PRIVATE_KEY`` / ``JWT_PUBLIC_KEY``
+  RSA keypair (RS256) shared by SimpleJWT, allauth.headless, and the PowerSync
+  token endpoint. Use cases are separated by the JWT ``aud`` claim. Generate
+  with::
+
+      docker compose exec web ./manage.py generate-jwt-keys
+
+  Paste the two output lines into your env file. Changing either value
+  invalidates all existing access and refresh tokens; logged-in users will
+  have to log in again.
 
 ``TIME_ZONE`` / ``TZ``
   Server timezone, e.g. ``Europe/Berlin``. See
