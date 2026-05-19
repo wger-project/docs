@@ -113,11 +113,12 @@ in the ``de.wger.flutter`` repository (commit to master).
 *Min server version:* If the new version of the app requires a new minimum
 server version, update the version in ``MIN_SERVER_VERSION``.
 
-**2) Update cocoapods for iOS and Mac**
+**2) Verify Apple builds**
 
-In the ``ios`` and ``macos`` folders run ``pod update`` (or ``gem update``).
-Verify that builds succeed with ``flutter build macos --release`` and
-``flutter build ios --release --no-codesign``.
+Verify that builds succeed with::
+
+    flutter build macos --release
+    flutter build ios --release --no-codesign
 
 **3) Dry-run release before uploading**
 
