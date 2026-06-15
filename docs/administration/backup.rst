@@ -50,11 +50,8 @@ from scratch.
 
 .. important::
 
-   **After any Postgres restore**, regardless of whether the ``powersync``
-   schema was part of the dump, drop the replication slot and restart the
-   PowerSync container. The slot points at a WAL position that no longer
-   exists after the restore, and PowerSync will fail with a cryptic
-   ``operator does not exist`` errors until it is re-created:
+   **After restoring the database**, drop the PowerSync replication slot and
+   restart the service so it re-reads from a valid WAL position:
 
    .. code-block:: bash
 
@@ -63,6 +60,10 @@ from scratch.
             FROM pg_replication_slots \
             WHERE slot_name LIKE 'powersync_%';"
        docker compose restart powersync
+
+   Skipping this leaves the slot pointing at a WAL position that no longer
+   exists, and PowerSync fails with cryptic ``operator does not exist`` errors
+   until it is re-created.
 
 Media
 -----
