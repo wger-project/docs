@@ -46,11 +46,11 @@ the ``ACCESS_TOKEN_LIFETIME`` and ``REFRESH_TOKEN_LIFETIME`` env vars (see
 
    **a) From the allauth-headless login endpoint** (recommended for apps
    that have a proper login UI, and for scripts targeting accounts
-   *without* 2FA): ``POST /_allauth/app/v1/auth/login`` with
+   *without* 2FA): ``POST /allauth/app/v1/auth/login`` with
    ``{"username", "password"}``::
 
        result = requests.post(
-           'https://wger.de/_allauth/app/v1/auth/login',
+           'https://wger.de/allauth/app/v1/auth/login',
            json={'username': 'user', 'password': 'admin'},
        )
        data = result.json()['data']
@@ -60,7 +60,7 @@ the ``ACCESS_TOKEN_LIFETIME`` and ``REFRESH_TOKEN_LIFETIME`` env vars (see
    For accounts *with* 2FA enabled the response is a partial-login: it
    contains an ``X-Session-Token`` header plus a ``requires_mfa`` flag
    instead of the tokens. You then send the TOTP/recovery code to
-   ``POST /_allauth/app/v1/auth/2fa/authenticate``, passing the session
+   ``POST /allauth/app/v1/auth/2fa/authenticate``, passing the session
    token in the ``X-Session-Token`` header, to receive the real access
    and refresh tokens.
 
@@ -147,7 +147,7 @@ Rate limiting
 A few sensitive endpoints are rate-limited (per IP for anonymous callers,
 per user for authenticated ones):
 
-* ``/_allauth/app/v1/auth/login`` and ``/_allauth/app/v1/auth/2fa/authenticate`` (authentication): 10 requests/min
+* ``/allauth/app/v1/auth/login`` and ``/allauth/app/v1/auth/2fa/authenticate`` (authentication): 10 requests/min
 * ``/api/v2/userprofile/`` (registration): 5 requests/min
 * ``/api/v2/ingredient/`` and ``/api/v2/ingredientinfo/`` (list): 120 requests/min
 * ``/api/v2/ingredient/<id>/`` and ``/api/v2/ingredientinfo/<id>/`` (detail): 300 requests/min
