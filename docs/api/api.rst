@@ -41,21 +41,44 @@ the ``ACCESS_TOKEN_LIFETIME`` and ``REFRESH_TOKEN_LIFETIME`` env vars (see
 
 1. Get the tokens
 
-Send your username and password to the ``/api/v2/token``
-endpoint, you will get an ``access`` and a ``refresh`` token
-back::
+   wger does not have a credentials-to-JWT endpoint, since that would bypass
+   2FA. The two supported ways to obtain a refresh token are:
 
-    result = requests.post(
-        'https://wger.de/api/v2/token',
-        data={'username': 'user', 'password': 'admin'}
-    )
-    access_token = result.json()['access']
-    refresh_token = result.json()['refresh']
+   **a) From the allauth-headless login endpoint** (recommended for apps
+   that have a proper login UI, and for scripts targeting accounts
+   *without* 2FA): ``POST /allauth/app/v1/auth/login`` with
+   ``{"username", "password"}``::
 
-    print(result.json())
-    >>> {'refresh': 'eyJhbGciOiJIUzI1...', 'access': 'eyJhbGciOiJIUzI...'}
+       result = requests.post(
+           'https://wger.de/allauth/app/v1/auth/login',
+           json={'username': 'user', 'password': 'admin'},
+       )
+       data = result.json()['data']
+       access_token = data['access']
+       refresh_token = data['refresh']
 
+   For accounts *with* 2FA enabled the response is a partial-login: it
+   contains an ``X-Session-Token`` header plus a ``requires_mfa`` flag
+   instead of the tokens. You then send the TOTP/recovery code to
+   ``POST /allauth/app/v1/auth/2fa/authenticate``, passing the session
+   token in the ``X-Session-Token`` header, to receive the real access
+   and refresh tokens.
 
+   The full request/response shapes (including the partial-login,
+   email-verification and password-reset flows) are documented upstream:
+
+   * Conceptual introduction:
+     https://docs.allauth.org/en/latest/headless/introduction.html
+   * OpenAPI specification of every endpoint:
+     https://docs.allauth.org/en/latest/headless/openapi-specification/
+
+   **b) From the web "API key" page** (recommended for personal scripts
+   and long-running integrations, especially when 2FA is enabled): log
+   into the web app, open *User settings → API key*, and mint a
+   long-lived refresh token. You only see the value once, so store it
+   immediately. Because reaching that page requires a regular log-in,
+   any 2FA configured on the account is enforced before the token is
+   issued.
 
 2. Authenticate
 
@@ -105,11 +128,8 @@ method is intended for personal scripts or one-off integrations::
     >>> {'count': 5, 'next': None, 'previous': None, 'results': [{'id':.....
 
 To generate a key, log in to the web app and open the "API key" section in
-your user settings.
-
-You can also get a permanent token programmatically by sending a username
-and password to the ``/api/v2/login/`` endpoint. If the user doesn't have a
-token yet, a new one is generated.
+your user settings. The same page also lets you mint a long-lived JWT
+refresh token for use with the headless auth surface.
 
 Pagination
 ----------
@@ -127,7 +147,7 @@ Rate limiting
 A few sensitive endpoints are rate-limited (per IP for anonymous callers,
 per user for authenticated ones):
 
-* ``/api/v2/login/`` and ``/api/v2/token`` (authentication): 10 requests/min
+* ``/allauth/app/v1/auth/login`` and ``/allauth/app/v1/auth/2fa/authenticate`` (authentication): 10 requests/min
 * ``/api/v2/userprofile/`` (registration): 5 requests/min
 * ``/api/v2/ingredient/`` and ``/api/v2/ingredientinfo/`` (list): 120 requests/min
 * ``/api/v2/ingredient/<id>/`` and ``/api/v2/ingredientinfo/<id>/`` (detail): 300 requests/min

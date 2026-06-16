@@ -11,6 +11,7 @@ topics for the development workflow.
    :maxdepth: 1
    :hidden:
 
+   architecture
    docker
    backend
    frontend
@@ -19,6 +20,9 @@ topics for the development workflow.
    i18n
    dummy_data
    release
+
+:doc:`architecture`
+    Overview of the different components and services
 
 :doc:`docker`
     **Recommended starting point.** A Docker-based dev environment for the

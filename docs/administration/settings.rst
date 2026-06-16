@@ -29,9 +29,16 @@ sessions and tokens.
 
       python -c "import secrets; print(secrets.token_urlsafe(50))"
 
-``SIGNING_KEY``
-  JWT signing key for the API. Use a *different* value than ``SECRET_KEY``.
-  Same generation method.
+``JWT_PRIVATE_KEY`` / ``JWT_PUBLIC_KEY``
+  RSA keypair (RS256) shared by SimpleJWT, allauth.headless, and the PowerSync
+  token endpoint. Use cases are separated by the JWT ``aud`` claim. Generate
+  with::
+
+      docker compose exec web ./manage.py generate-jwt-keys
+
+  Paste the two output lines into your env file. Changing either value
+  invalidates all existing access and refresh tokens; logged-in users will
+  have to log in again.
 
 ``TIME_ZONE`` / ``TZ``
   Server timezone, e.g. ``Europe/Berlin``. See
@@ -102,6 +109,10 @@ Database
 
 See :doc:`storage` for switching between Postgres and SQLite.
 
+``PS_DATABASE_URI``
+  Single connection string of the form ``postgres://user:password@host:port/dbname``.
+  Takes precedence over the ``DJANGO_DB_*`` variables below.
+
 ``DJANGO_DB_ENGINE``
   Default ``django.db.backends.postgresql``. Use ``django.db.backends.sqlite3``
   for SQLite.
@@ -110,7 +121,8 @@ See :doc:`storage` for switching between Postgres and SQLite.
   Database name (Postgres) or full path to the SQLite file.
 
 ``DJANGO_DB_USER``, ``DJANGO_DB_PASSWORD``, ``DJANGO_DB_HOST``, ``DJANGO_DB_PORT``
-  Postgres connection details. Ignored for SQLite.
+  Postgres connection details. Ignored for SQLite. Not needed when
+  ``PS_DATABASE_URI`` is set.
 
 ``DJANGO_PERFORM_MIGRATIONS``
   Default ``True``. Apply pending database migrations on container startup.
