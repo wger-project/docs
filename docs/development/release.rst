@@ -107,7 +107,7 @@ Preflight checks
 **1) Bump versions**
 
 *Flutter:* If we use a new flutter version, update the version in
-``.github/actions/flutter-common/action.yml`` as well as ``flatpak-flutter.json``
+``.github/actions/flutter-common/action.yml`` as well as ``flatpak-flutter.yml``
 in the ``de.wger.flutter`` repository (commit to master).
 
 *Min server version:* If the new version of the app requires a new minimum
@@ -146,13 +146,13 @@ contains the build instructions for the flatpak version of the app.
 
 If there's a new version of sqlite (very likely), make sure the
 ``flatpak-flutter`` script supports it. A PR upstream might be needed; until
-then, the ``de.wger.flutter.json`` can be generated locally. After making any
-changes to ``flatpak-flutter.json``::
+then, the ``de.wger.flutter.yml`` can be generated locally. After making any
+changes to ``flatpak-flutter.yml``::
 
     git clone https://github.com/TheAppgineer/flatpak-flutter.git
     git clone https://github.com/wger-project/de.wger.flutter.git
     cd de.wger.flutter
-    ../flatpak-flutter/flatpak-flutter.py --app-module wger flatpak-flutter.json
+    ../flatpak-flutter/flatpak-flutter.py --app-module wger flatpak-flutter.yml
 
     # optional, only needed if you get an error with the flatpak-builder command
     sudo apt install elfutils
