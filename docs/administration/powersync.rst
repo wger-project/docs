@@ -31,7 +31,7 @@ Run the ``compact`` subcommand inside the running PowerSync container:
 Scheduling with cron
 ~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: cron
+.. code-block::
 
     # /etc/cron.d/wger-powersync-compact
     0 3 * * *  root  cd /path/to/wger/docker && docker compose exec -T powersync node service/lib/entry.js compact >>/var/log/wger-compact.log 2>&1
