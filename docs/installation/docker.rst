@@ -31,7 +31,14 @@ password **adminadmin**.
 
 .. warning::
     If your instance is reachable over the internet, change the default password
-    after logging in for the first time.
+    after logging in for the first time and change the JWT keys.
+
+Be sure to read ``config/prod.env``and at least set these settings:
+
+* ``SECRET_KEY``with ``python -c "import secrets; print(secrets.token_urlsafe(50))"``
+* ``JWT_PRIVATE_KEY`` and ``JWT_PUBLIC_KEY`` with ``docker compose exec web ./manage.py generate-jwt-keys``
+* ``SITE_URL`` with your server's URL
+
 
 Configuration
 -------------
@@ -122,4 +129,4 @@ Next steps
 ----------
 
 Once your installation is running, see the :ref:`administration` section for
-ongoing operations.
+ongoing operations (specially the one about powersync).
