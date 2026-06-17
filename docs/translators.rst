@@ -5,7 +5,7 @@
 Translators
 ===========
 
-*Generated on 2026-05-13*
+*Generated on 2026-06-17*
 
 Thanks to everyone who has helped translate wger into other languages.
 Contributions are made via `Weblate <https://hosted.weblate.org/engage/wger>`_ 
@@ -90,6 +90,7 @@ Chinese (Traditional Han script)
 * Chia Wen Tsai — https://github.com/cjwind
 * davidhung — https://github.com/david3951445
 * Dora Chiu — https://github.com/DoraC7
+* ial nosna — https://github.com/ansonlai13
 * Lairdev — https://github.com/lairwaves-dev
 * Paulkit — https://github.com/Paulkit
 * Peter Dave Hello — https://github.com/PeterDaveHello
@@ -145,6 +146,7 @@ Dutch
 * Floris C
 * Joey Haalboom — https://github.com/JoeyHaalboom
 * Nick
+* Philip Goto — https://github.com/flipflop97
 * Remco Schrijver — https://github.com/RemcoSchrijver
 * Rick
 * Roland Geider — https://github.com/rolandgeider
@@ -191,6 +193,7 @@ French
 * Kilian
 * Laurent Rousseau
 * loued — https://github.com/Loued
+* Louis-Maxime C — https://github.com/Lumenol
 * Lucas Batier — https://github.com/lucas-batier
 * Martin Derleth
 * MrSniikyz — https://github.com/BabyGeek
@@ -204,6 +207,12 @@ French
 * William — https://github.com/WilliamR312
 * Xav Basco
 * yoyomax80400 — https://github.com/yoyomax80400
+* Zarrokea — https://github.com/Zarrokea
+
+Galician
+--------
+
+* HackingAll — https://github.com/HackingAllYT
 
 German
 ------
@@ -225,6 +234,7 @@ German
 * Luis Lüscher — https://github.com/lslschr
 * Lydia
 * m4skedbyte
+* Madleen — https://github.com/madleenxsophie
 * Marvin M — https://github.com/M123-dev
 * Milo Ivir — https://github.com/milotype
 * mondstern
@@ -244,6 +254,7 @@ Greek
 * Allan Nordhøy — https://github.com/comradekingu
 * Antonis-geo
 * Dimitrys Meliates
+* Dudeatron — https://github.com/Dudeatron
 * Eugenia Russell — https://github.com/eugenia-russell
 * George Koikas
 * Michalis
@@ -289,6 +300,7 @@ Indonesian
 * Debi Maulana Ahsan Halla
 * Nurfitra Pujo Santiko — https://github.com/NurfitraPujo
 * Roland Geider — https://github.com/rolandgeider
+* Taufan Budiman — https://github.com/taufanbudiman
 
 Italian
 -------
@@ -301,6 +313,7 @@ Italian
 * Armando La Placa — https://github.com/a-lp
 * Christian Coduri — https://github.com/coduri
 * clafalco — https://github.com/clafalco
+* Dario Coltri — https://github.com/casacoltri
 * DT
 * Federico — https://github.com/FedericoVaga
 * Federico Pierantoni — https://github.com/F3FFO
@@ -353,8 +366,10 @@ Norwegian Bokmål
 
 * Allan Nordhøy — https://github.com/comradekingu
 * GS Bacon — https://github.com/Z0ink5
+* Heis — https://github.com/Heis
 * Morten R. Bjørklund
 * Nicholas Lilletvedt — https://github.com/Nikko-01
+* Para — https://github.com/bablecopherye
 * Roland Geider — https://github.com/rolandgeider
 * sontor1 — https://github.com/sontor1
 
@@ -375,6 +390,7 @@ Polish
 * A M — https://github.com/AugiAugi44
 * Allan Nordhøy — https://github.com/comradekingu
 * Anonymous
+* Artur Lewandowski — https://github.com/Lewan24
 * Dawid Panyło
 * Eliza — https://github.com/elizj3
 * gnu-ewm — https://github.com/e-michalak
@@ -415,6 +431,7 @@ Portuguese
 * Lucas Mezêncio — https://github.com/lucasmezencio
 * Luiz Felipe Guidorizzi de Oliveira — https://github.com/EvilMonark
 * Ninguém Mesmo
+* Pedro Remedios — https://github.com/premedios
 * Raphael Marques de Barros
 * Ricardo Bezerra da Silva — https://github.com/jeovajireh
 * Roland Geider — https://github.com/rolandgeider
@@ -452,7 +469,9 @@ Portuguese (Portugal)
 
 * Anonymous
 * FilipeAb — https://github.com/FilipeAb
+* Mateus Volpato — https://github.com/mvolpato96
 * Ninguém Mesmo
+* Pedro Remedios — https://github.com/premedios
 * Ruben Sardinha
 
 Romanian
@@ -499,7 +518,13 @@ Serbian
 -------
 
 * Anonymous
+* Dudeatron — https://github.com/Dudeatron
 * Mladen Trišić — https://github.com/mtrisic
+
+Shona
+-----
+
+* Kudzai Bosha — https://github.com/KudziBosh
 
 Slovak
 ------
@@ -542,6 +567,7 @@ Spanish
 * Oscar González — https://github.com/ogrydc
 * Pablo Sarabia Ortiz — https://github.com/psarabiaortiz
 * Roberto Iglesias — https://github.com/iglesiasroberto14
+* Rodrigo Jurado Villalobos
 * Roland Geider — https://github.com/rolandgeider
 * Santiago Persico — https://github.com/spersico
 * Sergio — https://github.com/MrPointcut95
@@ -554,6 +580,7 @@ Swedish
 -------
 
 * Allan Nordhøy — https://github.com/comradekingu
+* Dudeatron — https://github.com/Dudeatron
 * Kevin Gregard — https://github.com/Kladdiskakan
 * Markus Kauppinen — https://github.com/kauppinenomarkus-dotcom
 * Petter Tollemark
@@ -585,8 +612,10 @@ Turkish
 * Anonymous
 * Cem Avcı — https://github.com/cem256
 * Cenk Cidecio — https://github.com/ccidecio
+* Dudeatron — https://github.com/Dudeatron
 * Oğuz Ersen — https://github.com/oersen
 * Roland Geider — https://github.com/rolandgeider
+* Samet Gürtuna — https://github.com/sametgurtuna
 * ToldYouThat
 * Yunus AK — https://github.com/akyunus
 

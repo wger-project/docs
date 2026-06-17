@@ -5,7 +5,7 @@
 Contributors
 ============
 
-*Generated on 2026-05-13*
+*Generated on 2026-06-17*
 
 Aggregated code contributors across all wger repositories (backend,
 react frontend, flutter mobile app, docker, docs). Thank you all
@@ -39,6 +39,7 @@ for contributing to the project, you are true heroes! 🫶
 * Amandeep Mandal — https://github.com/AmandeepMandal1077
 * amannegi — https://github.com/AmanNegi
 * Angelina Subeska — https://github.com/Lyra1806
+* Anja Klipic — https://github.com/anjakDev
 * Anjalie Kini
 * Antonis-geo
 * Anupthor007 — https://github.com/Anupthor007
@@ -64,6 +65,7 @@ for contributing to the project, you are true heroes! 🫶
 * betterrrrr — https://github.com/betterrrrr
 * bigjimmy333 — https://github.com/BigJimmy333
 * bingyingchu — https://github.com/bingyingchu
+* birjd002 — https://github.com/birjd002
 * Bonicki Wojciech
 * Boniface Mwenda
 * Brad Johnson — https://github.com/bradsk88
@@ -103,7 +105,9 @@ for contributing to the project, you are true heroes! 🫶
 * Dylan Aird — https://github.com/Dolaned
 * ebwinters [at] comcast.net — https://github.com/ebwinters
 * Edmundo Meyer — https://github.com/e-meyer
+* Eltahir Mahmoud — https://github.com/eltahirsami
 * emuth — https://github.com/emmaamuth
+* Ewin7 — https://github.com/Ewin7
 * eyjhb — https://github.com/eyJhb
 * filipcuper — https://github.com/FilipCuper
 * FilipeAb — https://github.com/FilipeAb
@@ -118,6 +122,7 @@ for contributing to the project, you are true heroes! 🫶
 * gmmoraes — https://github.com/Zutzsa
 * goodnewz — https://github.com/goodnewz
 * grkm — https://github.com/gorkemarslan
+* HackingAll — https://github.com/HackingAllYT
 * HairyCrabW — https://github.com/hangyiw
 * hangy — https://github.com/hangy
 * Harlene Samra — https://github.com/harlenesamra
@@ -191,6 +196,7 @@ for contributing to the project, you are true heroes! 🫶
 * Malcolm Jones — https://github.com/DeveloperMal
 * Maniues — https://github.com/Maniues
 * Mannai
+* Marcello Mendo — https://github.com/Marcelluxx
 * MARCO ACORTE — https://github.com/marco-acorte
 * Marco Rimoldi — https://github.com/marcor
 * Marko Milosevic — https://github.com/TaarnStar
@@ -225,6 +231,7 @@ for contributing to the project, you are true heroes! 🫶
 * pankaj-basnet — https://github.com/pankaj-basnet
 * Patrick Witter — https://github.com/patrickwitter
 * Patrik — https://github.com/P4TR1K1305
+* Pawel Haracz — https://github.com/haracz93
 * Peter Dave Hello — https://github.com/PeterDaveHello
 * Peter Thaler
 * Peter van der Does — https://github.com/petervanderdoes
