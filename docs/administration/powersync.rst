@@ -22,11 +22,11 @@ or nutrition logs can run it hourly.
 Running compaction
 ~~~~~~~~~~~~~~~~~~
 
-Run the ``compact`` subcommand inside the running PowerSync container:
+Run the ``compact`` subcommand in a one-off PowerSync container:
 
 .. code-block:: bash
 
-    docker compose exec powersync node service/lib/entry.js compact
+    docker compose run --rm powersync compact
 
 Scheduling with cron
 ~~~~~~~~~~~~~~~~~~~~
@@ -34,7 +34,7 @@ Scheduling with cron
 .. code-block::
 
     # /etc/cron.d/wger-powersync-compact
-    0 3 * * *  root  cd /path/to/wger/docker && docker compose exec -T powersync node service/lib/entry.js compact >>/var/log/wger-compact.log 2>&1
+    0 3 * * *  root  cd /path/to/wger/docker && docker compose run --rm -T powersync compact >>/var/log/wger-compact.log 2>&1
 
 The ``-T`` flag disables TTY allocation, which is required when running
 from cron.
@@ -57,7 +57,7 @@ The service unit, ``/etc/systemd/system/wger-powersync-compact.service``:
     [Service]
     Type=oneshot
     WorkingDirectory=/path/to/wger/docker
-    ExecStart=/usr/bin/docker compose exec -T powersync node service/lib/entry.js compact
+    ExecStart=/usr/bin/docker compose run --rm -T powersync compact
 
 The timer unit, ``/etc/systemd/system/wger-powersync-compact.timer``:
 
