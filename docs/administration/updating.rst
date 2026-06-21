@@ -19,6 +19,10 @@ Remove the containers and pull the newest images:
 That's it, database migrations and static files are applied automatically on
 container start.
 
+.. note::
+    In rare cases there might be some other required steps to take, consult
+    https://github.com/wger-project/wger/releases for details
+
 **From source**
 
 Pull new changes and apply them in the source tree:

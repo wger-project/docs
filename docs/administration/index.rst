@@ -63,7 +63,7 @@ administrators running a wger instance.
     for media and static files.
 
 :doc:`powersync`
-    Maintenance for the PowerSync sync service
+    Setup and maintenance for the PowerSync sync service
 
 :doc:`auth_proxy`
     Delegate authentication to a reverse proxy or external SSO provider.

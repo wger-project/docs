@@ -26,6 +26,14 @@ To start all services::
 
     docker compose up -d
 
+Once the containers are up, create the PowerSync storage role and schema. This
+is a **required one-time step** for the mobile-app sync service::
+
+    docker compose exec web ./manage.py setup-powersync-storage
+
+The command is idempotent, so it is safe to re-run. See :ref:`powersync_setup`
+for details.
+
 Then open http://localhost (or your server's IP) and log in as: **admin**,
 password **adminadmin**.
 

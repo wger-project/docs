@@ -1,13 +1,43 @@
+.. _powersync:
+
+PowerSync
+=========
+
+PowerSync is the service that gives the mobile app bidirectional, offline-capable
+sync. It replicates from the application's Postgres database into *its own* bucket
+storage and exposes a sync endpoint the app connects to. See :ref:`architecture`
+for how it fits into the overall system.
+
+.. _powersync_setup:
+
+Initial setup
+-------------
+
+PowerSync keeps its sync state in a dedicated Postgres role and a separate schema
+inside the wger database. These have to be created **once** before the service
+can work and is  **not** done automatically.
+
+Run::
+
+    docker compose exec web ./manage.py setup-powersync-storage
+
+The command reads the connection details from ``PS_STORAGE_PG_URI`` and creates
+the role and schema if they are missing. It is idempotent and safe to re-run, on
+an existing role it simply updates the password to match the URI.
+
+If you change the storage password, update ``PS_STORAGE_PG_URI`` first and then
+re-run the command. Pass ``--schema`` to use a schema name other than the
+default ``powersync``.
+
+
 .. _powersync_maintenance:
 
-PowerSync maintenance
-=====================
+Maintenance
+-----------
 
-The PowerSync service replicates from the application's Postgres database into
-its own *bucket storage* in the ``powersync`` schema of the same database.
-Buckets are append-only operation logs so every ``INSERT``/``UPDATE``/``DELETE``
-on a synced table becomes one entry. Without periodic maintenance those logs
-grow unbounded.
+The service replicates every ``INSERT``/``UPDATE``/``DELETE`` on a synced table
+into its bucket storage as an append-only operation log. Without periodic
+maintenance those logs grow unbounded.
 
 Compaction runs online, clients can keep syncing while it is in progress.
 
