@@ -159,7 +159,7 @@ changes to ``flatpak-flutter.yml``::
     sudo apt install elfutils
     flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    flatpak-builder --repo=repo --force-clean --sandbox --user --install --install-deps-from=flathub build de.wger.flutter.json
+    flatpak-builder --repo=repo --force-clean --sandbox --user --install --install-deps-from=flathub build de.wger.flutter.yml
     flatpak run de.wger.flutter
 
 All these steps need to happen on a Linux (virtual) machine.
