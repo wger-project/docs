@@ -105,8 +105,8 @@ A minimal example:
     TIME_ZONE=Europe/Berlin
 
     # Application
-    MEDIA_ROOT=/home/wger/media
-    STATIC_ROOT=/home/wger/static
+    DJANGO_MEDIA_ROOT=/home/wger/media
+    DJANGO_STATIC_ROOT=/home/wger/static
 
     # Django Setup
     DJANGO_SETTINGS_MODULE=settings.main
