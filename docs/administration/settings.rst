@@ -69,6 +69,14 @@ into CSRF problems.
   set this to ``True``. Read the security implications in
   `Django's docs <https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header>`_.
 
+``USE_X_FORWARDED_HOST``
+  Default ``False``. Set to ``True`` if your proxy sets the
+  ``X-Forwarded-Host`` header and you need absolute URLs (e.g. the OAuth
+  callback URLs for :ref:`social logins <social_auth>`) to be built with the
+  public host name instead of the internal one. Only enable this if the proxy
+  actually sets the header, see
+  `Django's docs <https://docs.djangoproject.com/en/dev/ref/settings/#use-x-forwarded-host>`_.
+
 ``NUMBER_OF_PROXIES``
   Default ``1``. Number of proxies in front of the application. Used by
   Django REST Framework's request throttling to determine the real client IP.
