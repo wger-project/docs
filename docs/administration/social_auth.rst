@@ -65,3 +65,51 @@ If you need to configure this, just save a dictionary to the field:
        app.save()
 
 See the allauth provider documentation for the keys each provider supports.
+
+
+Generic OpenID Connect (OIDC)
+-----------------------------
+
+Besides the named providers, allauth ships a generic ``openid_connect`` provider
+that works with any spec-compliant OpenID Connect server, such as Keycloak,
+authentik, Authelia or Zitadel. The setup is the same as above, with two
+differences: the app additionally needs a unique ``provider_id``, and the
+server's discovery URL goes into its ``settings`` field.
+
+Enable the provider::
+
+    WGER_SOCIAL_PROVIDERS=openid_connect
+
+and add the app to the database:
+
+   .. code-block:: python
+
+       from allauth.socialaccount.models import SocialApp
+       from django.contrib.sites.models import Site
+
+       app = SocialApp.objects.create(
+           provider='openid_connect',
+
+           # unique slug, appears in the login URLs
+           provider_id='keycloak',
+
+           # label of the login button
+           name='Keycloak',
+
+           client_id='...',
+           secret='...',
+           settings={'server_url': 'https://idp.example.com/realms/myrealm'},
+       )
+       app.sites.add(Site.objects.get(id=1))
+
+The ``server_url`` can either point directly to the
+``/.well-known/openid-configuration`` document or to the issuer base URL, in
+which case the well-known suffix is appended automatically.
+
+When registering the client at the identity provider, use the following
+redirect (callback) URL, with the ``provider_id`` chosen above::
+
+    https://your.wger.server/account/oidc/<provider_id>/login/callback/
+
+To offer several OIDC servers at the same time, simply create one ``SocialApp``
+entry per server, each with its own ``provider_id``.
