@@ -38,8 +38,11 @@ Otherwise, manually create a new virtualenv and install everything::
   pip install -e .
 
 This will download the required JS and CSS libraries and create an SQLite
-database and populate it with data on the first run::
+database in ``db/database.sqlite`` and populate it with data on the first
+run (the ``db`` folder is not part of the git checkout, so it needs to be
+created first)::
 
+  mkdir -p db
   export DJANGO_SETTINGS_MODULE=settings.local_dev
   wger bootstrap
   wger load-online-fixtures
@@ -47,7 +50,7 @@ database and populate it with data on the first run::
 It's recommended to make a backup of the SQLite database after the initial
 bootstrap, just copy it to some other place::
 
-  cp database.sqlite database.sqlite.orig
+  cp db/database.sqlite db/database.sqlite.orig
 
 You can of course also use other databases such as PostgreSQL or MariaDB. Create
 a database and user with the usual tools (``createdb``, ``CREATE USER``, etc.)
