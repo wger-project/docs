@@ -69,6 +69,16 @@ To solve this, update the env file and either
   as there are some security considerations.
 
 
+Mobile app stuck on "Connecting"
+--------------------------------
+
+If you can log into the mobile app, but the sync status stays on "Connecting"
+forever and your data never show up, something on your network is most likely
+blocking the connection the app uses to synchronise it. Typical culprits are VPN
+apps, ad blockers such as Pi-hole or AdGuard, antivirus apps and some mobile
+providers. Try switching between WiFi and mobile data, or turn off the
+VPN or ad blocker for a moment and check whether the sync starts working.
+
 Wrong pagination links
 ----------------------
 
