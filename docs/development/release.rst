@@ -3,9 +3,9 @@
 Release process
 ===============
 
-wger has three components that release independently: the Django backend,
-the JS/CSS frontend package, and the Flutter mobile app. The processes are
-similar in spirit but have their own steps.
+wger has four components that release independently: the Django backend,
+the JS/CSS frontend package, the Flutter mobile app, and the Python API
+client. The processes are similar in spirit but have their own steps.
 
 Backend
 -------
@@ -217,3 +217,72 @@ might be necessary to manually update the metadata file and open a pull
 request:
 
 https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/de.wger.flutter.yml
+
+
+Python API client
+-----------------
+
+The client in the ``api-client`` repository is generated from the backend's
+OpenAPI schema, after each release.
+
+Refresh the schema
+~~~~~~~~~~~~~~~~~~
+
+Point the sync script at an instance running the release you are targeting.
+Note that the instance must use PostgreSQL, as Django derives the bounds of
+its integer fields from the database backend and SQLite produces a schema
+that no real deployment matches::
+
+    uv run python scripts/sync_schema.py --base-url https://wger.de
+
+Running ``./manage.py spectacular --fail-on-warn`` in the backend will tell you
+if there are any problems with the schema.
+
+Regenerate the client
+~~~~~~~~~~~~~~~~~~~~~
+
+Regenerate and run the tests (api cient repo)::
+
+    ./scripts/generate.sh && uv run pytest
+
+The schema and the generated code belong in the same commit, CI rejects a
+schema that moved without a regenerated client.
+
+Review the contract diff
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Every release is tagged and the schema is committed, so the previous release is
+the diff base::
+
+    git diff <previous tag> -- schema/wger-openapi.yaml
+
+Look for removed endpoints, changed response types, new required parameters,
+and renamed ``operationId`` values. The last ones rename functions in the
+generated client, which breaks its consumers even though the backend did not
+change.
+
+Bump the version and update the changelog
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Set the new version, which updates ``pyproject.toml`` and ``uv.lock`` together,
+since the lock records the project version as well::
+
+    uv version 2.7.0
+
+Note in the readme whether the client still works against the previous backend
+release, along with anything that behaves differently there.
+
+Move the ``Unreleased`` entries of ``CHANGELOG.md`` under the new version.
+Above all the renames found in the diff, and links to the backend release notes
+for the API changes themselves.
+
+
+Tag and release
+~~~~~~~~~~~~~~~
+
+Create and push the tag, then publish a release from it (the workflow triggers
+on a published release, not on the tag alone)::
+
+    git tag 2.7.0
+    git push origin 2.7.0
+    gh release create 2.7.0 --generate-notes
