@@ -49,6 +49,27 @@ Update translations
 
 Update the .po files as described in :ref:`i18n`.
 
+Check the sync rules
+~~~~~~~~~~~~~~~~~~~~
+
+If the release changes a table the mobile app syncs, the sync rules in the
+docker repository (``services/config-powersync/sync_rules.yaml``) need the
+matching change. Mention it in the release notes: the file is bind mounted, so
+self-hosted instances only get it by pulling that repository.
+
+A new column needs one thing more. Adding it writes no WAL, so PowerSync never
+re-replicates the rows already in its bucket storage and clients read the
+column as missing, indefinitely on an instance that never deploys new rules.
+Touch every row of the table in the same migration::
+
+    migrations.RunSQL(
+        sql=['UPDATE changed_table SET id = id;'],
+        reverse_sql=migrations.RunSQL.noop,
+    )
+
+Deploying changed rules makes PowerSync reprocess everything and all clients
+re-download their buckets, so it is not a substitute for the row touch.
+
 Tag the release
 ~~~~~~~~~~~~~~~
 
