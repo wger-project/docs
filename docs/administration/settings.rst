@@ -260,6 +260,15 @@ JWT authentication
 
 For SSO via reverse proxy (``AUTH_PROXY_*``), see :doc:`auth_proxy`.
 
+OAuth2 provider
+---------------
+
+``IDP_OIDC_PRIVATE_KEY``
+  Signing key that lets wger act as an OAuth2 provider itself, so that other
+  applications can let their users log in with their wger account. Unset by
+  default, which leaves the feature switched off. See :doc:`oauth2_provider`
+  for the setup.
+
 Brute-force protection
 ----------------------
 

@@ -29,6 +29,7 @@ administrators running a wger instance.
    powersync
    auth_proxy
    social_auth
+   oauth2_provider
    mfa
    anubis
    postgres
@@ -70,6 +71,10 @@ administrators running a wger instance.
 
 :doc:`social_auth`
     Social authentication (OAuth2) via Google, GitHub, GitLab, and other providers.
+
+:doc:`oauth2_provider`
+    Let other applications log in with a wger account and use the API on the
+    user's behalf.
 
 :doc:`mfa`
     Two-factor authentication (TOTP, recovery codes) and passkeys (WebAuthn).
