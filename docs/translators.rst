@@ -5,7 +5,7 @@
 Translators
 ===========
 
-*Generated on 2026-06-17*
+*Generated on 2026-08-28*
 
 Thanks to everyone who has helped translate wger into other languages.
 Contributions are made via `Weblate <https://hosted.weblate.org/engage/wger>`_ 
@@ -22,6 +22,7 @@ Arabic
 
 * Ahmed zein — https://github.com/Ahmed-Zein
 * Anonymous
+* E Sa
 * Hanaa — https://github.com/hn-n
 * Hesham sraj
 * Jaafer Mahfoud — https://github.com/mysterI0s
@@ -30,6 +31,7 @@ Arabic
 Arabic (Saudi Arabia)
 ---------------------
 
+* E Sa
 * E. Ta. — https://github.com/j-neko
 * Hissabat Manager — https://github.com/Chinguetti-Quizz
 * MR — https://github.com/MyaserAL-Healy
@@ -40,6 +42,7 @@ Bulgarian
 ---------
 
 * Allan Nordhøy — https://github.com/comradekingu
+* Bozhidar Videnov — https://github.com/bozhidarv
 
 Catalan
 -------
@@ -60,6 +63,7 @@ Chinese (Simplified Han script)
 * Wen QI — https://github.com/kevinwenyu
 * Yichao19 — https://github.com/Yichao19
 * youkarin — https://github.com/yukarin4869
+* zzqayy — https://github.com/zzqayy
 
 Chinese (Simplified)
 --------------------
@@ -170,6 +174,7 @@ Finnish
 
 * J. Lavoie
 * Juuso Haapanen — https://github.com/juusohaapanen
+* Mikael Siidorow — https://github.com/MikaelSiidorow
 * Nikolay Korotkiy — https://github.com/sikmir
 * Petri Hämäläinen — https://github.com/pHamala
 * Ricky Tigg — https://github.com/Ricky-Tigg
@@ -184,6 +189,7 @@ French
 * bouya2a — https://github.com/bouya2a
 * Célian
 * David Olewski — https://github.com/Arigowin
+* DocteurAgadir — https://github.com/Gnoule
 * Enzo Besnainou
 * florent4014 — https://github.com/florent4014
 * Hugo CUVILLIER — https://github.com/SkyDonald
@@ -262,8 +268,10 @@ Greek
 Hebrew
 ------
 
+* Allan Nordhøy — https://github.com/comradekingu
 * Anonymous
 * DR
+* Mordechai Neeman
 * n,rdo
 * Omer I.S — https://github.com/omeritzics
 * shlomi assaf — https://github.com/shlomiassaf
@@ -274,6 +282,7 @@ Hebrew
 Hindi
 -----
 
+* Allan Nordhøy — https://github.com/comradekingu
 * Anonymous
 * Debayan Sutradhar — https://github.com/rnayabed
 * keshav mahawar
@@ -290,10 +299,12 @@ Hungarian
 * Allan Nordhøy — https://github.com/comradekingu
 * Greg
 * László Mócsy — https://github.com/LamaxStudio
+* tomorigabor — https://github.com/tomorigabor
 
 Indonesian
 ----------
 
+* Andini — https://github.com/Threeguana
 * Anonymous
 * Arga Pandika — https://github.com/argakast
 * aryakdaniswara — https://github.com/aryakdaniswara
@@ -311,6 +322,7 @@ Italian
 * Anonymous
 * Antenore Gatta — https://github.com/antenore
 * Armando La Placa — https://github.com/a-lp
+* Armando Schiano di Cola — https://github.com/armandoschianodicola
 * Christian Coduri — https://github.com/coduri
 * clafalco — https://github.com/clafalco
 * Dario Coltri — https://github.com/casacoltri
@@ -319,6 +331,7 @@ Italian
 * Federico Pierantoni — https://github.com/F3FFO
 * Gab Gat
 * J. Lavoie
+* Leonardo Lalli — https://github.com/Leonardo-Lalli
 * Luca Galli — https://github.com/Lvcaa
 * Marco Accorinti — https://github.com/accodev
 * MARCO ACORTE — https://github.com/marco-acorte
@@ -327,6 +340,7 @@ Italian
 * Mirco Pasquale — https://github.com/mircopsq
 * Mirko Ferrati — https://github.com/MirkoFerrati
 * mondstern
+* NP
 * oarion — https://github.com/oarion
 * Roland Geider — https://github.com/rolandgeider
 * Sfizio Purea
@@ -336,6 +350,7 @@ Italian
 Japanese
 --------
 
+* Allan Nordhøy — https://github.com/comradekingu
 * Anonymous
 * heppocogne — https://github.com/heppocogne
 * Ryohei Morimoto — https://github.com/Ryohei-Caulked
@@ -352,6 +367,7 @@ Korean
 * Hosted Weblate user 141821
 * jyk0619 — https://github.com/jyk0619
 * kobo
+* KT Park — https://github.com/kk673
 * namong79 — https://github.com/namong79
 * 고수처럼 — https://github.com/rrrmaster
 * 성동하 — https://github.com/tomjovi
@@ -365,6 +381,7 @@ Norwegian Bokmål
 ----------------
 
 * Allan Nordhøy — https://github.com/comradekingu
+* Christoffer Gjønvik Holsæther — https://github.com/christoffer-holsaether
 * GS Bacon — https://github.com/Z0ink5
 * Heis — https://github.com/Heis
 * Morten R. Bjørklund
@@ -392,6 +409,7 @@ Polish
 * Anonymous
 * Artur Lewandowski — https://github.com/Lewan24
 * Dawid Panyło
+* Dominik Matras — https://github.com/dominikmatras
 * Eliza — https://github.com/elizj3
 * gnu-ewm — https://github.com/e-michalak
 * Henio Szewczyk — https://github.com/hszewczyk
@@ -473,6 +491,7 @@ Portuguese (Portugal)
 * Ninguém Mesmo
 * Pedro Remedios — https://github.com/premedios
 * Ruben Sardinha
+* ssantos — https://github.com/SantosSi
 
 Romanian
 --------
@@ -508,6 +527,7 @@ Russian
 * Nikolay Korotkiy — https://github.com/sikmir
 * Roland Geider — https://github.com/rolandgeider
 * Ryeori — https://github.com/daniqshu
+* tovarishhh — https://github.com/bezbiletnym
 * zeriax — https://github.com/zeriaxdev
 * Алексей Курышко — https://github.com/alexkuryshko
 * Иван Редун — https://github.com/ireduntr
@@ -529,12 +549,14 @@ Shona
 Slovak
 ------
 
+* Allan Nordhøy — https://github.com/comradekingu
 * Oliver Ondruš — https://github.com/G0stik
 * Patrik — https://github.com/P4TR1K1305
 
 Slovenian
 ---------
 
+* Jure Repinc — https://github.com/JLP
 * Valentino Angioi
 
 Spanish
@@ -581,8 +603,10 @@ Swedish
 
 * Allan Nordhøy — https://github.com/comradekingu
 * Dudeatron — https://github.com/Dudeatron
+* Jonas — https://github.com/frassefraze
 * Kevin Gregard — https://github.com/Kladdiskakan
 * Markus Kauppinen — https://github.com/kauppinenomarkus-dotcom
+* Nils Rutqvist
 * Petter Tollemark
 * PNS11 — https://github.com/cess11
 * stefan — https://github.com/clint1337

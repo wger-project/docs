@@ -2,7 +2,7 @@
 
 Thank you all for contributing to the project, you are true heroes! 🫶
 
-*Generated on 2026-05-13*
+*Generated on 2026-08-28*
 
 ---
 
@@ -16,6 +16,7 @@ Thank you all for contributing to the project, you are true heroes! 🫶
 - Derek Knaub
 - Aaron Hsiung - [https://github.com/AaronHsiung](https://github.com/AaronHsiung)
 - Tom Bowyer - [https://github.com/ImTheTom](https://github.com/ImTheTom)
+- ecstt - [https://github.com/ecstt](https://github.com/ecstt)
 
 ## Translators
 

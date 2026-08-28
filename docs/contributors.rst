@@ -5,7 +5,7 @@
 Contributors
 ============
 
-*Generated on 2026-06-17*
+*Generated on 2026-08-28*
 
 Aggregated code contributors across all wger repositories (backend,
 react frontend, flutter mobile app, docker, docs). Thank you all
@@ -14,6 +14,7 @@ for contributing to the project, you are true heroes! 🫶
 * Aaliya Ali — https://github.com/Aaliya-Ali
 * Aaron Hsiung — https://github.com/AaronHsiung
 * Aaron Kimbrell — https://github.com/aronwk-aaron
+* AaryanPuri — https://github.com/AaryanPuri
 * Abhishek Saini — https://github.com/Abhisheksainii
 * absolutely-not-bot — https://github.com/absolutely-not-bot
 * Acut MaxB — https://github.com/bilol-makhmudov
@@ -38,6 +39,7 @@ for contributing to the project, you are true heroes! 🫶
 * alois
 * Amandeep Mandal — https://github.com/AmandeepMandal1077
 * amannegi — https://github.com/AmanNegi
+* Amit Mishra — https://github.com/amitmishra11
 * Angelina Subeska — https://github.com/Lyra1806
 * Anja Klipic — https://github.com/anjakDev
 * Anjalie Kini
@@ -45,10 +47,12 @@ for contributing to the project, you are true heroes! 🫶
 * Anupthor007 — https://github.com/Anupthor007
 * aria-tec — https://github.com/aria-tec
 * Arijan Ralph — https://github.com/CodingKnight2
+* armandoschianodicola — https://github.com/armandoschianodicola
 * artchiee — https://github.com/artchiee
 * Artem — https://github.com/defaultpage
 * Arthur De Neyer — https://github.com/GaecKo
 * Arun Muralidharan — https://github.com/arun-muralidharan
+* Arya — https://github.com/Arya-185
 * Arya Pratap Singh — https://github.com/ARYPROGRAMMER
 * Austin Leung — https://github.com/austin-leung
 * avinash — https://github.com/HeyAvi
@@ -60,9 +64,11 @@ for contributing to the project, you are true heroes! 🫶
 * beingbiplov — https://github.com/beingbiplov
 * Ben Reese — https://github.com/benreese0
 * Ben Southcott — https://github.com/blsouthcott
+* Ben Tucker — https://github.com/bentucker
 * Benjamin Porter — https://github.com/FreedomBen
 * Bernardo Koen — https://github.com/bernardokoen
 * betterrrrr — https://github.com/betterrrrr
+* bhavit04 — https://github.com/Bhavit16
 * bigjimmy333 — https://github.com/BigJimmy333
 * bingyingchu — https://github.com/bingyingchu
 * birjd002 — https://github.com/birjd002
@@ -76,6 +82,7 @@ for contributing to the project, you are true heroes! 🫶
 * Calvin Walden — https://github.com/calvinrw
 * Cam Cecil — https://github.com/scrapcode
 * Cameron Radmore — https://github.com/radmorecameron
+* Charu7596 — https://github.com/charugupta-dev
 * Chidinma Obiekwe — https://github.com/DidiNDexter
 * Chris Ulicny — https://github.com/ChrisUlicny
 * Christijan — https://github.com/ChrispyM
@@ -104,6 +111,7 @@ for contributing to the project, you are true heroes! 🫶
 * DVPeer — https://github.com/Denpeer
 * Dylan Aird — https://github.com/Dolaned
 * ebwinters [at] comcast.net — https://github.com/ebwinters
+* ecstt — https://github.com/ecstt
 * Edmundo Meyer — https://github.com/e-meyer
 * Eltahir Mahmoud — https://github.com/eltahirsami
 * emuth — https://github.com/emmaamuth
@@ -160,6 +168,7 @@ for contributing to the project, you are true heroes! 🫶
 * Josh — https://github.com/FlyingNimbusCloud
 * Joshua Shelley — https://github.com/navyjosh
 * João Goulart — https://github.com/usehalter
+* Jure Repinc — https://github.com/JLP
 * Justin — https://github.com/justin-pinheiro
 * JustinBenito — https://github.com/JustinBenito
 * justinec [at] unix.andrew.cmu.edu — https://github.com/jcho17
@@ -203,9 +212,12 @@ for contributing to the project, you are true heroes! 🫶
 * Marvin M — https://github.com/M123-dev
 * matheus — https://github.com/marchiore
 * Matthew Harrison — https://github.com/Maralai
+* Matz Hilven — https://github.com/MatzHilven
 * Max Pylypenko — https://github.com/3mpee3mpee
 * Mbarak Mbigo — https://github.com/Mbarak-Mbigo
+* Mehak-mahajan — https://github.com/Mehak-mahajan
 * Mihail Burduja — https://github.com/warchildmd
+* Mikael Siidorow — https://github.com/MikaelSiidorow
 * Milksheyke — https://github.com/sheyaln
 * Milo Ivir — https://github.com/milotype
 * Mirek Mazel — https://github.com/12people
@@ -214,6 +226,8 @@ for contributing to the project, you are true heroes! 🫶
 * Mladen Trišić — https://github.com/mtrisic
 * Mohammad Rafigh — https://github.com/mohammadrafigh
 * Mohammed Ali Zubair
+* Muhammad Fezan — https://github.com/faizan7800
+* Mustafa Senoglu — https://github.com/mmustafasenoglu
 * ndimoro — https://github.com/ndimoro
 * Nelumbo Nucifera — https://github.com/nelumboy
 * Nenza Nurfirmansyah — https://github.com/nenzan
@@ -236,6 +250,7 @@ for contributing to the project, you are true heroes! 🫶
 * Peter Thaler
 * Peter van der Does — https://github.com/petervanderdoes
 * Poussinou — https://github.com/Poussinou
+* Praharsha2007 — https://github.com/Praharsha2007
 * Prakash Shekhar — https://github.com/prakash-shekhar
 * purplebird
 * pythonGeek
@@ -266,6 +281,7 @@ for contributing to the project, you are true heroes! 🫶
 * Sandi Milohanić — https://github.com/sandimilohanic
 * sandilsranasinghe — https://github.com/sandilsranasinghe
 * sangharshdeveloper — https://github.com/Sangharshdeveloper
+* Sanji78 — https://github.com/Sanji78
 * Saraswathi — https://github.com/saraswathirajkumar18
 * Sarthak — https://github.com/sg172003
 * Scott Peshak — https://github.com/speshak
@@ -303,6 +319,7 @@ for contributing to the project, you are true heroes! 🫶
 * Tolu ogundoyin — https://github.com/Tolu007
 * Tom Bowyer — https://github.com/ImTheTom
 * Tomer Ben Rachel — https://github.com/TomerPacific
+* tomorigabor — https://github.com/tomorigabor
 * Tomáš Konkoľ — https://github.com/TomasKonkol
 * Tomáš Terpitko
 * ton-An — https://github.com/ton-An
