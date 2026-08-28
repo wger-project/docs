@@ -4,8 +4,8 @@ Celery
 ======
 
 wger uses a celery queue for some background tasks. At the moment this is used
-for things like fetching the ingredient images or periodically synchronizing the
-exercise database.
+for things like sending emails, fetching the ingredient images or periodically
+synchronizing the exercise database.
 
 The celery queue is optional and is not required.
 
@@ -125,14 +125,18 @@ https://docs.celeryq.dev/en/stable/userguide/daemonizing.html
 Celery beat
 -----------
 
-Celery beat is used to perform periodic tasks. This is used at the moment to
-regularly sync the exercises from the configured wger instance. A random time
-and day of the week is selected in which the individual task will be run. Each
-task can be toggled on or off with a setting in the ``WGER_SETTING`` dictionary:
+Celery beat is used to perform periodic tasks, such as regularly syncing the
+exercises from the configured wger instance. A random time and day of the week
+is selected in which the individual task will be run. These tasks can be
+toggled on or off with a setting in the ``WGER_SETTING`` dictionary:
 
 * **SYNC_EXERCISES_CELERY** to synchronize the exercises themselves
 * **SYNC_EXERCISE_IMAGES_CELERY** to synchronize exercise images
 * **SYNC_EXERCISE_VIDEOS_CELERY** to synchronize exercise videos
+
+Other tasks are always scheduled, currently the expired tokens and sessions
+that are flushed daily, and the daily recomputation of the calculated
+measurement categories.
 
 To start it just run in your virtual env::
 
