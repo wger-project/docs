@@ -6,6 +6,11 @@ Updating wger
 Pull new releases regularly to get bug fixes, new features and security
 updates.
 
+**Every release has a page at https://github.com/wger-project/wger/releases**
+with what changed and with anything that particular update needs beyond the
+steps below. Read it before you start, it is where the exceptions are spelled
+out.
+
 **Docker**
 
 Remove the containers and pull the newest images:
@@ -19,9 +24,18 @@ Remove the containers and pull the newest images:
 That's it, database migrations and static files are applied automatically on
 container start.
 
-.. note::
-    In rare cases there might be some other required steps to take, consult
-    https://github.com/wger-project/wger/releases for details
+.. warning::
+    The PowerSync sync rules are **not** part of the images: they are bind
+    mounted from a folder in the docker repository, so new images leave your
+    copy untouched. Pull that repository as well and restart the service:
+
+    .. code-block:: bash
+
+        git pull
+        docker compose restart powersync
+
+    Nothing warns you if you skip it. The service starts and the logs stay
+    clean, while the app quietly misses data. See :ref:`powersync`.
 
 **From source**
 
