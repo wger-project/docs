@@ -225,6 +225,13 @@ Python API client
 The client in the ``api-client`` repository is generated from the backend's
 OpenAPI schema, after each release.
 
+For a released backend, the first two steps are a single click: trigger the
+``Regenerate client`` workflow in the Actions tab and it refreshes the schema,
+regenerates the client, runs the checks and opens a pull request with the
+result. Continue at :ref:`review the contract diff <client_contract_diff>`.
+Do the steps by hand when the schema is only available from a local instance,
+since the runner cannot reach it.
+
 Refresh the schema
 ~~~~~~~~~~~~~~~~~~
 
@@ -247,6 +254,8 @@ Regenerate and run the tests (api cient repo)::
 
 The schema and the generated code belong in the same commit, CI rejects a
 schema that moved without a regenerated client.
+
+.. _client_contract_diff:
 
 Review the contract diff
 ~~~~~~~~~~~~~~~~~~~~~~~~
