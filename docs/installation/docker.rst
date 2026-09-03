@@ -130,6 +130,12 @@ The docker repo ships a `Caddyfile.example
 for users who'd rather use Caddy than nginx in front of the application. Caddy
 automatically obtains and renews SSL certificates from Let's Encrypt.
 
+.. note::
+
+   If you put your own proxy in front of the application, it needs some special
+   handling for the ``/ps/`` path used by the sync service, otherwise the mobile
+   app might not be able to synchronise. See :ref:`powersync_proxy`.
+
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 

@@ -30,6 +30,60 @@ re-run the command. Pass ``--schema`` to use a schema name other than the
 default ``powersync``.
 
 
+.. _powersync_proxy:
+
+Behind your own reverse proxy
+-----------------------------
+
+The sync endpoint under ``/ps/`` behaves differently from the rest of the
+application: the app opens a single, long-lived streaming response and receives
+the sync data over it as it arrives. The nginx and Caddy configurations in the
+docker repository already account for this, but if you put **another** proxy in
+front of them (nginx Proxy Manager, Apache, Traefik, your hoster's edge, etc.)
+that one might need to be configured accordingly as well.
+
+What the ``/ps/`` location needs:
+
+* **Response buffering off.** This is the important one. A buffering proxy
+  collects the stream instead of passing it through, so the app never receives
+  the sync data even though the server sent it long ago.
+* **Request buffering off**, the upload path streams as well.
+* **HTTP/1.1 or newer**, with ``Upgrade`` and ``Connection`` passed through.
+* **Long read and send timeouts.** The connection stays open for a long time
+  with no traffic on it, the usual 60 second default tears it down constantly.
+
+For nginx:
+
+.. code-block:: nginx
+
+    location /ps/ {
+        proxy_pass http://<address of the wger nginx>;
+
+        proxy_buffering off;
+        proxy_request_buffering off;
+
+        proxy_http_version 1.1;
+        proxy_read_timeout 1d;
+        proxy_send_timeout 1d;
+
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+.. note::
+
+   An nginx in front gets the buffering part for free: wger's own nginx sends
+   ``X-Accel-Buffering: no`` on that endpoint and nginx turns its buffering off
+   when it sees that header. It says nothing about the timeouts though, and
+   every other proxy ignores it, so setting the above explicitly is still the
+   safer route.
+
+
 .. _powersync_maintenance:
 
 Maintenance

@@ -120,6 +120,12 @@ apps, ad blockers such as Pi-hole or AdGuard, antivirus apps and some mobile
 providers. Try switching between WiFi and mobile data, or turn off the
 VPN or ad blocker for a moment and check whether the sync starts working.
 
+A reverse proxy of your own can look exactly the same: if it buffers the
+response and the data to sync is small enough to fit into its buffer, nothing
+reaches the app at all. The giveaway is the sync service logging
+``checkpoint_complete`` for that client while the app is still on "Connecting",
+see :ref:`powersync_proxy`.
+
 Mobile app reports "Sync Service Unavailable"
 ---------------------------------------------
 
@@ -137,10 +143,22 @@ suspects:
   the nginx service under ``/ps/``. Don't point the app (or ``SITE_URL``)
   directly at the django container.
 * Your own reverse proxy doesn't forward ``/ps/`` or cuts off long-running
-  connections; see the ``/ps/`` section in our nginx.conf for reference.
+  connections, see :ref:`powersync_proxy`.
 * The PowerSync container isn't running: check ``docker compose ps`` and
   ``docker compose logs powersync``. You might be using an older docker compose
   setup without the powersync service.
 
 To test that the service is configured correctly, open ``https://your.wger.url/ps/probes/liveness``
 with your browser. A short status response means the sync service is reachable.
+
+
+Mobile app syncs, but never completes
+-------------------------------------
+
+A subtler failure: the app logs in and looks connected, but data logged on the
+server never appears on the phone or the initial sync stalls just short of 100%.
+
+The usual cause is **response buffering** on a reverse proxy of your own in
+front of wger: the sync stream is collected by the proxy instead of being
+passed through, so the app never receives the data and keeps retrying. See
+:ref:`powersync_proxy` for the settings the ``/ps/`` location needs.
