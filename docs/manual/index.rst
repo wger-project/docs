@@ -10,6 +10,11 @@ User manual for the wger app. Currently only a chapter for the routines is avail
    :hidden:
 
    routines
+   connected_applications
 
 :doc:`routines`
     How to use the routines and the progression rules.
+
+:doc:`connected_applications`
+    How other applications get access to your wger data, what the permissions
+    on the consent screen mean, and how to take that access away again.
