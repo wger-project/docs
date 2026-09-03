@@ -44,6 +44,11 @@ sessions and tokens.
   Server timezone, e.g. ``Europe/Berlin``. See
   https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
+  Set this correctly before the first start and treat it as fixed afterwards.
+  Since 2.7 users carry their own timezone once their app has reported it, but
+  this value remains the fallback for everyone else. Changing it later shifts
+  the training days of users without a reported timezone.
+
 ``ALLOWED_HOSTS``
   Comma-separated list of hostnames the application accepts requests for,
   e.g. ``example.com,www.example.com``.
