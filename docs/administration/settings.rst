@@ -117,6 +117,16 @@ Application
   Default ``21`` (days). Users below this account age cannot contribute to
   exercises.
 
+``WGER_SHOW_APP_STORE_LINKS``
+  Default ``True``. Whether the footer and the landing page link to the mobile
+  app stores.
+
+``WGER_MAX_SESSION_LENGTH_HOURS``
+  Default ``5`` (hours). How long a single workout session may last. The same
+  value decides how long after its start a new entry still counts as part of an
+  ongoing session instead of starting a new one. Raise it if your users regularly
+  record very long activities such as hiking.
+
 Database
 --------
 
