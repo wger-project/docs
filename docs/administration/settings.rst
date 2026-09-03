@@ -168,7 +168,8 @@ setup.
 
 ``USE_CELERY``
   Default ``True`` in the Docker setup (``False`` otherwise). Master switch, most
-  ``SYNC_*_CELERY`` and ``CACHE_API_*_CELERY`` options require this.
+  ``SYNC_*_CELERY`` and ``CACHE_API_*_CELERY`` options require this. It also
+  moves the sending of emails to the worker, see below.
 
 ``CELERY_BROKER``, ``CELERY_BACKEND``
   Default ``redis://cache:6379/2``. Redis URL for Celery's broker and
@@ -332,6 +333,14 @@ to stdout). To use a real SMTP server:
 ``DJANGO_ADMINS``
   Optional. ``Name,email@example.com`` to receive notifications about
   internal server errors. Requires a working email configuration.
+
+With ``USE_CELERY=True`` the emails are handed to a background worker which
+actually sends them. Note that this applies to all emails sent thorugh the systen,
+such as registering, resetting a password, etc..
+
+Also worth noting: ``manage.py sendtestemail`` only puts the message into the
+queue, so it returns successfully even when the SMTP settings are wrong; the
+result of the actual delivery is in the worker's log.
 
 To verify your setup, run::
 
