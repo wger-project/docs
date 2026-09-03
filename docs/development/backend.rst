@@ -94,11 +94,11 @@ The backend uses Django's built-in test runner. Each app keeps its tests under
 Code style
 ----------
 
-The project uses ``ruff`` for formatting and ``isort`` for import sorting, both
-configured in ``pyproject.toml``. Before opening a PR::
+The project uses ``ruff`` for both formatting and import sorting, configured in
+``pyproject.toml``. Before opening a PR::
 
   ruff format
-  isort .
+  ruff check --fix
 
 CI runs the same checks, so it's worth doing it locally first.
 

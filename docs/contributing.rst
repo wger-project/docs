@@ -58,7 +58,7 @@ Once you have the code ready:
   everything, but they should cover the most important parts of the code. If you
   are not sure what or how to test, just ask us.
 * run the formatter for the language you're touching. For Python that's
-  ``ruff format && isort .`` with a line length of 100 characters (see
+  ``ruff format && ruff check --fix`` with a line length of 100 characters (see
   :doc:`development/backend`). Frontend (React) and mobile (Flutter) have their
   own formatters configured in their respective repos.
 * think about UI/UX. If you are adding a new feature, make sure it is easy to use and
