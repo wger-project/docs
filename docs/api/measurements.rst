@@ -42,6 +42,22 @@ Measurements
 A measurement has ``category``, ``date``, ``value``, ``notes``, plus the
 three fields the sync uses (``source``, ``external_id``, ``extra_data``).
 
+Since wger 2.8 an entry can also be written with a ``metric_type`` instead of
+a ``category``, which stands for your category of that type::
+
+    POST /api/v2/measurement/
+    {"metric_type": "body_weight", "date": "2026-10-08T07:30:00+02:00", "value": 80.1,
+     "extra_data": {"unit": "kg"}}
+
+Send the unit along: without it the value is taken in the unit of the
+category, which for a user who weighs in pounds turns 80.1 kg into 80.1 lb.
+
+If both are sent they have to agree. ``metric_type`` is write-only and does
+not create categories: if you have none of that type yet the request is a
+``400``. The same goes for ``custom``, which many categories share, so those
+are addressed by id. A group type such as ``blood_pressure`` takes no entries
+of its own, write into its components instead.
+
 ``date`` is a timezone-aware datetime and there is no one-entry-per-day
 restriction: a reading in the morning and one in the evening are two entries,
 and the components of one reading share their exact timestamp.
@@ -164,7 +180,8 @@ Three fields describe where an entry came from:
 ``category``, ``source`` and ``external_id`` together are unique, which makes
 a re-import idempotent: an entry the importer already wrote is refused with a
 ``400`` instead of duplicated, and the server can recompute a calculated
-category the same way. ``external_id`` cannot be used as a filter.
+category the same way. Filter on ``external_id`` to find an entry you wrote
+before, e.g. to change or delete it.
 
 The mobile app shows entries with a ``source`` other than ``user`` as
 read-only, which for the imported ones is a client convention: the importer
@@ -379,7 +396,9 @@ Categories can be filtered by ``id``, ``name``, ``unit``, ``metric_type``,
 ``parent`` and ``is_official``.
 
 Measurements can be filtered by ``id`` (also ``id__in``), ``category``
-(also ``category__in``), ``source`` and ``date``, the latter with the
+(also ``category__in``), ``metric_type`` (the type of the category),
+``source``, ``external_id`` (also ``external_id__in``) and ``date``, the
+latter with the
 ``date__gt``, ``date__gte``, ``date__lt`` and ``date__lte`` variants. For
 charts, fetch the range you draw instead of the whole history, the endpoint
 is indexed for exactly that access pattern.
@@ -452,6 +471,11 @@ integrations written against it. Do not build on it: it is the measurements
 of the official body weight category behind a narrower shape, its values are
 always in the unit of the user profile, and it will go away.
 
-Use ``/api/v2/measurement/`` with the official body weight category instead
-(find it with
-``/api/v2/measurement-category/?metric_type=body_weight&is_official=True``).
+Use ``/api/v2/measurement/`` instead, with ``?metric_type=body_weight`` for
+reading and ``"metric_type": "body_weight"`` for writing. On 2.7, which
+knows neither of the two, look the category up with
+``/api/v2/measurement-category/?metric_type=body_weight&is_official=True``.
+Before 2.7 body weight is not a measurement yet and ``weightentry`` is the
+only way in.
+Values come back in the unit stored with the entry (``extra_data.unit``, or
+the unit of the category if it has none), not converted to the profile unit.
