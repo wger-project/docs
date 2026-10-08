@@ -21,8 +21,11 @@ Bump the app version as well as the minimum required mobile app version in:
 
 * ``wger/version.py``
 * ``package.json`` (not strictly required, but keep it in sync)
-* All the ``.github/workflows/docker-*.yml`` files
 * ``docs/conf.py`` (in the docs repo)
+
+The docker workflows need no edit: the server image reads its tag from
+``VERSION_STRING`` in ``wger/version.py``, the base image is tagged by build
+date and the demo image only has ``latest``.
 
 Update the project ID in ``docs/contributing.rst`` (in the docs repo).
 
@@ -73,16 +76,21 @@ re-download their buckets, so it is not a substitute for the row touch.
 Tag the release
 ~~~~~~~~~~~~~~~
 
-Create a new tag for the release::
+Create a new tag for the release, using the same three part version that is in
+``wger/version.py``::
 
     git tag -a 1.2.3 -m "Release 1.2.3"
     git push origin 1.2.3
 
-Create a final tag for the Docker image without the ``-dev`` suffix (after the
-images have been built)::
+Older releases were tagged ``2.6``, ``2.5`` and so on. Don't do that any more:
+``wger/server:1.2`` is a docker tag that moves to the newest release of that
+line, and a git tag of the same name pointing at one fixed commit means the
+opposite.
 
-    docker login
-    docker buildx imagetools create --tag wger/server:1.2.3 wger/server:latest
+The Docker images are tagged automatically from ``wger/version.py``. The push to
+master that sets the version to ``1.2.3`` publishes ``wger/server:1.2.3``,
+``wger/server:1.2`` and ``wger/server:latest``. Pre-releases such as
+``1.2.3-dev`` only get their own tag and ``latest``, they never move ``1.2``.
 
 Create a GitHub release
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,12 +99,30 @@ Create a new release on GitHub from the tag. Generate the description from the
 pull requests and edit as needed, then link to it from the changelog in the
 docs repo::
 
-    gh release create "X.Y" --generate-notes
+    gh release create "1.2.3" --generate-notes
 
 Announce it
 ~~~~~~~~~~~
 
 Write an announcement and post it on Discord, Mastodon and similar channels.
+
+Start the next cycle
+~~~~~~~~~~~~~~~~~~~~
+
+Set ``VERSION_STRING`` in ``wger/version.py`` to the next version with a
+``-dev`` suffix, e.g. ``2.8.0-dev``, and leave it there for the whole cycle.
+There is no need for ``alpha1``, ``alpha2`` and so on: those name releases
+that never happen, master is simply the upcoming version until the release
+commit sets the final number.
+
+Write ``2.8.0-dev`` and not the PEP 440 spelling ``2.8.0.dev0``. The literal
+is used as-is as a docker tag and has to be valid semver.
+
+Keep in mind that wger.de follows master, so it reports the upcoming version
+as a pre-release for the whole cycle. Never raise ``MIN_SERVER_VERSION`` (or
+the app's ``MIN_SERVER_VERSION``) to the version master is currently
+building: that would lock out every instance running master until the
+release is out.
 
 
 Frontend
@@ -132,7 +158,11 @@ Preflight checks
 in the ``de.wger.flutter`` repository (commit to master).
 
 *Min server version:* If the new version of the app requires a new minimum
-server version, update the version in ``MIN_SERVER_VERSION``.
+server version, update the version in ``MIN_SERVER_VERSION``. Only ever name a
+server version that is already out. wger.de runs master and reports the
+upcoming version as a pre-release for the whole cycle, so an app that requires
+the version master is currently building locks itself out of the reference
+instance.
 
 **2) Verify Apple builds**
 
