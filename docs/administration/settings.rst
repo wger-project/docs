@@ -307,7 +307,8 @@ reCAPTCHA
 ---------
 
 ``USE_RECAPTCHA``
-  Default ``False``. Show a captcha challenge during user registration.
+  Default ``False``. Show a captcha challenge on the registration and password
+  reset forms.
 
 ``RECAPTCHA_PUBLIC_KEY``, ``RECAPTCHA_PRIVATE_KEY``
   Your keys from https://www.google.com/recaptcha/
