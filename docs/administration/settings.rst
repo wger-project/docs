@@ -49,11 +49,6 @@ sessions and tokens.
   this value remains the fallback for everyone else. Changing it later shifts
   the training days of users without a reported timezone.
 
-``ALLOWED_HOSTS``
-  Comma-separated list of hostnames the application accepts requests for,
-  e.g. ``example.com,www.example.com``.
-
-
 ``SITE_URL``
   Default ``http://localhost``. Public base URL of your instance, no trailing
   slash. Used to build absolute links in outgoing emails.

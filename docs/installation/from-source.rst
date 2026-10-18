@@ -100,8 +100,8 @@ A minimal example:
     # /home/wger/wger.env
 
     # Change these
-    ALLOWED_HOSTS=example.com,www.example.com
-    DJANGO_SECRET_KEY=your-very-long-and-random-secret-key
+    SITE_URL=https://example.com
+    SECRET_KEY=your-very-long-and-random-secret-key
     TIME_ZONE=Europe/Berlin
 
     # Application
