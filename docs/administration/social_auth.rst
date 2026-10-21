@@ -106,6 +106,20 @@ The ``server_url`` can either point directly to the
 ``/.well-known/openid-configuration`` document or to the issuer base URL, in
 which case the well-known suffix is appended automatically.
 
+Single values of the discovery document can be overridden with
+``openid_configuration_overrides``, e.g. when the server is reached via an
+internal address and advertises endpoints the browser can't open:
+
+   .. code-block:: python
+
+       app.settings = {
+           'server_url': 'http://keycloak:8080/realms/myrealm',
+           'openid_configuration_overrides': {
+               'authorization_endpoint': 'https://idp.example.com/realms/myrealm/protocol/openid-connect/auth',
+           },
+       }
+       app.save()
+
 When registering the client at the identity provider, use the following
 redirect (callback) URL, with the ``provider_id`` chosen above::
 
