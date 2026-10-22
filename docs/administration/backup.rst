@@ -32,6 +32,46 @@ To restore from a dump:
     cat backup.sql | docker compose exec -T db psql --username wger --dbname wger
     docker compose up
 
+Automated backups
+~~~~~~~~~~~~~~~~~
+
+The docker repository contains a script and a systemd timer for daily dumps in
+the ``backup`` folder. The script dumps the database in PostgreSQL's custom
+format and checks that the dump can be read. By default, we keep 7 daily,
+4 weekly, and 6 monthly dumps. The database keeps running while the backup is made.
+
+.. code-block:: bash
+
+    # Run once by hand
+    ./backup/backup-db.sh
+
+    # Install the daily timer (adjust the path in the service file first)
+    cp backup/wger-backup.service backup/wger-backup.timer /etc/systemd/system/
+    systemctl daemon-reload
+    systemctl enable --now wger-backup.timer
+
+The settings (backup folder, how long dumps are kept) are listed at the top
+of ``backup-db.sh``. It is recommended to keep at least one copy outside the server,
+a backup on the same disk does not help if the server is lost.
+
+To restore such a dump into a fresh database:
+
+.. code-block:: bash
+
+    docker compose down
+    docker volume remove docker_postgres-data
+    docker compose up -d --wait db
+    docker compose exec -T db pg_restore --username wger --dbname wger \
+        --no-owner < /root/dumps/daily/wger-<date>.dump
+    docker compose up -d
+    docker compose exec web ./manage.py setup-powersync-storage
+
+The dump contains neither the ``powersync`` schema nor database roles, so the
+last command creates them again.
+
+PowerSync
+~~~~~~~~~
+
 The PowerSync bucket-storage tables (``powersync.*`` schema) are effectively
 a **cache** rebuilt from the ``public.*`` wger tables and ``sync_rules.yaml``.
 Nothing in there is a primary source of truth, every row can be regenerated
