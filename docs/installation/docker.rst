@@ -136,6 +136,20 @@ automatically obtains and renews SSL certificates from Let's Encrypt.
    handling for the ``/ps/`` path used by the sync service, otherwise the mobile
    app might not be able to synchronise. See :ref:`powersync_proxy`.
 
+.. note::
+
+   With your own proxy in front, the login lockout needs to read the visitor's
+   address from the entry your proxy adds to ``X-Forwarded-For``. Set these two
+   lines in ``config/prod.env``::
+
+      AXES_IPWARE_PROXY_COUNT=1
+      AXES_IPWARE_META_PRECEDENCE_ORDER=HTTP_X_FORWARDED_FOR,REMOTE_ADDR
+
+   Otherwise all visitors count as one and a few failed logins lock everybody
+   out. Also publish the port only on localhost (``"127.0.0.1:8080:80"``).
+   Docker opens published ports past the host's firewall, and anyone reaching
+   the port directly could pick their own address and get around the lockout.
+
 Also notice that the application currently needs to run on its own (sub)domain
 and not in a subdirectory, so ``<domain>/wger`` will probably only mostly work.
 
