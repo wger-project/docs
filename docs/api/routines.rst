@@ -291,13 +291,36 @@ the prescribed values in the previous iteration. Set the
 ``requirements`` field to a JSON object of the form::
 
     {
-        "rules": [
-            "weight",
-            "repetitions",
-            "rir",
-            "rest"
-        ]
+        "rules": ["weight", "repetitions"],
+        "all_sets": false
     }
+
+``rules`` lists what the logs of the previous iteration have to reach:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Rule
+     - Log field
+     - Compared against
+   * - ``weight``
+     - weight
+     - the prescribed weight
+   * - ``repetitions``
+     - repetitions
+     - the prescribed repetitions
+   * - ``rir``
+     - rir
+     - the prescribed RiR
+   * - ``rest``
+     - rest
+     - the prescribed rest time
+   * - ``max_weight``
+     - weight
+     - the top of the prescribed weight range
+   * - ``max_repetitions``
+     - repetitions
+     - the top of the prescribed rep range
 
 If the ``rules`` list is non-empty, the rule only applies when *all*
 listed fields were met in at least one log of the previous iteration.
@@ -305,6 +328,30 @@ For example: if the target is to move from 8x60 kg to 8x65 kg, with
 ``rules`` containing ``weight`` and ``repetitions``, the increase only
 happens once the user has actually logged 8 reps at 60 kg. Until then
 the field stays at the previous value.
+
+The ``max_*`` rules are meant for rep or weight ranges. With a
+prescription of 8-12 reps the ``repetitions`` rule is already met at 8,
+the bottom of the range, while ``max_repetitions`` is only met at 12.
+Without a range (no max config, or a max that is not above the min) they
+behave like their base rule.
+
+The optional ``all_sets`` flag (default ``false``) changes what counts as
+met: instead of a single qualifying log, every log of the previous
+iteration has to meet all rules, and at least the prescribed number of
+sets has to be logged. Fewer logs than prescribed never qualify, so a
+skipped or cut short workout does not trigger the progression.
+
+Together these describe a classic double progression, i.e. work inside
+8-12 reps at a fixed weight and add weight only once all sets reach 12::
+
+    {
+        "rules": ["max_repetitions"],
+        "all_sets": true
+    }
+
+The min and max configs of a field advance together, gated by the
+requirements of the min config. Requirements set on a max config alone
+have no effect.
 
 
 Custom calculation logic
