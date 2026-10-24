@@ -32,4 +32,4 @@ To receive the emails, set the mail server in ``grafana/.env`` (see the
 ``GRAFANA_SMTP_*`` entries in ``grafana/.env.example``) and change the
 recipient address in ``grafana/provisioning/alerting/contactpoints.yml``.
 Then restart the Grafana compose file. The alerts are listed in Grafana under
-*Alerting > Alert rules*, in the *wger* folder.
+*Alerting > Alert rules*, in the *Alerts* folder.
