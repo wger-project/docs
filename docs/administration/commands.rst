@@ -19,7 +19,9 @@ Here are some of the most important ones:
   This command bootstraps the application: it creates a settings file, initialises
   a SQLite database, loads all necessary fixtures for the application to work and
   creates a default administrator user. While it can also work with e.g. a PostgreSQL
-  database, you will need to create it yourself:
+  database, you will need to create it yourself. An already set up database is left
+  untouched, so it is safe to run on every start (this is what the docker image does).
+  If the database can't be reached, the command fails instead:
 
 ``create-or-reset-admin``
   Makes sure that the default administrator user exists. If you change the password,
