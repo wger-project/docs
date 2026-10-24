@@ -67,7 +67,9 @@ To restore such a dump into a fresh database:
     docker compose exec web ./manage.py setup-powersync-storage
 
 The dump contains neither the ``powersync`` schema nor database roles, so the
-last command creates them again.
+last command creates them again. Until then the PowerSync container will keep
+restarting with ``password authentication failed for user "powersync_storage"``,
+afterwards it recovers by itself and syncs all data again.
 
 PowerSync
 ~~~~~~~~~
