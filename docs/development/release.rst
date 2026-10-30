@@ -154,8 +154,9 @@ Preflight checks
 **1) Bump versions**
 
 *Flutter:* If we use a new flutter version, update the version in
-``.github/actions/flutter-common/action.yml`` as well as ``flatpak-flutter.yml``
-in the ``de.wger.flutter`` repository (commit to master).
+``.github/actions/flutter-common/action.yml`` as well as ``flutter.ref`` in
+``flutpak.yaml``. The release workflow passes the former to flutpak, the latter
+is only used for local runs.
 
 *Min server version:* If the new version of the app requires a new minimum
 server version, update the version in ``MIN_SERVER_VERSION``. Only ever name a
