@@ -195,26 +195,37 @@ https://support.google.com/googleplay/android-developer/answer/9844778?hl=en#zip
 **4) Flatpak / Flathub**
 
 The ``de.wger.flutter`` repository is a fork of the flathub metadata repo and
-contains the build instructions for the flatpak version of the app.
+contains the build instructions for the flatpak version of the app. Its content
+is generated with `flutpak <https://github.com/o-murphy/flutpak>`_ from
+``flutpak.yaml`` and the template ``flatpak/de.wger.flutter.yml`` in the app
+repository; the release workflow does this automatically and pushes a
+``release-x.y.z`` branch to the fork.
 
-If there's a new version of sqlite (very likely), make sure the
-``flatpak-flutter`` script supports it. A PR upstream might be needed; until
-then, the ``de.wger.flutter.yml`` can be generated locally. After making any
-changes to ``flatpak-flutter.yml``::
+Check ``flutpak.yaml`` before a release:
 
-    git clone https://github.com/TheAppgineer/flatpak-flutter.git
-    git clone https://github.com/wger-project/de.wger.flutter.git
-    cd de.wger.flutter
-    ../flatpak-flutter/flatpak-flutter.py --app-module wger flatpak-flutter.yml
+* Packages that download a native library at build time (sqlite3, powersync)
+  need an entry in flutpak's registry for the version in ``pubspec.lock``. If
+  the registry lags behind (likely for sqlite3), add the entry under
+  ``foreign-deps``. The URLs and SHA256 hashes are in the package's sources
+  (``lib/src/hook/asset_hashes.dart`` for sqlite3).
+* Git dependencies are not supported by flutpak and are listed by hand under
+  ``sources``. If the dependency was updated, use the new ``resolved-ref`` from
+  ``pubspec.lock`` for the commit.
+
+To generate and test the manifest locally (generating works on any OS and
+needs Dart 3.13 or newer, building needs Linux)::
+
+    dart pub global activate flutpak
+    flutpak generate --tag x.y.z
+    # result is in flatpak/generated/
 
     # optional, only needed if you get an error with the flatpak-builder command
     sudo apt install elfutils
     flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+    cd flatpak/generated
     flatpak-builder --repo=repo --force-clean --sandbox --user --install --install-deps-from=flathub build de.wger.flutter.yml
     flatpak run de.wger.flutter
-
-All these steps need to happen on a Linux (virtual) machine.
 
 **5) Update screenshots**
 
