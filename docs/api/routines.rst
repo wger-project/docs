@@ -378,6 +378,9 @@ values (``weight_target``, ``repetitions_target``, ``rir_target``,
 ``rest_target``), so a log preserves both sides even when the routine
 later changes.
 
+A log can also have free-text ``notes`` for that one set (e.g. form cues
+or how it felt), independent of the notes of its session.
+
 
 Computed endpoints
 ------------------
