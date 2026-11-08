@@ -146,11 +146,16 @@ What the sync cannot do
 
 * **Nothing is written back.** wger only reads, so what you enter by hand
   here stays here and never lands in Apple Health or Health Connect.
-* **Imported entries cannot be edited in wger**, and correcting or deleting a
-  value where it came from does not reach the entry already imported. The
-  exception are the entries that summarise a whole day, which are
-  recalculated for the past month. Adding your own entries by hand in the
-  same categories works as usual.
+* **Imported entries can be changed in wger**, which is handy for a bad
+  reading from your scale, and an edited value stays as you left it. A
+  deleted one comes back if it is from the past month, since the sync reads
+  that month again each time. The entries that summarise a whole day are
+  recalculated for the past month as well, so your changes to those do not
+  last.
+* **Changes where a value came from do not reach wger**: correcting or
+  deleting it there leaves the imported entry as it is. The whole-day
+  summaries are the exception, for the same reason. Adding your own entries
+  by hand in the same categories works as usual.
 * **The sync uses its own categories.** If you have been keeping your blood
   pressure in a category you made yourself, the import creates its own
   instead of taking that one over. Body weight is the exception: it goes into

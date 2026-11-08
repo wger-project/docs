@@ -166,8 +166,10 @@ Three fields describe where an entry came from:
 
 ``source``
     ``user`` (the default, entered by hand), ``google`` (Health Connect),
-    ``apple`` (Apple Health) or ``calculated`` (written by the server for a
-    calculated category).
+    ``apple`` (Apple Health), ``device`` (since wger 2.8, a wearable, scale or
+    sensor app writing on the user's behalf, with vendor and model in
+    ``extra_data``) or ``calculated`` (written by the server for a calculated
+    category).
 
 ``external_id``
     The record id in the source platform, as a UUID. A calculated entry uses
@@ -183,10 +185,14 @@ a re-import idempotent: an entry the importer already wrote is refused with a
 category the same way. Filter on ``external_id`` to find an entry you wrote
 before, e.g. to change or delete it.
 
-The mobile app shows entries with a ``source`` other than ``user`` as
-read-only, which for the imported ones is a client convention: the importer
-has to be able to write its own rows. For ``calculated`` the API enforces it,
-since anything written there is replaced by the next recomputation anyway:
+Users can edit and delete imported entries. The clients warn them that the
+app an entry came from may overwrite the change: whether it does depends on
+that app, which is why an integration should not count on its rows staying as
+it wrote them. Older versions of the clients show imported entries as
+read-only.
+
+Only ``calculated`` entries are read-only. The API enforces it, since anything
+written there is replaced by the next recomputation anyway:
 
 * posting an entry into a calculated category is a ``400``
 * changing a calculated entry is a ``400``, deleting one a ``403``
@@ -199,9 +205,9 @@ change that caused them.
 
 .. note::
     Clients should treat ``source`` as an open list. A value they do not
-    know means "not written by the user here", which is the only thing the
-    UI needs from it. New values are added without a major version, so a
-    strict mapping is a source of hard errors later.
+    know means "written by another app", which is the only thing the UI
+    needs from it. New values are added without a major version, so a strict
+    mapping is a source of hard errors later.
 
 
 Categories
