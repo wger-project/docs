@@ -147,14 +147,23 @@ Rate limiting
 A few sensitive endpoints are rate-limited (per IP for anonymous callers,
 per user for authenticated ones):
 
-* ``/allauth/app/v1/auth/login`` and ``/allauth/app/v1/auth/2fa/authenticate`` (authentication): 10 requests/min
-* ``/api/v2/userprofile/`` (registration): 5 requests/min
 * ``/api/v2/ingredient/`` and ``/api/v2/ingredientinfo/`` (list): 120 requests/min
 * ``/api/v2/ingredient/<id>/`` and ``/api/v2/ingredientinfo/<id>/`` (detail): 300 requests/min
 * ``/api/v2/ingredient-sync/`` (bulk sync): 600 requests/min
+* ``/api/v2/exercise/``, ``/api/v2/exercise-translation/`` and
+  ``/api/v2/exercise-submission/`` (creating exercises): 20 requests/hour.
+  Only POST requests count, reading and editing are not limited.
 
-Exceeding a limit returns HTTP 429 with a ``Retry-After`` header. All other
-endpoints are unthrottled.
+Exceeding a limit returns HTTP 429 with a ``Retry-After`` header.
+
+Failed logins are limited per account: after 5 wrong passwords for a username,
+or 5 wrong two-factor codes for a user, within 5 minutes,
+``/allauth/app/v1/auth/login`` and ``/allauth/app/v1/auth/2fa/authenticate``
+answer with HTTP 400 and the error code ``too_many_login_attempts``. Repeated
+failed password logins from one IP address additionally lock that address out
+for a while.
+
+All other endpoints are unthrottled.
 
 
 Format negotiation
