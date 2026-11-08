@@ -303,18 +303,34 @@ Powered by `django-axes <https://django-axes.readthedocs.io/>`_.
 ``AXES_IPWARE_PROXY_COUNT``, ``AXES_IPWARE_META_PRECEDENCE_ORDER``
   Advanced settings for IP detection behind proxies. See django-axes docs.
 
-reCAPTCHA
----------
+Captcha
+-------
 
-``USE_RECAPTCHA``
-  Default ``False``. Show a captcha challenge on the registration and password
-  reset forms.
+The registration and password reset forms can be protected with a captcha.
+Both supported services load a script from their provider in the visitor's
+browser, and wger checks the result with the provider, so the server needs to
+reach it too.
+
+``CAPTCHA_PROVIDER``
+  Default ``none``. Which captcha the forms use: ``none``, ``recaptcha``
+  (Google reCAPTCHA v3) or ``turnstile`` (Cloudflare Turnstile). If the keys of
+  the selected provider are missing, ``manage.py check`` shows a warning.
 
 ``RECAPTCHA_PUBLIC_KEY``, ``RECAPTCHA_PRIVATE_KEY``
-  Your keys from https://www.google.com/recaptcha/
+  Your keys from https://www.google.com/recaptcha/, needed for ``recaptcha``.
 
 ``RECAPTCHA_REQUIRED_SCORE``
-  Default ``0.75``.
+  Default ``0.75``. The score (0 to 1) reCAPTCHA has to give a visitor. Lower
+  values let more visitors through.
+
+``TURNSTILE_SITE_KEY``, ``TURNSTILE_SECRET_KEY``
+  Your keys from the Turnstile section of the Cloudflare dashboard, needed for
+  ``turnstile``. Turnstile is free, add the hostname of your instance to the
+  site key.
+
+``USE_RECAPTCHA``
+  Deprecated, use ``CAPTCHA_PROVIDER=recaptcha`` instead. ``manage.py check`` warns while
+  it is set, it will be removed in a future release.
 
 .. _email:
 
