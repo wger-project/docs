@@ -20,7 +20,18 @@ out the wger server git repo:
 
     cd docker/dev
     cp .env.example .env
-    echo "WGER_CODEPATH=/my/wger/path" > .env
+    echo "WGER_CODEPATH=/my/wger/path" >> .env
+
+The web service is available on host port 8000 by default. If that port is
+already in use, set ``WGER_HOST_PORT`` in the same ``.env`` file, for example:
+
+.. code-block:: bash
+
+    echo "WGER_HOST_PORT=8001" >> .env
+
+When using the ``dev-postgres`` environment, the PostgreSQL and PowerSync host
+ports can be changed in the same way with ``POSTGRES_HOST_PORT`` (default 5432)
+and ``POWERSYNC_HOST_PORT`` (default 8080).
 
 Start docker watch in the docker folder:
 
@@ -72,8 +83,9 @@ After this you can run the following commands to load the initial data:
     python3 manage.py runserver 0.0.0.0:8000
 
 
-You can now login on http://localhost:8000 with the default administrator user
-(afterwards you just need to start the server, no need to bootstrap again):
+You can now log in on http://localhost:8000 with the default administrator user,
+or use the port configured with ``WGER_HOST_PORT``. Afterwards you just need to
+start the server; there is no need to bootstrap again:
 
 * username: ``admin``
 * password: ``adminadmin``
