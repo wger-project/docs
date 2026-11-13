@@ -34,6 +34,11 @@ is a **required one-time step** for the mobile-app sync service::
 The command is idempotent, so it is safe to re-run. See :ref:`powersync_setup`
 for details.
 
+A new installation has no ingredients. To load them, follow the steps in
+:doc:`../administration/sync-data`. The quickest way is::
+
+    docker compose exec web wger load-online-fixtures
+
 Then open http://localhost (or your server's IP) and log in as: **admin**,
 password **adminadmin**.
 

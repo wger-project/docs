@@ -27,20 +27,54 @@ Exercises
 Ingredients
 -----------
 
-The full ingredient dataset takes around 1 GB of database space and needs a
-while to download and process. For a quick start, load a smaller base set:
+A new installation has no ingredients. Load them once with one of the two
+options below; afterwards they can be kept up to date automatically.
+
+Option 1: base set
+~~~~~~~~~~~~~~~~~~
+
+About 177,000 ingredients (a 30 MB download). Good for a quick start, but it
+contains no serving units (e.g. "1 slice") and the data is not current.
 
 .. code-block:: bash
 
     docker compose exec web wger load-online-fixtures
 
-For the full dataset:
+.. warning::
+
+   Only load the base set into an instance **without ingredients**. The file
+   contains fixed IDs and overwrites existing ingredients with the same ID.
+
+You can switch to the full dataset later with option 2 in ``update`` mode.
+
+Option 2: full dataset
+~~~~~~~~~~~~~~~~~~~~~~
+
+All ingredients from wger.de, including serving units. Needs around 1 GB of
+database space and takes a while to download and process.
 
 .. code-block:: bash
 
-    # On a fresh install:
+    # Instance without ingredients:
     docker compose exec web ./manage.py sync-ingredients-bulk --set-mode insert
 
-    # On an existing install (preserves your additions):
+    # Instance with ingredients, e.g. after loading the base set
+    # (preserves your additions):
     docker compose exec web ./manage.py sync-ingredients-bulk --set-mode update
+
+Keeping them up to date
+~~~~~~~~~~~~~~~~~~~~~~~
+
+With ``SYNC_INGREDIENTS_CELERY=True`` (the default in the Docker setup) the
+full dataset is synced in ``update`` mode once a month, on a random day. The
+first run can be up to a month after the installation, so load the
+ingredients manually first.
+
+Images are not part of either option. With ``DOWNLOAD_INGREDIENTS_FROM=WGER``
+and Celery they are downloaded in the background the first time an
+ingredient is opened. To download all images at once:
+
+.. code-block:: bash
+
+    docker compose exec web ./manage.py download-ingredient-images
 

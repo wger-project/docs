@@ -31,18 +31,18 @@ Here are some of the most important ones:
   loads all fixture files with the default data. This data includes all data necessary
   for the application to work such as:
   * exercises, muscles, equipment
-  * ingredients, units
+  * repetition and weight units
   * languages
   * permission groups
   * etc.
 
   Note that ingredients are not included and need to be installed separately with
-  download-online-fixtures.
+  ``load-online-fixtures``.
 
 ``load-online-fixtures``
-  Downloads a subset of ingredients and the weight units fixtures, then installs
-  them. To download all ingredients, use the manage.py command with the
-  ``sync-ingredients-bulk`` option (see below).
+  Downloads a subset of ingredients, then installs them. To download all
+  ingredients, use the manage.py command with the ``sync-ingredients-bulk``
+  option (see below).
 
 
 Management commands

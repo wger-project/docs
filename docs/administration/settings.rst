@@ -207,7 +207,9 @@ See :doc:`sync-data` for the operational context.
   Default ``False``. Download exercise images / videos on startup.
 
 ``LOAD_ONLINE_FIXTURES_ON_STARTUP``
-  Default ``False``. Load a small base set of ingredients on startup.
+  Default ``False``. Load the base set of ingredients on startup, see
+  :doc:`sync-data`. This happens on **every** start and overwrites ingredients
+  with the same ID, so set it back to ``False`` after the first start.
 
 **Periodic via Celery**
 
