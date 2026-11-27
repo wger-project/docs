@@ -141,6 +141,31 @@ will be slow and may put load on the server. The response JSON contains
 total number of results.
 
 
+Ingredient search history
+-------------------------
+
+Ingredient searches on ``/api/v2/ingredient/`` and ``/api/v2/ingredientinfo/``
+accept an optional ``prioritize_history=true`` parameter alongside
+``name__search``. When authenticated, matching ingredients previously logged
+in your nutrition diary come first. The existing search order is retained
+within the logged and unlogged groups, with a stable ingredient ID tiebreaker.
+Repeated diary entries do not duplicate ingredients in the results.
+
+For example::
+
+    GET /api/v2/ingredientinfo/?name__search=rice&prioritize_history=true
+
+Only your own diary entries affect the order. The option does not add
+nonmatching ingredients or bypass language and other filters. It has no
+effect for anonymous requests or without a nonempty ``name__search``.
+Omitting the parameter or passing ``false`` preserves the usual search
+behavior. An explicit ``ordering`` parameter takes precedence over history
+ranking.
+
+The response fields and ``limit``/``offset`` pagination stay the same. Follow
+the returned ``next`` URL to preserve the search options on subsequent pages.
+The bulk ``/api/v2/ingredient-sync/`` endpoint does not offer this option.
+
 Rate limiting
 -------------
 
